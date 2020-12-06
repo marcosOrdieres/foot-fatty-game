@@ -13,11 +13,12 @@ interface LeftFootProps {
     leftWhiteFoot: boolean,
     cakeLeftFoot: boolean,
     lipLeftFoot: boolean,
+    blueLeftFoot: boolean,
     layout: any
 }
 const { width, height } = Dimensions.get('window');
 
-const LeftFoot: React.FunctionComponent<LeftFootProps> = ({ onSwipeLeft, onSwipeRight, moveLeftToRight, moveLeftToLeft, leftBlackFoot, leftWhiteFoot, cakeLeftFoot, lipLeftFoot, characterChosen, layout }) => {
+const LeftFoot: React.FunctionComponent<LeftFootProps> = ({ onSwipeLeft, onSwipeRight, moveLeftToRight, moveLeftToLeft, leftBlackFoot, leftWhiteFoot, cakeLeftFoot, lipLeftFoot, characterChosen, blueLeftFoot, layout }) => {
     const [number, setNumber] = useState(0)
     const [primero, setPrimero] = useState(false)
     const [segundo, setSegundo] = useState(false)
@@ -36,13 +37,15 @@ const LeftFoot: React.FunctionComponent<LeftFootProps> = ({ onSwipeLeft, onSwipe
             return cakeLeftFoot
         } else if (characterChosen === 'lipsGirl') {
             return lipLeftFoot
+        } else if (characterChosen === 'blueGirl' || characterChosen === 'blueGirlSecond' || characterChosen === 'blueGirlThird') {
+            return blueLeftFoot
         }
         else {
             return leftWhiteFoot
         }
     }
 
-    const onGestureEventFunc = (event) => {
+    const onGestureEventFunc = (event: any) => {
         if (event.nativeEvent.translationX > 40 && !primero) {
             if (event.nativeEvent.velocityX > 800) {
                 setFast(true)
@@ -91,9 +94,10 @@ LeftFoot.defaultProps = {
     props: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
     onSwipeLeft: () => console.warn('pressed'),
     onSwipeRight: () => console.warn('pressed'),
-    characterChosen: true,
+    characterChosen: 'blackGirl',
     layout: true,
-    moveRightToRight: true,
+    blueLeftFoot: true,
+    moveRightToRight: () => { console.log('right') },
     lipLeftFoot: true,
     moveRightToLeft: true,
     rightBlackFoot: true,

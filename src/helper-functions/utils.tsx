@@ -33,6 +33,12 @@ export const characterForHeadOrFeet = (characterFinal: string | string[]) => {
             return 'fatboySecond'
         case 'fatboyThird':
             return 'fatboyThird'
+        case 'blueGirl':
+            return 'blueGirl'
+        case 'blueGirlSecond':
+            return 'blueGirlSecond'
+        case 'blueGirlThird':
+            return 'blueGirlThird'
         default:
             return 'fatBoy'
     }

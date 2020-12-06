@@ -128,6 +128,15 @@ const MainPage = () => {
             case 'blackGirlThird':
                 setCharacterFinal('blackGirl')
                 break;
+            case 'blueGirl':
+                setCharacterFinal('blueGirlSecond')
+                break;
+            case 'blueGirlSecond':
+                setCharacterFinal('blueGirlThird')
+                break;
+            case 'blueGirlThird':
+                setCharacterFinal('blueGirl')
+                break;
         }
     }
 
@@ -248,7 +257,7 @@ const MainPage = () => {
 
     return (
         <ImageBackground
-            source={onFire ? fatImages.imageBathroom : fatImages.imageBathroom}
+            source={onFire ? fatImages.imageBathroomFire : fatImages.imageBathroom}
             style={{ flex: 1 }}>
             <View
                 style={{ height: layout.layout.height, width: layout.layout.width, margin: 5, marginLeft: '3.5%' }}>
@@ -301,7 +310,7 @@ const MainPage = () => {
                                 text={'Change Character'} />
                         </View>
                         <View style={{ flex: 0.6, alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 45, fontFamily: 'Arcade-Classic' }}>{totalCoins}</Text>
+                            <Text style={{ fontSize: totalCoins >= 1000 ? 30 : 45, fontFamily: 'Arcade-Classic' }}>{totalCoins}</Text>
                         </View>
                     </View>
                     <View style={{ flex: 0.6, alignItems: 'center', justifyContent: 'center' }}>
@@ -350,6 +359,7 @@ const MainPage = () => {
                         leftWhiteFoot={fatImages.leftWhiteFoot}
                         cakeLeftFoot={fatImages.cakeLeftFoot}
                         lipLeftFoot={fatImages.lipLeftFoot}
+                        blueLeftFoot={fatImages.blueLeftFoot}
                         moveLeftToRight={moveLeftToRight}
                         moveLeftToLeft={moveLeftToLeft} />
                     <View style={{ position: 'absolute', left: '28%', top: '10%' }}><Text style={{ color: 'red', fontSize: 30, fontWeight: 'bold' }}>{startGame && leftGame ? 'Left' : ''}</Text></View>
@@ -371,7 +381,10 @@ const MainPage = () => {
                         cakeGirl={fatImages.cakeGirl}
                         blackGirlSecond={fatImages.blackGirlSecond}
                         blackGirlThird={fatImages.blackGirlThird}
-                        blackGirl={fatImages.blackGirl} />
+                        blackGirl={fatImages.blackGirl}
+                        blueGirlSecond={fatImages.blueGirlSecond}
+                        blueGirlThird={fatImages.blueGirlThird}
+                        blueGirl={fatImages.blueGirl} />
 
                     <RightFoot
                         onSwipeLeft={() => (startGame && !correlacionTresForGame) ? onSwipeRightFootToLeft() : startGame && correlacionTresForGame && rightGame ? onSwipeRightFootToLeft() : null}
@@ -382,6 +395,7 @@ const MainPage = () => {
                         rightWhiteFoot={fatImages.rightWhiteFoot}
                         cakeRightFoot={fatImages.cakeRightFoot}
                         lipRightFoot={fatImages.lipRightFoot}
+                        blueRightFoot={fatImages.blueRightFoot}
                         moveRightToRight={moveRightToRight}
                         moveRightToLeft={moveRightToLeft} />
                 </View>

@@ -44,6 +44,7 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                 if (value === 'blackGirl') return setBlackGirlOpacity(true)
                 if (value === 'lipsGirl') return setLipsGirlOpacity(true)
                 if (value === 'cakeGirl') return setCakeGirlOpacity(true)
+                if (value === 'blueGirl') return setBlueGirlOpacity(true)
             })
         }
         const storageItems = await getAsyncStorage('duck');
@@ -63,6 +64,7 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
     const [blackGirlOpacity, setBlackGirlOpacity] = useState(false);
     const [lipsGirlOpacity, setLipsGirlOpacity] = useState(false);
     const [cakeGirlOpacity, setCakeGirlOpacity] = useState(false);
+    const [blueGirlOpacity, setBlueGirlOpacity] = useState(false);
 
     const handleStateItems = (newValue: boolean) => {
         setItems(newValue);
@@ -106,7 +108,7 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                                     style={{ opacity: pinkDuckOpacity ? 0.3 : null, height: 75, width: 75, resizeMode: 'stretch' }}
                                     source={fatImages.pinkDuck} />
                             </TouchableOpacity>
-                            <ButtonItemAndChar opacity={pinkDuckOpacity} marginLeft={'33%'} coins={3000} />
+                            <ButtonItemAndChar opacity={pinkDuckOpacity} marginLeft={'33%'} coins={6000} />
                             <TouchableOpacity
                                 onPress={!greenDuckOpacity ? async () => {
                                     const coinsMinus10000 = await wasteCoinsAndStoreDuck(coinsInModal, 10000, { duck: ['greenDuck'] })
@@ -118,7 +120,7 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                                     source={fatImages.greenDuck} />
 
                             </TouchableOpacity>
-                            <ButtonItemAndChar opacity={greenDuckOpacity} marginLeft={'83%'} coins={3000} />
+                            <ButtonItemAndChar opacity={greenDuckOpacity} marginLeft={'83%'} coins={9000} />
                         </View>
                         <Cancel onPressCancel={onPressCancel} />
                     </View>
@@ -144,7 +146,7 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                                     style={{ opacity: blackGirlOpacity ? 0.3 : null, height: 75, width: 75, resizeMode: 'stretch' }}
                                     source={fatImages.blackGirl} />
                             </TouchableOpacity>
-                            <ButtonItemAndChar opacity={cakeGirlOpacity} coins={3000} />
+                            <ButtonItemAndChar opacity={cakeGirlOpacity} marginLeft={'1%'} coins={3000} />
                             <TouchableOpacity
                                 onPress={!lipsGirlOpacity ? async () => {
                                     const moneySpentCharacter = await spendCoinsForCharacter(coinsInModal, 8000, 'lipsGirl')
@@ -155,10 +157,10 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                                     style={{ opacity: lipsGirlOpacity ? 0.3 : null, height: 75, width: 75, resizeMode: 'stretch' }}
                                     source={fatImages.lipsGirl} />
                             </TouchableOpacity>
-                            <ButtonItemAndChar opacity={cakeGirlOpacity} marginLeft={'22%'} coins={8000} />
+                            <ButtonItemAndChar opacity={cakeGirlOpacity} marginLeft={'16%'} coins={8000} />
                             <TouchableOpacity
                                 onPress={!cakeGirlOpacity ? async () => {
-                                    const moneySpentCharacter = await spendCoinsForCharacter(coinsInModal, 15000, 'cakeGirl')
+                                    const moneySpentCharacter = await spendCoinsForCharacter(coinsInModal, 12000, 'cakeGirl')
                                     if (moneySpentCharacter) updateCoinsCallback(moneySpentCharacter);
                                 } : () => console.warn('YA SE HA COMPRADO')}
                                 style={{ width: 100, height: 100, borderColor: cakeGirlOpacity ? '#ffcccc' : 'red', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
@@ -167,8 +169,19 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                                     source={fatImages.cakeGirl} />
 
                             </TouchableOpacity>
-                            <ButtonItemAndChar opacity={cakeGirlOpacity} marginLeft={'45%'} coins={15000} />
-                            <BigButton image={fatImages.coinImage} text={'+ 5000'} />
+                            <ButtonItemAndChar opacity={cakeGirlOpacity} marginLeft={'31%'} coins={12000} />
+                            <TouchableOpacity
+                                onPress={!blueGirlOpacity ? async () => {
+                                    const moneySpentCharacter = await spendCoinsForCharacter(coinsInModal, 15000, 'blueGirl')
+                                    if (moneySpentCharacter) updateCoinsCallback(moneySpentCharacter);
+                                } : () => console.warn('YA SE HA COMPRADO')}
+                                style={{ width: 100, height: 100, borderColor: blueGirlOpacity ? '#ffcccc' : 'red', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
+                                <Image
+                                    style={{ opacity: blueGirlOpacity ? 0.3 : null, height: 75, width: 75, resizeMode: 'stretch' }}
+                                    source={fatImages.blueGirl} />
+                            </TouchableOpacity>
+                            <ButtonItemAndChar opacity={blueGirlOpacity} marginLeft={'50%'} coins={15000} />
+                            <BigButton image={fatImages.coinImage} text={'+ 3000'} />
                             <PrivacyPolicy url={'https://mamarene.blogspot.com/2019/09/privacy-policy-fat-foot.html'} />
                         </View>
 
