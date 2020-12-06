@@ -30,6 +30,10 @@ import spongeOrange from './spongeOrange.png';
 import blueGirl from './blueGirl.png';
 import blueGirlSecond from './blueGirlSecond.png';
 import blueGirlThird from './blueGirlThird.png';
+import imageBedroom from './imageBedroom.png';
+import imageBedroomBig from './imageBedroomBig.png';
+import bedroom from './bedroom.png';
+import bathroom from './bathroom.png';
 
 export {
   shopIcon,
@@ -63,4 +67,8 @@ export {
   blueGirlThird,
   blueLeftFoot,
   blueRightFoot,
+  imageBedroom,
+  imageBedroomBig,
+  bedroom,
+  bathroom,
 };

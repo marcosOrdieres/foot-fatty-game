@@ -15,7 +15,7 @@ const Countdown: React.FunctionComponent<CountdownProps> = ({ finishedGameBar, o
         <CountDown
             until={finishedGameBar ? 1 : onFire ? secondsGameOnFire : secondsGame}
             onFinish={onFinish}
-            size={20}
+            size={18}
             timeToShow={['M', 'S']}
             timeLabels={{ m: 'Minutes', s: 'Seconds' }}
             timeLabelStyle={{ fontFamily: 'Arcade-Classic', color: 'black' }}

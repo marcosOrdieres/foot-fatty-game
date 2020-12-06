@@ -13,6 +13,7 @@ import BigButton from './BigButton';
 import PrivacyPolicy from './PrivacyPolicy';
 import ModalTop from './ModalTop';
 import ButtonItemAndChar from './ButtonItemAndChar';
+import ButtonIcon from './ButtonIcon';
 
 export {
   LeftFoot,
@@ -30,4 +31,5 @@ export {
   PrivacyPolicy,
   ModalTop,
   ButtonItemAndChar,
+  ButtonIcon,
 };

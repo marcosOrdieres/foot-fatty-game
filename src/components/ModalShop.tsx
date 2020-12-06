@@ -165,7 +165,7 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                                 } : () => console.warn('YA SE HA COMPRADO')}
                                 style={{ width: 100, height: 100, borderColor: cakeGirlOpacity ? '#ffcccc' : 'red', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
                                 <Image
-                                    style={{ opacity: cakeGirlOpacity ? 0.3 : null, height: 75, width: 75, resizeMode: 'stretch' }}
+                                    style={{ opacity: cakeGirlOpacity ? 0.3 : null, height: 75, width: 100, resizeMode: 'stretch' }}
                                     source={fatImages.cakeGirl} />
 
                             </TouchableOpacity>
@@ -177,7 +177,7 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                                 } : () => console.warn('YA SE HA COMPRADO')}
                                 style={{ width: 100, height: 100, borderColor: blueGirlOpacity ? '#ffcccc' : 'red', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
                                 <Image
-                                    style={{ opacity: blueGirlOpacity ? 0.3 : null, height: 75, width: 75, resizeMode: 'stretch' }}
+                                    style={{ opacity: blueGirlOpacity ? 0.3 : null, height: 75, width: 60, resizeMode: 'stretch' }}
                                     source={fatImages.blueGirl} />
                             </TouchableOpacity>
                             <ButtonItemAndChar opacity={blueGirlOpacity} marginLeft={'50%'} coins={15000} />
