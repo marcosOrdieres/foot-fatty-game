@@ -1,6 +1,7 @@
 import shopIcon from './shopIcon.png';
 import coinImage from './coinImage.png';
 import imageBathroom from './imageBathroom.png';
+import imageBathroomFire from './imageBathroomFire.png';
 import leftWhiteFoot from './leftWhiteFoot.png';
 import rightWhiteFoot from './rightWhiteFoot.png';
 import leftBlackFoot from './leftBlackFoot.png';
@@ -9,6 +10,8 @@ import cakeLeftFoot from './cakeGirlLeftFoot.png';
 import cakeRightFoot from './cakeGirlRightFoot.png';
 import lipLeftFoot from './lipLeftFoot.png';
 import lipRightFoot from './lipRightFoot.png';
+import blueLeftFoot from './blueLeftFoot.png';
+import blueRightFoot from './blueRightFoot.png';
 
 import fatboyGif from './fatBoy.png';
 import fatboySecond from './fatBoySecond.png';
@@ -24,6 +27,9 @@ import greenDuck from './greenDuck.png';
 import spongeNormal from './spongeNormal.png';
 import spongeFire from './spongeFire.png';
 import spongeOrange from './spongeOrange.png';
+import blueGirl from './blueGirl.png';
+import blueGirlSecond from './blueGirlSecond.png';
+import blueGirlThird from './blueGirlThird.png';
 
 export {
   shopIcon,
@@ -51,4 +57,10 @@ export {
   spongeNormal,
   spongeFire,
   spongeOrange,
+  imageBathroomFire,
+  blueGirl,
+  blueGirlSecond,
+  blueGirlThird,
+  blueLeftFoot,
+  blueRightFoot,
 };

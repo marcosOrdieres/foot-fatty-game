@@ -12,12 +12,13 @@ interface RightFootProps {
     rightWhiteFoot: boolean,
     cakeRightFoot: boolean,
     lipRightFoot: boolean,
+    blueRightFoot: boolean,
     onGestureEvent: any,
     layout: any
 }
 const { width, height } = Dimensions.get('window');
 
-const RightFoot: React.FunctionComponent<RightFootProps> = ({ onSwipeLeft, onSwipeRight, onGestureEvent, moveRightToRight, moveRightToLeft, characterChosen, rightBlackFoot, rightWhiteFoot, cakeRightFoot, lipRightFoot, layout }) => {
+const RightFoot: React.FunctionComponent<RightFootProps> = ({ onSwipeLeft, onSwipeRight, onGestureEvent, moveRightToRight, moveRightToLeft, characterChosen, rightBlackFoot, rightWhiteFoot, cakeRightFoot, lipRightFoot, blueRightFoot, layout }) => {
 
     const [number, setNumber] = useState(0)
     const [primero, setPrimero] = useState(false)
@@ -37,6 +38,9 @@ const RightFoot: React.FunctionComponent<RightFootProps> = ({ onSwipeLeft, onSwi
             return cakeRightFoot
         } else if (characterChosen === 'lipsGirl') {
             return lipRightFoot
+        }
+        else if (characterChosen === 'blueGirl' || characterChosen === 'blueGirlSecond' || characterChosen === 'blueGirlThird') {
+            return blueRightFoot
         } else {
             return rightWhiteFoot
         }
@@ -96,6 +100,7 @@ RightFoot.defaultProps = {
     moveRightToRight: true,
     moveRightToLeft: true,
     characterChosen: 'true',
+    blueRightFoot: true,
     rightBlackFoot: true,
     rightWhiteFoot: true,
     cakeRightFoot: true,
