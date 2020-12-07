@@ -28,7 +28,7 @@ const AnimatedPowerBar: React.FunctionComponent<AnimatedPowerBarProps> = ({ prog
                 </View>
             </AnimatedBar>
             :
-            <Text style={{ fontSize: 20, fontStyle: 'normal', fontFamily: 'Arcade-Classic' }}>Game Finalised 😀</Text>
+            <Text style={{ fontSize: 50, fontStyle: 'normal', fontFamily: 'Arcade-Classic' }}>Game Finalised 😀</Text>
     )
 }
 
@@ -39,7 +39,7 @@ AnimatedPowerBar.defaultProps = {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 0.5,
         paddingTop: 30,
         paddingHorizontal: 30,
         justifyContent: "space-around",

@@ -14,6 +14,10 @@ import PrivacyPolicy from './PrivacyPolicy';
 import ModalTop from './ModalTop';
 import ButtonItemAndChar from './ButtonItemAndChar';
 import ButtonIcon from './ButtonIcon';
+import LeftFootPunch from './LeftFootPunch';
+import RightFootPunch from './RightFootPunch';
+import DoubleProgressBar from './DoubleProgressBar';
+import Coins from './Coins';
 
 export {
   LeftFoot,
@@ -32,4 +36,8 @@ export {
   ModalTop,
   ButtonItemAndChar,
   ButtonIcon,
+  LeftFootPunch,
+  RightFootPunch,
+  DoubleProgressBar,
+  Coins,
 };

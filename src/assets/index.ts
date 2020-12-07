@@ -34,6 +34,7 @@ import imageBedroom from './imageBedroom.png';
 import imageBedroomBig from './imageBedroomBig.png';
 import bedroom from './bedroom.png';
 import bathroom from './bathroom.png';
+import explosion from './explosion.png';
 
 export {
   shopIcon,
@@ -71,4 +72,5 @@ export {
   imageBedroomBig,
   bedroom,
   bathroom,
+  explosion,
 };

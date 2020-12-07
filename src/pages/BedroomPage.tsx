@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, Dimensions, Image, ImageBackground, Alert
 import { characterForHeadOrFeet, multipleFive } from '../helper-functions/utils'
 import { getAsyncStorage, setAsyncStorage } from '../services/storage-service';
 import * as fatImages from '../assets'
-import { AnimatedPowerBar, ButtonRounded, RightFoot, LeftFoot, Head, Ducks, ModalShop, Sponges, Countdown, ButtonIcon } from '../components';
+import { AnimatedPowerBar, ButtonRounded, RightFoot, LeftFoot, Head, Ducks, ModalShop, Sponges, Countdown, ButtonIcon, LeftFootPunch, RightFootPunch, DoubleProgressBar, Coins } from '../components';
 //import { ChangeHeadArray } from '../helper-functions/changeHead'
 const { width, height } = Dimensions.get('window');
 
@@ -15,6 +15,20 @@ const BedroomPage = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [itemsForPurchase, setItemsForPurchase] = useState(null);
     const [totalCoins, setTotalCoins] = useState(0);
+    const [games, setGames] = useState(0);
+    const [progress, setProgress] = useState(0);
+    const [characterFinal, setCharacterFinal] = useState('fatBoy');
+
+    const [progressLeft, setProgressLeft] = useState(0);
+    const [progressRight, setProgressRight] = useState(0);
+
+    const [startGame, setStartGame] = useState(false);
+    const [finishedGameBar, setFinishedGameBar] = useState(false);
+    const [doubleScore, setDoubleScore] = useState(false);
+    const [scaleFootLeft, setScaleFootLeft] = useState(2);
+    const [scaleFootRight, setScaleFootRight] = useState(2);
+    const [oneCharacter, setOneCharacter] = useState(false);
+
 
     const checkCoins = async () => {
         const coins = await getAsyncStorage('coins');
@@ -22,35 +36,137 @@ const BedroomPage = () => {
         return coins
     }
 
+    const onPunchFoot = (left: boolean, right: boolean) => {
+        if (left) {
+            winCoinsWhenSwipe(true, false)
+            return console.warn('pressed left')
+        }
+        if (right) {
+            winCoinsWhenSwipe(false, true)
+            return console.warn('pressed right')
+        }
+    }
+
     useEffect(() => {
         checkCoins()
     }, [])
+
+    const finishGame = async () => {
+        const gamesStorage = await getAsyncStorage('games');
+        if (progressLeft >= 1 || progressRight >= 1) {
+            await setAsyncStorage('games', gamesStorage + 1);
+            setGames(gamesStorage + 1)
+            Alert.alert('CONGRATULATIONS, you passed the level 😀 😀')
+            setStartGame(false)
+            setProgressRight(0)
+            setProgressLeft(0)
+            setScaleFootLeft(2)
+            setScaleFootRight(2)
+        } else {
+            Alert.alert('Sorry, You missed the Level 😅 😅')
+            setStartGame(false)
+            setProgressRight(0)
+            setProgressLeft(0)
+            setScaleFootLeft(2)
+            setScaleFootRight(2)
+        }
+    }
+
+    const winCoinsWhenSwipe = async (left: boolean, right: boolean) => {
+        if (progressLeft >= 1 || progressRight >= 1) { setFinishedGameBar(true) }
+        const coins = await getAsyncStorage('coins');
+        if (doubleScore) {
+            await setAsyncStorage('coins', coins + 2);
+            if (left) {
+                setProgressLeft(progressLeft + 0.02)
+                onScaleFoot(0.04, 0)
+            }
+            if (right) {
+                setProgressRight(progressRight + 0.02)
+                onScaleFoot(0, 0.04)
+            }
+        } else {
+            await setAsyncStorage('coins', coins + 1000);
+            if (left) {
+                setProgressLeft(progressLeft + 0.1)
+                changeHeadState()
+                onScaleFoot(0.02, 0)
+            }
+            if (right) {
+                setProgressRight(progressRight + 0.01)
+                onScaleFoot(0, 0.02)
+            }
+        }
+        const coinsAfterSwipe = await getAsyncStorage('coins');
+        setTotalCoins(coinsAfterSwipe)
+    }
+
+    const onScaleFoot = (left: number, right: number) => {
+        if (left !== 0) {
+            setScaleFootLeft(scaleFootLeft - left)
+        }
+        if (right !== 0) {
+            setScaleFootRight(scaleFootRight - right)
+        }
+    }
+
+    async function changeCharacter() {
+        const characterListStorage = await getAsyncStorage('character');
+        const characterListStorageNumber = characterListStorage.character.length;
+        const numberIWant = Math.floor(Math.random() * characterListStorageNumber) + 0;
+        const finalChar = characterListStorage.character[numberIWant];
+        setCharacterFinal(finalChar);
+    }
+
+    async function moreThanOneCharacter() {
+        const characterListStorage = await getAsyncStorage('character');
+        if (characterListStorage.character.length !== 1) {
+            setOneCharacter(true)
+        } else {
+            setOneCharacter(false)
+        }
+    }
+
+    const changeHeadState = () => {
+        switch (characterFinal) {
+            case 'fatBoy':
+                setCharacterFinal('fatboySecond')
+                break;
+            case 'fatboySecond':
+                setCharacterFinal('fatboyThird')
+                break;
+            case 'fatboyThird':
+                setCharacterFinal('fatBoy')
+                break;
+            case 'blackGirl':
+                setCharacterFinal('blackGirlSecond')
+                break;
+            case 'blackGirlSecond':
+                setCharacterFinal('blackGirlThird')
+                break;
+            case 'blackGirlThird':
+                setCharacterFinal('blackGirl')
+                break;
+            case 'blueGirl':
+                setCharacterFinal('blueGirlSecond')
+                break;
+            case 'blueGirlSecond':
+                setCharacterFinal('blueGirlThird')
+                break;
+            case 'blueGirlThird':
+                setCharacterFinal('blueGirl')
+                break;
+        }
+    }
 
     return (
         <ImageBackground
             source={onFire ? fatImages.imageBedroomBig : fatImages.imageBedroomBig}
             style={{ flex: 1 }}>
-            <View
-                style={{ height: layout.layout.height, width: layout.layout.width, margin: 5, marginLeft: '3.5%' }}>
-
-
-
+            <View style={{ height: layout.layout.height, width: layout.layout.width, margin: 5, marginLeft: '3.5%' }}>
                 <View style={{ width: layout.layout.width, flex: 0.2, flexDirection: 'row' }}>
-                    <View style={{ flex: 0.2, flexDirection: 'row' }}>
-                        <View style={{ flex: 0.4, alignItems: 'center', justifyContent: 'center' }}>
-                            <Image
-                                style={{ height: 50, width: 50, resizeMode: 'stretch', position: 'absolute' }}
-                                source={fatImages.coinImage} />
-                        </View>
-                        <View style={{ flex: 0.6, alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ fontSize: totalCoins >= 1000 ? 30 : 45, fontFamily: 'Arcade-Classic' }}>{totalCoins}</Text>
-                        </View>
-                    </View>
-                    <View style={{ flex: 0.6, alignItems: 'center', justifyContent: 'center' }}>
-                        <AnimatedPowerBar
-                            progress={50}
-                        />
-                    </View>
+                    <Coins totalCoins={totalCoins} />
+                    <DoubleProgressBar progressLeft={progressLeft} progressRight={progressRight} />
                     <TouchableOpacity
                         onPress={() => { setModalVisible(true) }}
                         style={{ flex: 0.15 }}>
@@ -58,44 +174,39 @@ const BedroomPage = () => {
                             style={{ height: 80, width: 80, resizeMode: 'stretch', justifyContent: 'center', alignItems: 'center', marginLeft: 30 }}
                             source={fatImages.shopIcon} />
                         <View style={{ top: 5, left: 5, alignItems: 'center', justifyContent: 'space-around' }}>
-                            <Text style={{ fontSize: 25, fontFamily: 'Arcade-Classic' }}>GAMES: 10</Text>
+                            <Text style={{ fontSize: 25, fontFamily: 'Arcade-Classic' }}>GAMES: {games}</Text>
                         </View>
-
-                        {/* <Ducks ducks={theDucks} /> */}
 
                         <ModalShop
                             //updateCoinsCallback={updateCoinsCallback}
                             onPressCancel={() => {
                                 setModalVisible(!modalVisible);
-                                //getTheDucks()
-                                //moreThanOneCharacter()
+                                moreThanOneCharacter()
                             }}
                             itemsForPurchase={itemsForPurchase}
                             visible={modalVisible} />
                     </TouchableOpacity>
                 </View>
                 <View style={{ width: 300, height: 20, alignSelf: 'center' }}>
-                    <Text style={{ fontSize: 25, fontFamily: 'Arcade-Classic', textAlign: 'center' }}>BEDROOM   PUNCHES</Text>
+                    <Text style={{ fontSize: 25, fontFamily: 'Arcade-Classic', textAlign: 'center' }}>BEDROOM   ONLINE   PUNCHES</Text>
                 </View>
                 <View style={{ width: layout.layout.width, flex: 0.8, flexDirection: 'row' }}>
                     <View style={{ width: '25%', height: '100%' }}>
                         <View>
-                            {false ?
-                                <Countdown
-                                    //finishedGameBar={finishedGameBar}
-                                    onFire={onFire}
-                                    //onFinish={() => finishGame()}
-                                    secondsGame={50}
-                                    secondsGameOnFire={40}
-                                />
+                            {startGame ?
+                                <View style={{ marginRight: '30%' }}>
+                                    <Countdown
+                                        finishedGameBar={finishedGameBar}
+                                        onFire={onFire}
+                                        onFinish={() => finishGame()}
+                                        secondsGame={50}
+                                        secondsGameOnFire={40}
+                                    />
+                                </View >
                                 :
                                 <View>
                                     <ButtonRounded
-                                        // onPress={() => {
-                                        //     correlacionDeTres()
-                                        //     setFinishedGameBar(false);
-                                        //     setStartGame(true)
-                                        // }}
+                                        onPress={() => { setFinishedGameBar(false); setStartGame(true) }}
                                         start
                                         textColor={'white'}
                                         text={'Start Game'} />
@@ -104,15 +215,12 @@ const BedroomPage = () => {
                         </View>
 
                         <ButtonRounded
-                            // onPress={() => {
-                            //     setEveryFeetFalse();
-                            //     doubleScoreFunction();
-                            // }}
+                            //onPress={() => {doubleScoreFunction()}}
                             marginTop={'15%'}
                             watchVideo
                             text={'X2 - Watch Video'} />
                         <ButtonRounded
-                            //onPress={() => changeCharacter()}
+                            onPress={() => changeCharacter()}
                             moreThanOneCharacted={false}
                             marginTop={'10%'}
                             textColor={'black'}
@@ -120,31 +228,24 @@ const BedroomPage = () => {
                         <ButtonIcon action={'Bathroom'} icon={fatImages.bathroom} />
                         <Text style={{ marginRight: '35%', fontSize: 14, fontFamily: 'Arcade-Classic', textAlign: 'center' }}>Bathroom</Text>
                     </View >
-                    <LeftFoot
-                        //onSwipeLeft={() => (startGame && !correlacionTresForGame) ? onSwipeLeftFootToLeft() : startGame && correlacionTresForGame && leftGame ? onSwipeLeftFootToLeft() : null}
-                        //onSwipeRight={() => (startGame && !correlacionTresForGame) ? onSwipeLeftFootToRight() : startGame && correlacionTresForGame && leftGame ? onSwipeLeftFootToRight() : null}
+                    <LeftFootPunch
                         layout={layout}
-                        characterChosen={characterForHeadOrFeet('fatBoy')}
+                        characterChosen={characterForHeadOrFeet(characterFinal)}
+                        progress={1}
+                        scale={scaleFootLeft}
+                        onPunch={startGame ? () => onPunchFoot(true, false) : null}
                         leftBlackFoot={fatImages.leftBlackFoot}
-                        leftWhiteFoot={fatImages.leftWhiteFoot}
+                        leftWhiteFoot={(progressLeft >= 1) ? fatImages.explosion : fatImages.leftWhiteFoot}
                         cakeLeftFoot={fatImages.cakeLeftFoot}
                         lipLeftFoot={fatImages.lipLeftFoot}
                         blueLeftFoot={fatImages.blueLeftFoot}
-                    //moveLeftToRight={moveLeftToRight}
-                    //moveLeftToLeft={moveLeftToLeft} 
                     />
                     {/* <View style={{ position: 'absolute', left: '28%', top: '10%' }}><Text style={{ color: 'red', fontSize: 30, fontWeight: 'bold' }}>{startGame && leftGame ? 'Left' : ''}</Text></View> */}
                     {/* <View style={{ position: 'absolute', left: '65%', top: '10%' }}><Text style={{ color: 'red', fontSize: 30, fontWeight: 'bold' }}>{startGame && rightGame ? 'Right' : ''}</Text></View> */}
 
-                    {/* <Sponges
-                        sponges={sponges}
-                        games={games}
-                        width={width}
-                        height={height} /> */}
-
                     <Head
                         layout={layout}
-                        characterChosen={characterForHeadOrFeet('fatBoy')}
+                        characterChosen={characterForHeadOrFeet(characterFinal)}
                         lipsGirl={fatImages.lipsGirl}
                         fatboyGif={fatImages.fatboyGif}
                         fatboySecond={fatImages.fatboySecond}
@@ -157,31 +258,19 @@ const BedroomPage = () => {
                         blueGirlThird={fatImages.blueGirlThird}
                         blueGirl={fatImages.blueGirl} />
 
-                    <RightFoot
-                        //onSwipeLeft={() => (startGame && !correlacionTresForGame) ? onSwipeRightFootToLeft() : startGame && correlacionTresForGame && rightGame ? onSwipeRightFootToLeft() : null}
-                        //onSwipeRight={() => (startGame && !correlacionTresForGame) ? onSwipeRightFootToRight() : startGame && correlacionTresForGame && rightGame ? onSwipeRightFootToLeft() : null}
+                    <RightFootPunch
                         layout={layout}
-                        characterChosen={characterForHeadOrFeet('fatBoy')}
+                        characterChosen={characterForHeadOrFeet(characterFinal)}
+                        progress={1}
+                        scale={scaleFootRight}
+                        onPunch={startGame ? () => onPunchFoot(false, true) : null}
                         rightBlackFoot={fatImages.rightBlackFoot}
                         rightWhiteFoot={fatImages.rightWhiteFoot}
                         cakeRightFoot={fatImages.cakeRightFoot}
                         lipRightFoot={fatImages.lipRightFoot}
                         blueRightFoot={fatImages.blueRightFoot}
-                    //moveRightToRight={moveRightToRight}
-                    //moveRightToLeft={moveRightToLeft} 
                     />
                 </View>
-
-
-
-
-
-
-
-
-
-
-
             </View>
         </ImageBackground>
     )

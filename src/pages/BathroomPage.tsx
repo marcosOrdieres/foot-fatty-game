@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, Dimensions, Image, ImageBackground, Alert
 import { characterForHeadOrFeet, multipleFive } from '../helper-functions/utils'
 import { getAsyncStorage, setAsyncStorage } from '../services/storage-service';
 import * as fatImages from '../assets'
-import { AnimatedPowerBar, ButtonRounded, RightFoot, LeftFoot, Head, Ducks, ModalShop, Sponges, Countdown, ButtonIcon } from '../components';
+import { AnimatedPowerBar, ButtonRounded, RightFoot, LeftFoot, Head, Ducks, ModalShop, Sponges, Countdown, ButtonIcon, Coins } from '../components';
 //import { ChangeHeadArray } from '../helper-functions/changeHead'
 const { width, height } = Dimensions.get('window');
 import { useNavigation } from '@react-navigation/native';
@@ -264,16 +264,7 @@ const BathroomPage = () => {
             <View
                 style={{ height: layout.layout.height, width: layout.layout.width, margin: 5, marginLeft: '3.5%' }}>
                 <View style={{ width: layout.layout.width, flex: 0.2, flexDirection: 'row' }}>
-                    <View style={{ flex: 0.2, flexDirection: 'row' }}>
-                        <View style={{ flex: 0.4, alignItems: 'center', justifyContent: 'center' }}>
-                            <Image
-                                style={{ height: 50, width: 50, resizeMode: 'stretch', position: 'absolute' }}
-                                source={fatImages.coinImage} />
-                        </View>
-                        <View style={{ flex: 0.6, alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ fontSize: totalCoins >= 1000 ? 30 : 45, fontFamily: 'Arcade-Classic' }}>{totalCoins}</Text>
-                        </View>
-                    </View>
+                    <Coins totalCoins={totalCoins} />
                     <View style={{ flex: 0.6, alignItems: 'center', justifyContent: 'center' }}>
                         <AnimatedPowerBar progress={progress} />
                     </View>

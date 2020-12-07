@@ -38,8 +38,7 @@ const RightFoot: React.FunctionComponent<RightFootProps> = ({ onSwipeLeft, onSwi
             return cakeRightFoot
         } else if (characterChosen === 'lipsGirl') {
             return lipRightFoot
-        }
-        else if (characterChosen === 'blueGirl' || characterChosen === 'blueGirlSecond' || characterChosen === 'blueGirlThird') {
+        } else if (characterChosen === 'blueGirl' || characterChosen === 'blueGirlSecond' || characterChosen === 'blueGirlThird') {
             return blueRightFoot
         } else {
             return rightWhiteFoot
