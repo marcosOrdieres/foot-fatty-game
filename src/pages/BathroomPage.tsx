@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, Dimensions, Image, ImageBackground, Alert
 import { characterForHeadOrFeet, multipleFive } from '../helper-functions/utils'
 import { getAsyncStorage, setAsyncStorage } from '../services/storage-service';
 import * as fatImages from '../assets'
-import { AnimatedPowerBar, ButtonRounded, RightFoot, LeftFoot, Head, Ducks, ModalShop, Sponges, Countdown, ButtonIcon, Coins } from '../components';
+import { AnimatedPowerBar, ButtonRounded, RightFoot, LeftFoot, Head, Ducks, ModalShop, Sponges, Countdown, ButtonIcon, Coins, TextHelper } from '../components';
 //import { ChangeHeadArray } from '../helper-functions/changeHead'
 const { width, height } = Dimensions.get('window');
 import { useNavigation } from '@react-navigation/native';
@@ -351,8 +351,9 @@ const BathroomPage = () => {
                         blueLeftFoot={fatImages.blueLeftFoot}
                         moveLeftToRight={moveLeftToRight}
                         moveLeftToLeft={moveLeftToLeft} />
-                    <View style={{ position: 'absolute', left: '28%', top: '10%' }}><Text style={{ color: 'red', fontSize: 30, fontWeight: 'bold' }}>{startGame && leftGame ? 'Left' : ''}</Text></View>
-                    <View style={{ position: 'absolute', left: '65%', top: '10%' }}><Text style={{ color: 'red', fontSize: 30, fontWeight: 'bold' }}>{startGame && rightGame ? 'Right' : ''}</Text></View>
+
+                    <TextHelper startGame={startGame} left={'30%'} onlineGame={leftGame} text={'Left'} />
+                    <TextHelper startGame={startGame} left={'60%'} onlineGame={rightGame} text={'Right'} />
 
                     <Sponges
                         sponges={sponges}

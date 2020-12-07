@@ -36,6 +36,10 @@ import bedroom from './bedroom.png';
 import bathroom from './bathroom.png';
 import explosion from './explosion.png';
 
+import goldenDiploma from './goldenDiploma.png';
+import goldenMedal from './goldenMedal.png';
+import goldenTrophy from './goldenTrophy.png';
+
 export {
   shopIcon,
   coinImage,
@@ -73,4 +77,7 @@ export {
   bedroom,
   bathroom,
   explosion,
+  goldenDiploma,
+  goldenMedal,
+  goldenTrophy,
 };

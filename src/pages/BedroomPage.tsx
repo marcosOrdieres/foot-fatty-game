@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, Dimensions, Image, ImageBackground, Alert
 import { characterForHeadOrFeet, multipleFive } from '../helper-functions/utils'
 import { getAsyncStorage, setAsyncStorage } from '../services/storage-service';
 import * as fatImages from '../assets'
-import { AnimatedPowerBar, ButtonRounded, RightFoot, LeftFoot, Head, Ducks, ModalShop, Sponges, Countdown, ButtonIcon, LeftFootPunch, RightFootPunch, DoubleProgressBar, Coins } from '../components';
+import { AnimatedPowerBar, ButtonRounded, RightFoot, LeftFoot, Head, Ducks, ModalShop, Sponges, Countdown, ButtonIcon, LeftFootPunch, RightFootPunch, DoubleProgressBar, Coins, TextHelper } from '../components';
 //import { ChangeHeadArray } from '../helper-functions/changeHead'
 const { width, height } = Dimensions.get('window');
 
@@ -29,6 +29,8 @@ const BedroomPage = () => {
     const [scaleFootRight, setScaleFootRight] = useState(2);
     const [oneCharacter, setOneCharacter] = useState(false);
 
+    const [onlineLeftGame, setOnlineLeftGame] = useState(false);
+    const [onlineRightGame, setOnlineRightGame] = useState(false);
 
     const checkCoins = async () => {
         const coins = await getAsyncStorage('coins');
@@ -47,8 +49,19 @@ const BedroomPage = () => {
         }
     }
 
+    const checkGames = async () => {
+        const gamesStorage = await getAsyncStorage('games');
+        if (!gamesStorage) {
+            await setAsyncStorage('games', 0)
+            return setGames(0)
+        }
+        setGames(gamesStorage)
+    }
+
     useEffect(() => {
-        checkCoins()
+        checkCoins();
+        onlineFakeGame();
+        checkGames();
     }, [])
 
     const finishGame = async () => {
@@ -62,6 +75,8 @@ const BedroomPage = () => {
             setProgressLeft(0)
             setScaleFootLeft(2)
             setScaleFootRight(2)
+            setOnlineRightGame(false);
+            setOnlineLeftGame(false);
         } else {
             Alert.alert('Sorry, You missed the Level 😅 😅')
             setStartGame(false)
@@ -69,6 +84,8 @@ const BedroomPage = () => {
             setProgressLeft(0)
             setScaleFootLeft(2)
             setScaleFootRight(2)
+            setOnlineRightGame(false);
+            setOnlineLeftGame(false);
         }
     }
 
@@ -159,6 +176,21 @@ const BedroomPage = () => {
         }
     }
 
+    const onlineFakeGame = async () => {
+        await new Promise((resolve) => setTimeout(() => {
+            setOnlineRightGame(false);
+            setOnlineLeftGame(true);
+            resolve();
+        }, Math.floor(Math.random() * 12000) + 100));
+
+        await new Promise((resolve) => setTimeout(() => {
+            setOnlineLeftGame(false);
+            setOnlineRightGame(true);
+            resolve();
+        }, Math.floor(Math.random() * 12000) + 100));
+        onlineFakeGame()
+    }
+
     return (
         <ImageBackground
             source={onFire ? fatImages.imageBedroomBig : fatImages.imageBedroomBig}
@@ -166,7 +198,7 @@ const BedroomPage = () => {
             <View style={{ height: layout.layout.height, width: layout.layout.width, margin: 5, marginLeft: '3.5%' }}>
                 <View style={{ width: layout.layout.width, flex: 0.2, flexDirection: 'row' }}>
                     <Coins totalCoins={totalCoins} />
-                    <DoubleProgressBar progressLeft={progressLeft} progressRight={progressRight} />
+                    <DoubleProgressBar progressLeft={progressLeft} leftChosen={startGame ? onlineLeftGame : null} rightChosen={startGame ? onlineRightGame : null} progressRight={progressRight} />
                     <TouchableOpacity
                         onPress={() => { setModalVisible(true) }}
                         style={{ flex: 0.15 }}>
@@ -206,7 +238,7 @@ const BedroomPage = () => {
                                 :
                                 <View>
                                     <ButtonRounded
-                                        onPress={() => { setFinishedGameBar(false); setStartGame(true) }}
+                                        onPress={() => { setFinishedGameBar(false); setStartGame(true); onlineFakeGame() }}
                                         start
                                         textColor={'white'}
                                         text={'Start Game'} />
@@ -233,15 +265,16 @@ const BedroomPage = () => {
                         characterChosen={characterForHeadOrFeet(characterFinal)}
                         progress={1}
                         scale={scaleFootLeft}
-                        onPunch={startGame ? () => onPunchFoot(true, false) : null}
+                        onPunch={startGame && onlineLeftGame ? () => onPunchFoot(true, false) : null}
                         leftBlackFoot={fatImages.leftBlackFoot}
                         leftWhiteFoot={(progressLeft >= 1) ? fatImages.explosion : fatImages.leftWhiteFoot}
                         cakeLeftFoot={fatImages.cakeLeftFoot}
                         lipLeftFoot={fatImages.lipLeftFoot}
                         blueLeftFoot={fatImages.blueLeftFoot}
                     />
-                    {/* <View style={{ position: 'absolute', left: '28%', top: '10%' }}><Text style={{ color: 'red', fontSize: 30, fontWeight: 'bold' }}>{startGame && leftGame ? 'Left' : ''}</Text></View> */}
-                    {/* <View style={{ position: 'absolute', left: '65%', top: '10%' }}><Text style={{ color: 'red', fontSize: 30, fontWeight: 'bold' }}>{startGame && rightGame ? 'Right' : ''}</Text></View> */}
+                    <TextHelper startGame={startGame} left={'30%'} onlineGame={onlineLeftGame} text={'Left'} />
+                    <TextHelper startGame={startGame} left={'60%'} onlineGame={onlineRightGame} text={'Right'} />
+
 
                     <Head
                         layout={layout}
@@ -263,7 +296,7 @@ const BedroomPage = () => {
                         characterChosen={characterForHeadOrFeet(characterFinal)}
                         progress={1}
                         scale={scaleFootRight}
-                        onPunch={startGame ? () => onPunchFoot(false, true) : null}
+                        onPunch={startGame && onlineRightGame ? () => onPunchFoot(false, true) : null}
                         rightBlackFoot={fatImages.rightBlackFoot}
                         rightWhiteFoot={fatImages.rightWhiteFoot}
                         cakeRightFoot={fatImages.cakeRightFoot}

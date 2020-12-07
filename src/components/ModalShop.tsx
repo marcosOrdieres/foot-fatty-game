@@ -92,36 +92,67 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                                     const coinsMinus2000 = await wasteCoinsAndStoreDuck(coinsInModal, 2000, { duck: ['yellowDuck'] })
                                     if (coinsMinus2000) updateCoinsCallback(coinsMinus2000);
                                 } : () => console.warn('YA SE HA COMPRADO')}
-                                style={{ zIndex: 1000, width: 100, height: 100, borderColor: yellowDuckOpacity ? '#e5e5ff' : 'blue', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
+                                style={{ width: 75, height: 75, borderColor: yellowDuckOpacity ? '#e5e5ff' : 'blue', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
                                 <Image
-                                    style={{ opacity: yellowDuckOpacity ? 0.3 : null, height: 75, width: 75, resizeMode: 'stretch' }}
+                                    style={{ opacity: yellowDuckOpacity ? 0.3 : null, height: 50, width: 50, resizeMode: 'stretch' }}
                                     source={fatImages.yellowDuck} />
                             </TouchableOpacity>
-                            <ButtonItemAndChar opacity={yellowDuckOpacity} coins={3000} />
+                            <ButtonItemAndChar duck opacity={yellowDuckOpacity} coins={3000} />
                             <TouchableOpacity
                                 onPress={!pinkDuckOpacity ? async () => {
                                     const coinsMinus6000 = await wasteCoinsAndStoreDuck(coinsInModal, 6000, { duck: ['pinkDuck'] })
                                     if (coinsMinus6000) updateCoinsCallback(coinsMinus6000);
                                 } : () => console.warn('YA SE HA COMPRADO')}
-                                style={{ width: 100, height: 100, borderColor: pinkDuckOpacity ? '#e5e5ff' : 'blue', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
+                                style={{ width: 75, height: 75, borderColor: pinkDuckOpacity ? '#e5e5ff' : 'blue', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
                                 <Image
-                                    style={{ opacity: pinkDuckOpacity ? 0.3 : null, height: 75, width: 75, resizeMode: 'stretch' }}
+                                    style={{ opacity: pinkDuckOpacity ? 0.3 : null, height: 50, width: 50, resizeMode: 'stretch' }}
                                     source={fatImages.pinkDuck} />
                             </TouchableOpacity>
-                            <ButtonItemAndChar opacity={pinkDuckOpacity} marginLeft={'33%'} coins={6000} />
+                            <ButtonItemAndChar duck opacity={pinkDuckOpacity} marginLeft={'33%'} coins={6000} />
                             <TouchableOpacity
                                 onPress={!greenDuckOpacity ? async () => {
                                     const coinsMinus10000 = await wasteCoinsAndStoreDuck(coinsInModal, 10000, { duck: ['greenDuck'] })
                                     if (coinsMinus10000) updateCoinsCallback(coinsMinus10000);
                                 } : () => console.warn('YA SE HA COMPRADO')}
-                                style={{ opacity: 0.3, width: 100, height: 100, borderColor: greenDuckOpacity ? '#e5e5ff' : 'blue', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
+                                style={{ opacity: 0.3, width: 75, height: 75, borderColor: greenDuckOpacity ? '#e5e5ff' : 'blue', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
                                 <Image
-                                    style={{ opacity: greenDuckOpacity ? 0.3 : null, height: 75, width: 75, resizeMode: 'stretch' }}
+                                    style={{ opacity: greenDuckOpacity ? 0.3 : null, height: 50, width: 50, resizeMode: 'stretch' }}
                                     source={fatImages.greenDuck} />
 
                             </TouchableOpacity>
-                            <ButtonItemAndChar opacity={greenDuckOpacity} marginLeft={'83%'} coins={9000} />
+                            <ButtonItemAndChar duck opacity={greenDuckOpacity} marginLeft={'83%'} coins={9000} />
                         </View>
+
+
+
+                        <View style={{ flex: 0.6, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', margin: 20 }}>
+                            <TouchableOpacity
+                                style={{ width: 75, height: 75, borderColor: 'blue', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
+                                <Image
+                                    style={{ opacity: null, height: 60, width: 60, resizeMode: 'stretch' }}
+                                    source={fatImages.goldenDiploma} />
+                            </TouchableOpacity>
+                            <ButtonItemAndChar bestPriceText={'20 Games'} />
+                            <TouchableOpacity
+                                style={{ width: 75, height: 75, borderColor: 'blue', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
+                                <Image
+                                    style={{ height: 60, width: 60, resizeMode: 'stretch' }}
+                                    source={fatImages.goldenMedal} />
+                            </TouchableOpacity>
+                            <ButtonItemAndChar marginLeft={'33%'} bestPriceText={'30 Games    3 Ducks'} />
+                            <TouchableOpacity
+                                style={{ opacity: 0.3, width: 75, height: 75, borderColor: 'blue', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
+                                <Image
+                                    style={{ opacity: null, height: 60, width: 60, resizeMode: 'stretch' }}
+                                    source={fatImages.goldenTrophy} />
+
+                            </TouchableOpacity>
+                            <ButtonItemAndChar marginLeft={'83%'} bestPriceText={'40 Games   3 Ducks   4 Characters'} />
+                        </View>
+
+
+
+
                         <Cancel onPressCancel={onPressCancel} />
                     </View>
 

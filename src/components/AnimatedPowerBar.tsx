@@ -28,7 +28,7 @@ const AnimatedPowerBar: React.FunctionComponent<AnimatedPowerBarProps> = ({ prog
                 </View>
             </AnimatedBar>
             :
-            <Text style={{ fontSize: 50, fontStyle: 'normal', fontFamily: 'Arcade-Classic' }}>Game Finalised 😀</Text>
+            <Text style={{ fontSize: 20, fontStyle: 'normal', fontFamily: 'Arcade-Classic' }}>Game Finalised 😀</Text>
     )
 }
 

@@ -18,6 +18,7 @@ import LeftFootPunch from './LeftFootPunch';
 import RightFootPunch from './RightFootPunch';
 import DoubleProgressBar from './DoubleProgressBar';
 import Coins from './Coins';
+import TextHelper from './TextHelper';
 
 export {
   LeftFoot,
@@ -40,4 +41,5 @@ export {
   RightFootPunch,
   DoubleProgressBar,
   Coins,
+  TextHelper,
 };
