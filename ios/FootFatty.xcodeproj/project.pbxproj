@@ -13,32 +13,34 @@
 		0A5953582576C24200C8B701 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A5953572576C24200C8B701 /* libRNGestureHandler.a */; };
 		0A59535A2576C24200C8B701 /* libRNReanimated.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A5953592576C24200C8B701 /* libRNReanimated.a */; };
 		0A59535C2576C24200C8B701 /* libRNScreens.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A59535B2576C24200C8B701 /* libRNScreens.a */; };
-		0A6FDF0325811C79004044CF /* Arcade-Classic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AE30C2A257A4C2B006CD2AA /* Arcade-Classic.ttf */; };
+		0AB6BA692582774E002D4FC4 /* Arcade-Classic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6BA682582774E002D4FC4 /* Arcade-Classic.ttf */; };
+		0BE14BF039F2480FB3522904 /* Teko-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD40EBD003E049328B2FC16D /* Teko-Regular.ttf */; };
+		0D5F923B05E54B72A4611739 /* Teko-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 623DCDF3A1B84B60BE88E24F /* Teko-Light.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		1478ABA7D42E456682C77B16 /* Teko-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 824CE2DD384C4A84A87EAB7F /* Teko-SemiBold.ttf */; };
+		46BC39FDC4BA42C0AB1BC33D /* Teko-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21C72C574CE84728A6615508 /* Teko-Bold.ttf */; };
+		5DE1D5C27BE94FED95754D6F /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0736793373A24977AA43D700 /* Montserrat-Regular.ttf */; };
+		65D6672A5EB54F028D02D6BF /* Teko-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A2CCD380CC3F4A40B3EBE0E7 /* Teko-Medium.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		AA64DCCE88222A3166B3E389 /* libPods-FootFatty.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D5CA02C1F9821F8B2B6617F /* libPods-FootFatty.a */; };
-		7DAA82458E45459D98B6F221 /* Arcade-Classic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 064D0F43733040FDBD266019 /* Arcade-Classic.ttf */; };
 		BC162E0385A846579FD93DC0 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2578BECC4495419EBE7954BE /* Montserrat-Bold.ttf */; };
 		EF48370D3AD24DFF8991ED20 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3EA443AF71A6409FA41AE026 /* Montserrat-Medium.ttf */; };
-		5DE1D5C27BE94FED95754D6F /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0736793373A24977AA43D700 /* Montserrat-Regular.ttf */; };
-		46BC39FDC4BA42C0AB1BC33D /* Teko-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21C72C574CE84728A6615508 /* Teko-Bold.ttf */; };
-		0D5F923B05E54B72A4611739 /* Teko-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 623DCDF3A1B84B60BE88E24F /* Teko-Light.ttf */; };
-		65D6672A5EB54F028D02D6BF /* Teko-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A2CCD380CC3F4A40B3EBE0E7 /* Teko-Medium.ttf */; };
-		0BE14BF039F2480FB3522904 /* Teko-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD40EBD003E049328B2FC16D /* Teko-Regular.ttf */; };
-		1478ABA7D42E456682C77B16 /* Teko-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 824CE2DD384C4A84A87EAB7F /* Teko-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* FootFattyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FootFattyTests.m; sourceTree = "<group>"; };
+		064D0F43733040FDBD266019 /* Arcade-Classic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Arcade-Classic.ttf"; path = "../src/assets/fonts/Arcade-Classic.ttf"; sourceTree = "<group>"; };
+		0736793373A24977AA43D700 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Regular.ttf"; path = "../src/assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		0A5953532576C24200C8B701 /* libRNCAsyncStorage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNCAsyncStorage.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A5953552576C24200C8B701 /* libRNCMaskedView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNCMaskedView.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A5953572576C24200C8B701 /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A5953592576C24200C8B701 /* libRNReanimated.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNReanimated.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A59535B2576C24200C8B701 /* libRNScreens.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNScreens.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		0AB6BA682582774E002D4FC4 /* Arcade-Classic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Arcade-Classic.ttf"; path = "../../../src/assets/fonts/Arcade-Classic.ttf"; sourceTree = "<group>"; };
 		0AE30C29257A4C2B006CD2AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = "Base.lproj/Arcade-Classic.ttf"; sourceTree = "<group>"; };
 		12AA0463E709194CFF3DBA16 /* Pods-FootFatty.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FootFatty.debug.xcconfig"; path = "Target Support Files/Pods-FootFatty/Pods-FootFatty.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* FootFatty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FootFatty.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,10 +50,16 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = FootFatty/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = FootFatty/main.m; sourceTree = "<group>"; };
 		184C849ECE3F08F7BCC6E1AD /* Pods-FootFatty-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FootFatty-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-FootFatty-tvOSTests/Pods-FootFatty-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		21C72C574CE84728A6615508 /* Teko-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Teko-Bold.ttf"; path = "../src/assets/fonts/Teko-Bold.ttf"; sourceTree = "<group>"; };
+		2578BECC4495419EBE7954BE /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../src/assets/fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		2D5CA02C1F9821F8B2B6617F /* libPods-FootFatty.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FootFatty.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EA443AF71A6409FA41AE026 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../src/assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		623DCDF3A1B84B60BE88E24F /* Teko-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Teko-Light.ttf"; path = "../src/assets/fonts/Teko-Light.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = FootFatty/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		824CE2DD384C4A84A87EAB7F /* Teko-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Teko-SemiBold.ttf"; path = "../src/assets/fonts/Teko-SemiBold.ttf"; sourceTree = "<group>"; };
 		8E7816DC5E81352B6BC8A07C /* libPods-FootFatty-FootFattyTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FootFatty-FootFattyTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		927357A679DA3B1C1D0ABD56 /* Pods-FootFatty-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FootFatty-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-FootFatty-tvOS/Pods-FootFatty-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		A2CCD380CC3F4A40B3EBE0E7 /* Teko-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Teko-Medium.ttf"; path = "../src/assets/fonts/Teko-Medium.ttf"; sourceTree = "<group>"; };
 		ADAA54143FD5C0EAC8B4EF9B /* Pods-FootFatty-FootFattyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FootFatty-FootFattyTests.release.xcconfig"; path = "Target Support Files/Pods-FootFatty-FootFattyTests/Pods-FootFatty-FootFattyTests.release.xcconfig"; sourceTree = "<group>"; };
 		B695C85068B085FE848E72D7 /* Pods-FootFatty-FootFattyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FootFatty-FootFattyTests.debug.xcconfig"; path = "Target Support Files/Pods-FootFatty-FootFattyTests/Pods-FootFatty-FootFattyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BA8533A2E687DE514CDE2169 /* libPods-FootFatty-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FootFatty-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,16 +68,8 @@
 		EC700FE963D84967940DE638 /* Pods-FootFatty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FootFatty.release.xcconfig"; path = "Target Support Files/Pods-FootFatty/Pods-FootFatty.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		FD40EBD003E049328B2FC16D /* Teko-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Teko-Regular.ttf"; path = "../src/assets/fonts/Teko-Regular.ttf"; sourceTree = "<group>"; };
 		FE85C30B2F7014BC625C5383 /* Pods-FootFatty-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FootFatty-tvOS.release.xcconfig"; path = "Target Support Files/Pods-FootFatty-tvOS/Pods-FootFatty-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		064D0F43733040FDBD266019 /* Arcade-Classic.ttf */ = {isa = PBXFileReference; name = "Arcade-Classic.ttf"; path = "../src/assets/fonts/Arcade-Classic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		2578BECC4495419EBE7954BE /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; name = "Montserrat-Bold.ttf"; path = "../src/assets/fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		3EA443AF71A6409FA41AE026 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; name = "Montserrat-Medium.ttf"; path = "../src/assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		0736793373A24977AA43D700 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; name = "Montserrat-Regular.ttf"; path = "../src/assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		21C72C574CE84728A6615508 /* Teko-Bold.ttf */ = {isa = PBXFileReference; name = "Teko-Bold.ttf"; path = "../src/assets/fonts/Teko-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		623DCDF3A1B84B60BE88E24F /* Teko-Light.ttf */ = {isa = PBXFileReference; name = "Teko-Light.ttf"; path = "../src/assets/fonts/Teko-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A2CCD380CC3F4A40B3EBE0E7 /* Teko-Medium.ttf */ = {isa = PBXFileReference; name = "Teko-Medium.ttf"; path = "../src/assets/fonts/Teko-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		FD40EBD003E049328B2FC16D /* Teko-Regular.ttf */ = {isa = PBXFileReference; name = "Teko-Regular.ttf"; path = "../src/assets/fonts/Teko-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		824CE2DD384C4A84A87EAB7F /* Teko-SemiBold.ttf */ = {isa = PBXFileReference; name = "Teko-SemiBold.ttf"; path = "../src/assets/fonts/Teko-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +118,7 @@
 		0AE30C32257A650F006CD2AA /* fonts */ = {
 			isa = PBXGroup;
 			children = (
+				0AB6BA682582774E002D4FC4 /* Arcade-Classic.ttf */,
 				0AE30C2A257A4C2B006CD2AA /* Arcade-Classic.ttf */,
 			);
 			path = fonts;
@@ -153,6 +154,22 @@
 				C981EA4DC688EBFD671E92D4 /* libPods-FootFatty-tvOSTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		33DD74FAD0E24679B12FBB1F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				064D0F43733040FDBD266019 /* Arcade-Classic.ttf */,
+				2578BECC4495419EBE7954BE /* Montserrat-Bold.ttf */,
+				3EA443AF71A6409FA41AE026 /* Montserrat-Medium.ttf */,
+				0736793373A24977AA43D700 /* Montserrat-Regular.ttf */,
+				21C72C574CE84728A6615508 /* Teko-Bold.ttf */,
+				623DCDF3A1B84B60BE88E24F /* Teko-Light.ttf */,
+				A2CCD380CC3F4A40B3EBE0E7 /* Teko-Medium.ttf */,
+				FD40EBD003E049328B2FC16D /* Teko-Regular.ttf */,
+				824CE2DD384C4A84A87EAB7F /* Teko-SemiBold.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		52DDD7866FF01035BFD47F14 /* Pods */ = {
@@ -201,23 +218,6 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
-		};
-		33DD74FAD0E24679B12FBB1F /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				064D0F43733040FDBD266019 /* Arcade-Classic.ttf */,
-				2578BECC4495419EBE7954BE /* Montserrat-Bold.ttf */,
-				3EA443AF71A6409FA41AE026 /* Montserrat-Medium.ttf */,
-				0736793373A24977AA43D700 /* Montserrat-Regular.ttf */,
-				21C72C574CE84728A6615508 /* Teko-Bold.ttf */,
-				623DCDF3A1B84B60BE88E24F /* Teko-Light.ttf */,
-				A2CCD380CC3F4A40B3EBE0E7 /* Teko-Medium.ttf */,
-				FD40EBD003E049328B2FC16D /* Teko-Regular.ttf */,
-				824CE2DD384C4A84A87EAB7F /* Teko-SemiBold.ttf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -281,8 +281,6 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				0A6FDF0325811C79004044CF /* Arcade-Classic.ttf in Resources */,
-				7DAA82458E45459D98B6F221 /* Arcade-Classic.ttf in Resources */,
 				BC162E0385A846579FD93DC0 /* Montserrat-Bold.ttf in Resources */,
 				EF48370D3AD24DFF8991ED20 /* Montserrat-Medium.ttf in Resources */,
 				5DE1D5C27BE94FED95754D6F /* Montserrat-Regular.ttf in Resources */,
@@ -291,6 +289,7 @@
 				65D6672A5EB54F028D02D6BF /* Teko-Medium.ttf in Resources */,
 				0BE14BF039F2480FB3522904 /* Teko-Regular.ttf in Resources */,
 				1478ABA7D42E456682C77B16 /* Teko-SemiBold.ttf in Resources */,
+				0AB6BA692582774E002D4FC4 /* Arcade-Classic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

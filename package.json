@@ -23,6 +23,7 @@
     "react": "16.13.1",
     "react-native": "0.63.4",
     "react-native-animated-bar": "^0.2.0",
+    "react-native-awesome-alerts": "^1.4.2",
     "react-native-countdown-component": "^2.7.1",
     "react-native-gesture-handler": "~1.4.0",
     "react-native-really-awesome-button": "^1.6.0",

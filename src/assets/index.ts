@@ -40,6 +40,11 @@ import goldenDiploma from './goldenDiploma.png';
 import goldenMedal from './goldenMedal.png';
 import goldenTrophy from './goldenTrophy.png';
 
+import success from './success.png';
+import failure from './failure.png';
+import noItems from './noItems.png';
+import noMoney from './noMoney.png';
+
 export {
   shopIcon,
   coinImage,
@@ -80,4 +85,8 @@ export {
   goldenDiploma,
   goldenMedal,
   goldenTrophy,
+  failure,
+  success,
+  noItems,
+  noMoney,
 };

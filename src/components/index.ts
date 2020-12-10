@@ -20,6 +20,7 @@ import DoubleProgressBar from './DoubleProgressBar';
 import Coins from './Coins';
 import TextHelper from './TextHelper';
 import GoldenPrices from './GoldenPrices';
+import CustomAlert from './CustomAlert';
 
 export {
   LeftFoot,
@@ -44,4 +45,5 @@ export {
   Coins,
   TextHelper,
   GoldenPrices,
+  CustomAlert,
 };
