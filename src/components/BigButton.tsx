@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableOpacity, Image, Text, Dimensions } from 'react-native';
+import { TouchableOpacity, Image, Text, Dimensions, Platform } from 'react-native';
 const { width, height } = Dimensions.get('window');
 
 interface BigButtonProps {
@@ -15,7 +15,7 @@ const BigButton: React.FunctionComponent<BigButtonProps> = ({ image, text }) => 
                 // await InAppPurchases.purchaseItemAsync(itemsForPurchase[0].productId);
             }}
             style={{ width: width / 5, height: height / 1.5, backgroundColor: 'green', borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ textAlign: 'center', fontSize: 30, fontFamily: 'Arcade-Classic' }}>{text}</Text>
+            <Text style={{ textAlign: 'center', fontSize: 30, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>{text}</Text>
             <Image
                 style={{ height: 50, width: 50, resizeMode: 'stretch' }}
                 source={image} />

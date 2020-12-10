@@ -19,6 +19,7 @@ import RightFootPunch from './RightFootPunch';
 import DoubleProgressBar from './DoubleProgressBar';
 import Coins from './Coins';
 import TextHelper from './TextHelper';
+import GoldenPrices from './GoldenPrices';
 
 export {
   LeftFoot,
@@ -42,4 +43,5 @@ export {
   DoubleProgressBar,
   Coins,
   TextHelper,
+  GoldenPrices,
 };

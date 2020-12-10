@@ -13,6 +13,7 @@
 		0A5953582576C24200C8B701 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A5953572576C24200C8B701 /* libRNGestureHandler.a */; };
 		0A59535A2576C24200C8B701 /* libRNReanimated.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A5953592576C24200C8B701 /* libRNReanimated.a */; };
 		0A59535C2576C24200C8B701 /* libRNScreens.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A59535B2576C24200C8B701 /* libRNScreens.a */; };
+		0A6FDF0325811C79004044CF /* Arcade-Classic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AE30C2A257A4C2B006CD2AA /* Arcade-Classic.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -244,6 +245,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				0A6FDF0325811C79004044CF /* Arcade-Classic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

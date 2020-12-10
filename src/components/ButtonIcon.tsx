@@ -1,22 +1,25 @@
 import React from 'react'
-import { TouchableOpacity, Image } from 'react-native';
+import { TouchableOpacity, Image, Platform, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 interface DrawerProps {
     action?: string,
-    icon?: string
+    icon?: string,
+    place?: string
 }
 
 
-const ButtonIcon: React.FunctionComponent<DrawerProps> = ({ action, icon }) => {
+const ButtonIcon: React.FunctionComponent<DrawerProps> = ({ action, icon, place }) => {
     const navigation = useNavigation();
     return (
         <TouchableOpacity
             onPress={() => { navigation.navigate(action) }}
-            style={{ marginTop: '10%', paddingLeft: '15%' }}>
+            style={{ marginTop: '5%', width: '75%' }}>
             <Image
                 style={{ height: 60, width: 60 }}
                 source={icon} />
+            <Text style={{ fontSize: 14, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null, textAlign: 'left' }}>{place}</Text>
+
         </TouchableOpacity>
     )
 }

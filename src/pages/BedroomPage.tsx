@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, Dimensions, Image, ImageBackground, Alert
 import { characterForHeadOrFeet, multipleFive } from '../helper-functions/utils'
 import { getAsyncStorage, setAsyncStorage } from '../services/storage-service';
 import * as fatImages from '../assets'
-import { AnimatedPowerBar, ButtonRounded, RightFoot, LeftFoot, Head, Ducks, ModalShop, Sponges, Countdown, ButtonIcon, LeftFootPunch, RightFootPunch, DoubleProgressBar, Coins, TextHelper } from '../components';
+import { AnimatedPowerBar, ButtonRounded, RightFoot, LeftFoot, Head, Ducks, ModalShop, Sponges, Countdown, ButtonIcon, LeftFootPunch, RightFootPunch, DoubleProgressBar, Coins, TextHelper, GoldenPrices } from '../components';
 //import { ChangeHeadArray } from '../helper-functions/changeHead'
 const { width, height } = Dimensions.get('window');
 
@@ -28,6 +28,7 @@ const BedroomPage = () => {
     const [scaleFootLeft, setScaleFootLeft] = useState(2);
     const [scaleFootRight, setScaleFootRight] = useState(2);
     const [oneCharacter, setOneCharacter] = useState(false);
+    const [prices, setTheGoldenPrice] = useState(null);
 
     const [onlineLeftGame, setOnlineLeftGame] = useState(false);
     const [onlineRightGame, setOnlineRightGame] = useState(false);
@@ -38,15 +39,24 @@ const BedroomPage = () => {
         return coins
     }
 
-    const onPunchFoot = (left: boolean, right: boolean) => {
-        if (left) {
-            winCoinsWhenSwipe(true, false)
-            return console.warn('pressed left')
+    const onPunchFoot = (left: boolean, right: boolean, correctPunch: boolean) => {
+
+        if (correctPunch) {
+            if (left) {
+                winCoinsWhenSwipe(true, false, 0.01, 1)
+            }
+            if (right) {
+                winCoinsWhenSwipe(false, true, 0.01, 1)
+            }
+        } else {
+            if (left) {
+                winCoinsWhenSwipe(true, false, -0.01, -1)
+            }
+            if (right) {
+                winCoinsWhenSwipe(false, true, -0.01, -1)
+            }
         }
-        if (right) {
-            winCoinsWhenSwipe(false, true)
-            return console.warn('pressed right')
-        }
+
     }
 
     const checkGames = async () => {
@@ -58,9 +68,41 @@ const BedroomPage = () => {
         setGames(gamesStorage)
     }
 
+    const decisionOnlineChosen = async (progressLeft: number, progressRight: number) => {
+        const textArray = ['none', 'Left', 'Right'];
+        const randomNumber = Math.floor(Math.random() * 2) + 1;
+        const randomString = textArray[randomNumber];
+
+        if (progressLeft >= 1) {
+            if (randomString === 'Left') {
+                const coins = await getAsyncStorage('coins');
+                await setAsyncStorage('coins', coins + 100);
+                const coinsAfterWinOnlineGame = await getAsyncStorage('coins');
+                setTotalCoins(coinsAfterWinOnlineGame)
+                return { decisionSide: true, sideChosen: 'Left' }
+            } else {
+                return { decisionSide: false, sideChosen: 'Left' }
+            }
+        } else if (progressRight >= 1) {
+
+            if (randomString === 'Right') {
+
+                const coins = await getAsyncStorage('coins');
+                await setAsyncStorage('coins', coins + 100);
+                const coinsAfterWinOnlineGame = await getAsyncStorage('coins');
+                setTotalCoins(coinsAfterWinOnlineGame)
+
+                return { decisionSide: true, sideChosen: 'Right' }
+            } else {
+                return { decisionSide: false, sideChosen: 'Right' }
+            }
+        }
+    }
+
     useEffect(() => {
         checkCoins();
-        onlineFakeGame();
+        //onlineFakeGame(); why?
+        getTheGoldenPrices()
         checkGames();
     }, [])
 
@@ -69,7 +111,14 @@ const BedroomPage = () => {
         if (progressLeft >= 1 || progressRight >= 1) {
             await setAsyncStorage('games', gamesStorage + 1);
             setGames(gamesStorage + 1)
-            Alert.alert('CONGRATULATIONS, you passed the level 😀 😀')
+            const { decisionSide, sideChosen } = await decisionOnlineChosen(progressLeft, progressRight);
+            console.warn('22222', decisionSide, sideChosen)
+
+            if (decisionSide) {
+                Alert.alert(`+1 GAME +100 COINS  😀 your Side Decision:${sideChosen} was the Online Chosen`)
+            } else {
+                Alert.alert(`+1 GAME 😀 your Side Decision:${sideChosen} was not the Online Chosen`)
+            }
             setStartGame(false)
             setProgressRight(0)
             setProgressLeft(0)
@@ -89,30 +138,33 @@ const BedroomPage = () => {
         }
     }
 
-    const winCoinsWhenSwipe = async (left: boolean, right: boolean) => {
+    const winCoinsWhenSwipe = async (left: boolean, right: boolean, progress: number, coinsWon: number) => {
         if (progressLeft >= 1 || progressRight >= 1) { setFinishedGameBar(true) }
         const coins = await getAsyncStorage('coins');
         if (doubleScore) {
-            await setAsyncStorage('coins', coins + 2);
+            await setAsyncStorage('coins', coins + coinsWon * 2);
             if (left) {
-                setProgressLeft(progressLeft + 0.02)
+                setProgressLeft(progressLeft + progress * 2)
                 onScaleFoot(0.04, 0)
             }
             if (right) {
-                setProgressRight(progressRight + 0.02)
+                setProgressRight(progressRight + progress * 2)
                 onScaleFoot(0, 0.04)
             }
         } else {
-            await setAsyncStorage('coins', coins + 1000);
+            await setAsyncStorage('coins', coins + coinsWon);
             if (left) {
-                setProgressLeft(progressLeft + 0.1)
+                setProgressLeft(progressLeft + progress)
                 changeHeadState()
                 onScaleFoot(0.02, 0)
             }
             if (right) {
-                setProgressRight(progressRight + 0.01)
+                setProgressRight(progressRight + progress)
                 onScaleFoot(0, 0.02)
             }
+        }
+        if (progressLeft >= 1 || progressRight >= 1) {
+            finishGame()
         }
         const coinsAfterSwipe = await getAsyncStorage('coins');
         setTotalCoins(coinsAfterSwipe)
@@ -176,19 +228,26 @@ const BedroomPage = () => {
         }
     }
 
-    const onlineFakeGame = async () => {
+    const onlineFakeGame = async (fromTime: number, toTime: number) => {
         await new Promise((resolve) => setTimeout(() => {
             setOnlineRightGame(false);
             setOnlineLeftGame(true);
             resolve();
-        }, Math.floor(Math.random() * 12000) + 100));
+        }, Math.floor(Math.random() * fromTime) + toTime));
 
         await new Promise((resolve) => setTimeout(() => {
             setOnlineLeftGame(false);
             setOnlineRightGame(true);
             resolve();
-        }, Math.floor(Math.random() * 12000) + 100));
-        onlineFakeGame()
+        }, Math.floor(Math.random() * fromTime) + toTime));
+        onlineFakeGame(15000, 4000)
+    }
+
+    async function getTheGoldenPrices() {
+        const goldenPriceStorage = await getAsyncStorage('goldenPrice');
+        if (goldenPriceStorage) {
+            setTheGoldenPrice(goldenPriceStorage.goldenPrice)
+        }
     }
 
     return (
@@ -205,22 +264,23 @@ const BedroomPage = () => {
                         <Image
                             style={{ height: 80, width: 80, resizeMode: 'stretch', justifyContent: 'center', alignItems: 'center', marginLeft: 30 }}
                             source={fatImages.shopIcon} />
-                        <View style={{ top: 5, left: 5, alignItems: 'center', justifyContent: 'space-around' }}>
-                            <Text style={{ fontSize: 25, fontFamily: 'Arcade-Classic' }}>GAMES: {games}</Text>
+                        <View style={{ left: 5, alignItems: 'center', justifyContent: 'space-around' }}>
+                            <Text style={{ fontSize: 20, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>GAMES: {games}</Text>
                         </View>
 
                         <ModalShop
                             //updateCoinsCallback={updateCoinsCallback}
                             onPressCancel={() => {
                                 setModalVisible(!modalVisible);
+                                getTheGoldenPrices()
                                 moreThanOneCharacter()
                             }}
                             itemsForPurchase={itemsForPurchase}
                             visible={modalVisible} />
                     </TouchableOpacity>
                 </View>
-                <View style={{ width: 300, height: 20, alignSelf: 'center' }}>
-                    <Text style={{ fontSize: 25, fontFamily: 'Arcade-Classic', textAlign: 'center' }}>BEDROOM   ONLINE   PUNCHES</Text>
+                <View style={{ width: 300, height: 30, alignSelf: 'center' }}>
+                    <Text style={{ fontSize: 20, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null, textAlign: 'center' }}>BEDROOM   ONLINE   PUNCHES</Text>
                 </View>
                 <View style={{ width: layout.layout.width, flex: 0.8, flexDirection: 'row' }}>
                     <View style={{ width: '25%', height: '100%' }}>
@@ -238,7 +298,7 @@ const BedroomPage = () => {
                                 :
                                 <View>
                                     <ButtonRounded
-                                        onPress={() => { setFinishedGameBar(false); setStartGame(true); onlineFakeGame() }}
+                                        onPress={() => { setFinishedGameBar(false); setStartGame(true); onlineFakeGame(2000, 100) }}
                                         start
                                         textColor={'white'}
                                         text={'Start Game'} />
@@ -253,19 +313,18 @@ const BedroomPage = () => {
                             text={'X2 - Watch Video'} />
                         <ButtonRounded
                             onPress={() => changeCharacter()}
-                            moreThanOneCharacted={false}
-                            marginTop={'10%'}
-                            textColor={'black'}
+                            moreThanOneCharacted={oneCharacter ? false : true}
+                            marginTop={'15%'}
+                            textColor={oneCharacter ? 'black' : '#b3b3b3'}
                             text={'Change Character'} />
-                        <ButtonIcon action={'Bathroom'} icon={fatImages.bathroom} />
-                        <Text style={{ marginRight: '35%', fontSize: 14, fontFamily: 'Arcade-Classic', textAlign: 'center' }}>Bathroom</Text>
+                        <ButtonIcon action={'Bathroom'} icon={fatImages.bathroom} place={'Bedroom'} />
                     </View >
                     <LeftFootPunch
                         layout={layout}
                         characterChosen={characterForHeadOrFeet(characterFinal)}
                         progress={1}
                         scale={scaleFootLeft}
-                        onPunch={startGame && onlineLeftGame ? () => onPunchFoot(true, false) : null}
+                        onPunch={startGame && onlineLeftGame ? () => onPunchFoot(true, false, true) : startGame ? () => onPunchFoot(true, false, false) : null}
                         leftBlackFoot={fatImages.leftBlackFoot}
                         leftWhiteFoot={(progressLeft >= 1) ? fatImages.explosion : fatImages.leftWhiteFoot}
                         cakeLeftFoot={fatImages.cakeLeftFoot}
@@ -274,7 +333,7 @@ const BedroomPage = () => {
                     />
                     <TextHelper startGame={startGame} left={'30%'} onlineGame={onlineLeftGame} text={'Left'} />
                     <TextHelper startGame={startGame} left={'60%'} onlineGame={onlineRightGame} text={'Right'} />
-
+                    <GoldenPrices prices={prices} />
 
                     <Head
                         layout={layout}
@@ -296,7 +355,7 @@ const BedroomPage = () => {
                         characterChosen={characterForHeadOrFeet(characterFinal)}
                         progress={1}
                         scale={scaleFootRight}
-                        onPunch={startGame && onlineRightGame ? () => onPunchFoot(false, true) : null}
+                        onPunch={startGame && onlineRightGame ? () => onPunchFoot(false, true, true) : startGame ? () => onPunchFoot(false, true, false) : null}
                         rightBlackFoot={fatImages.rightBlackFoot}
                         rightWhiteFoot={fatImages.rightWhiteFoot}
                         cakeRightFoot={fatImages.cakeRightFoot}

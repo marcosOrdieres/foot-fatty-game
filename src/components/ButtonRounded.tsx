@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dimensions, Text, Image, View } from 'react-native';
+import { Dimensions, Text, Image, View, Platform } from 'react-native';
 import { watchVideoIcon } from '../assets';
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 const { width, height } = Dimensions.get('window');
@@ -20,10 +20,7 @@ const ButtonRounded: React.FunctionComponent<ButtonRoundedProps> = ({ onPress, t
         <View
             style={{
                 marginTop,
-                //position: 'absolute',
-                //top: top,
                 alignItems: 'flex-start',
-                //alignItems: 'center',
                 justifyContent: 'center',
             }}>
             <AwesomeButtonRick
@@ -33,12 +30,7 @@ const ButtonRounded: React.FunctionComponent<ButtonRoundedProps> = ({ onPress, t
                 onPress={onPress}
                 width={start ? width / 4 : width / 6}
                 height={height / 8.5}>
-                {watchVideo ?
-                    <Image
-                        style={{ height: 15, width: 15, resizeMode: 'stretch' }}
-                        source={watchVideoIcon} />
-                    : null}
-                <Text style={{ textAlign: 'center', fontSize: 20, color: textColor || 'black', fontFamily: 'Arcade-Classic' }}>{text.toUpperCase()}</Text>
+                <Text adjustsFontSizeToFit style={{ textAlign: 'center', fontSize: Platform.OS === 'ios' ? 14 : 20, color: textColor || 'black', fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>{text.toUpperCase()}</Text>
             </AwesomeButtonRick>
         </View>
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Image, Text } from 'react-native';
+import { View, Image, Text, Platform } from 'react-native';
 import * as fatImages from '../assets'
 
 interface CoinsProps {
@@ -17,7 +17,7 @@ const Coins: React.FunctionComponent<CoinsProps> = ({ totalCoins }) => {
                     source={fatImages.coinImage} />
             </View>
             <View style={{ flex: 0.6, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: totalCoins >= 1000 ? 30 : 45, fontFamily: 'Arcade-Classic' }}>{totalCoins}</Text>
+                <Text allowFontScaling style={{ fontSize: totalCoins >= 1000 ? 30 : 45, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>{totalCoins}</Text>
             </View>
         </View>
     )

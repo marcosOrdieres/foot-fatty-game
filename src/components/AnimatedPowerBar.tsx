@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { View, TouchableOpacity, Image, SafeAreaView, ScrollView, Text, StyleSheet, Alert } from 'react-native';
+import { View, TouchableOpacity, Image, SafeAreaView, ScrollView, Text, StyleSheet, Platform } from 'react-native';
 import COLORS from '../common/Colors';
 import AnimatedBar from "react-native-animated-bar";
 
@@ -28,7 +28,7 @@ const AnimatedPowerBar: React.FunctionComponent<AnimatedPowerBarProps> = ({ prog
                 </View>
             </AnimatedBar>
             :
-            <Text style={{ fontSize: 20, fontStyle: 'normal', fontFamily: 'Arcade-Classic' }}>Game Finalised 😀</Text>
+            <Text style={{ fontSize: 20, fontStyle: 'normal', fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>Game Finalised 😀</Text>
     )
 }
 
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     barText: {
         backgroundColor: "transparent",
         color: "#FFF",
-        fontFamily: 'Arcade-Classic'
+        fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null
     },
 });
 

@@ -8,7 +8,7 @@ import { AnimatedPowerBar, ButtonRounded, RightFoot, LeftFoot, Head, Ducks, Moda
 const { width, height } = Dimensions.get('window');
 import { useNavigation } from '@react-navigation/native';
 
-//asyncStorage keys: character, coins, duck, games, duster
+//asyncStorage keys: character, coins, duck, games, goldenPrices
 
 const BathroomPage = () => {
     const navigation = useNavigation();
@@ -274,8 +274,8 @@ const BathroomPage = () => {
                         <Image
                             style={{ height: 80, width: 80, resizeMode: 'stretch', justifyContent: 'center', alignItems: 'center', marginLeft: 30 }}
                             source={fatImages.shopIcon} />
-                        <View style={{ top: 5, left: 5, alignItems: 'center', justifyContent: 'space-around' }}>
-                            <Text style={{ fontSize: 25, fontFamily: 'Arcade-Classic' }}>GAMES: {games}</Text>
+                        <View style={{ alignItems: 'center', justifyContent: 'space-around' }}>
+                            <Text adjustsFontSizeToFit style={{ fontSize: 25, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>GAMES: {games}</Text>
                         </View>
 
                         <Ducks ducks={theDucks} />
@@ -292,7 +292,7 @@ const BathroomPage = () => {
                     </TouchableOpacity>
                 </View>
                 <View style={{ width: 300, height: 20, alignSelf: 'center' }}>
-                    <Text style={{ fontSize: 25, fontFamily: 'Arcade-Classic', textAlign: 'center' }}>BATHROOM   TICKLES</Text>
+                    <Text style={{ fontSize: 20, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null, textAlign: 'center' }}>BATHROOM   TICKLES</Text>
                 </View>
                 <View style={{ width: layout.layout.width, flex: 0.8, flexDirection: 'row' }}>
                     <View style={{ width: '25%', height: '100%' }}>
@@ -336,8 +336,7 @@ const BathroomPage = () => {
                             marginTop={'15%'}
                             textColor={oneCharacter ? 'black' : '#b3b3b3'}
                             text={'Change Character'} />
-                        <ButtonIcon action={'Bedroom'} icon={fatImages.bedroom} />
-                        <Text style={{ marginRight: '35%', fontSize: 14, fontFamily: 'Arcade-Classic', textAlign: 'center' }}>Bedroom</Text>
+                        <ButtonIcon action={'Bedroom'} icon={fatImages.bedroom} place={'Bathroom'} />
                     </View >
                     <LeftFoot
                         onSwipeLeft={() => (startGame && !correlacionTresForGame) ? onSwipeLeftFootToLeft() : startGame && correlacionTresForGame && leftGame ? onSwipeLeftFootToLeft() : null}
@@ -355,11 +354,11 @@ const BathroomPage = () => {
                     <TextHelper startGame={startGame} left={'30%'} onlineGame={leftGame} text={'Left'} />
                     <TextHelper startGame={startGame} left={'60%'} onlineGame={rightGame} text={'Right'} />
 
-                    <Sponges
+                    {/* <Sponges
                         sponges={sponges}
                         games={games}
                         width={width}
-                        height={height} />
+                        height={height} /> */}
 
                     <Head
                         layout={layout}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text } from 'react-native';
+import { View, Text, Platform } from 'react-native';
 
 interface TextHelperProps {
     startGame?: boolean,
@@ -12,7 +12,7 @@ interface TextHelperProps {
 const TextHelper: React.FunctionComponent<TextHelperProps> = ({ startGame, onlineGame, text, left }) => {
     return (
         <View style={{ position: 'absolute', left, top: '10%' }}>
-            <Text style={{ color: '#006622', fontSize: 30, fontFamily: 'Arcade-Classic' }}>
+            <Text style={{ color: '#006622', fontSize: 30, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>
                 {startGame && onlineGame ? text : ''}
             </Text>
         </View>
