@@ -7,10 +7,13 @@ import { AnimatedPowerBar, ButtonRounded, RightFoot, LeftFoot, Head, Ducks, Moda
 //import { ChangeHeadArray } from '../helper-functions/changeHead'
 const { width, height } = Dimensions.get('window');
 import { useNavigation } from '@react-navigation/native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 //asyncStorage keys: character, coins, duck, games, goldenPrices
 
 const BathroomPage = () => {
+    const insets = useSafeAreaInsets();
+
     const navigation = useNavigation();
     const [totalCoins, setTotalCoins] = useState(0);
     const [games, setGames] = useState(0);
@@ -19,7 +22,6 @@ const BathroomPage = () => {
     const [moveLeftToRight, setMoveLeftToRight] = useState(false);
     const [moveRightToLeft, setMoveRightToLeft] = useState(false);
     const [moveRightToRight, setMoveRightToRight] = useState(false);
-
     const [modalVisible, setModalVisible] = useState(false);
     //const [characterFinal, setCharacterFinal] = useState({ character: ['fatBoy'] });
     const [characterFinal, setCharacterFinal] = useState('fatBoy');
