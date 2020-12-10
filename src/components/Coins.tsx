@@ -17,7 +17,7 @@ const Coins: React.FunctionComponent<CoinsProps> = ({ totalCoins }) => {
                     source={fatImages.coinImage} />
             </View>
             <View style={{ flex: 0.6, alignItems: 'center', justifyContent: 'center' }}>
-                <Text allowFontScaling style={{ fontSize: totalCoins >= 1000 ? 30 : 45, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>{totalCoins}</Text>
+                <Text allowFontScaling style={{ fontSize: totalCoins >= 9999 ? 25 : totalCoins >= 999 ? 30 : 45, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>{totalCoins}</Text>
             </View>
         </View>
     )
