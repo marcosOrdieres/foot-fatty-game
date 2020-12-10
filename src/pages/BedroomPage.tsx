@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Text, View, TouchableOpacity, Dimensions, Image, ImageBackground, Alert, Platform } from 'react-native';
-import { characterForHeadOrFeet, multipleFive } from '../helper-functions/utils'
+import { characterForHeadOrFeet } from '../helper-functions/utils'
 import { getAsyncStorage, setAsyncStorage } from '../services/storage-service';
 import * as fatImages from '../assets'
-import { AnimatedPowerBar, ButtonRounded, RightFoot, LeftFoot, Head, Ducks, ModalShop, Sponges, Countdown, ButtonIcon, LeftFootPunch, RightFootPunch, DoubleProgressBar, Coins, TextHelper, GoldenPrices } from '../components';
+import { ButtonRounded, CustomAlert, Head, ModalShop, Sponges, Countdown, ButtonIcon, LeftFootPunch, RightFootPunch, DoubleProgressBar, Coins, TextHelper, GoldenPrices } from '../components';
 //import { ChangeHeadArray } from '../helper-functions/changeHead'
 const { width, height } = Dimensions.get('window');
 
@@ -18,6 +18,9 @@ const BedroomPage = () => {
     const [games, setGames] = useState(0);
     const [progress, setProgress] = useState(0);
     const [characterFinal, setCharacterFinal] = useState('fatBoy');
+    const [showAlertMissGame, setShowAlertMissGame] = useState(false);
+    const [showAlertPassGame, setShowAlertPassGame] = useState(false);
+    const [showAlertPassAndWinCoinsGame, setShowAlertPassAndWinCoinsGame] = useState(false);
 
     const [progressLeft, setProgressLeft] = useState(0);
     const [progressRight, setProgressRight] = useState(0);
@@ -113,9 +116,9 @@ const BedroomPage = () => {
             setGames(gamesStorage + 1)
             const { decisionSide, sideChosen } = await decisionOnlineChosen(progressLeft, progressRight);
             if (decisionSide) {
-                Alert.alert(`+1 GAME +50 COINS  😀 your Side Decision:${sideChosen} was the Online Chosen`)
+                setShowAlertPassAndWinCoinsGame(true)
             } else {
-                Alert.alert(`+1 GAME 😀 your Side Decision:${sideChosen} was not the Online Chosen`)
+                setShowAlertPassGame(true)
             }
             setOnlineRightGame(false);
             setOnlineLeftGame(false);
@@ -126,7 +129,7 @@ const BedroomPage = () => {
             setScaleFootRight(2)
 
         } else {
-            Alert.alert('Sorry, You missed the Level 😅 😅')
+            setShowAlertMissGame(true)
             setOnlineRightGame(false);
             setOnlineLeftGame(false);
             setStartGame(false)
@@ -137,6 +140,10 @@ const BedroomPage = () => {
 
         }
     }
+
+    const handleStateAlert = (newValue: boolean) => setShowAlertMissGame(newValue);
+    const handleStatePassAlert = (newValue: boolean) => setShowAlertPassGame(newValue);
+    const handleStatePassAndWinCoinsAlert = (newValue: boolean) => setShowAlertPassAndWinCoinsGame(newValue);
 
     const winCoinsWhenSwipe = async (left: boolean, right: boolean, progress: number, coinsWon: number) => {
         if (progressLeft >= 1 || progressRight >= 1) { setFinishedGameBar(true) }
@@ -381,6 +388,39 @@ const BedroomPage = () => {
                         lipRightFoot={fatImages.lipRightFoot}
                         blueRightFoot={fatImages.blueRightFoot}
                     />
+
+                    {showAlertMissGame ?
+                        <CustomAlert
+                            showAlert={showAlertMissGame}
+                            onShow={handleStateAlert}
+                            titleText="Sorry"
+                            messageText="You   missed   the   Level!"
+                            icon={fatImages.failure}
+                        />
+                        : null
+                    }
+
+                    {showAlertPassGame ?
+                        <CustomAlert
+                            showAlert={showAlertPassGame}
+                            onShow={handleStatePassAlert}
+                            titleText="Congratulations"
+                            messageText="+  1  game!"
+                            icon={fatImages.success}
+                        />
+                        : null
+                    }
+
+                    {showAlertPassAndWinCoinsGame ?
+                        <CustomAlert
+                            showAlert={showAlertPassAndWinCoinsGame}
+                            onShow={handleStatePassAndWinCoinsAlert}
+                            titleText="Congratulations"
+                            messageText="+  1  game    +   50  coins ( side online decision )!"
+                            icon={fatImages.coinImage}
+                        />
+                        : null
+                    }
                 </View>
             </View>
         </ImageBackground>

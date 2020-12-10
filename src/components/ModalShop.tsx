@@ -3,7 +3,7 @@ import { View, StyleSheet, Image, Text, Modal, TouchableOpacity, Dimensions } fr
 const { width, height } = Dimensions.get('window');
 import { getAsyncStorage, setAsyncStorage } from '../services/storage-service';
 import * as fatImages from '../assets'
-import { Cancel, ModalTop, ButtonItemAndChar } from '../components';
+import { Cancel, ModalTop, ButtonItemAndChar, CustomAlert } from '../components';
 import { goldenPrice, spendCoinsForCharacter, wasteCoinsAndStoreDuck } from '../helper-functions/utils';
 import { BigButton, PrivacyPolicy } from '../components';
 
@@ -57,7 +57,6 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
         }
         const storageGoldenPrices = await getAsyncStorage('goldenPrice');
         if (storageGoldenPrices) {
-            console.log('dsdsdsd', goldenTrophyOpacity)
             storageGoldenPrices.goldenPrice.map((value: string) => {
                 if (value === 'goldenDiploma') return setGoldenDiplomaOpacity(true)
                 if (value === 'goldenMedal') return setGoldenMedalOpacity(true)
@@ -80,9 +79,13 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
     const [cakeGirlOpacity, setCakeGirlOpacity] = useState(false);
     const [blueGirlOpacity, setBlueGirlOpacity] = useState(false);
 
-    const handleStateItems = (newValue: boolean) => {
-        setItems(newValue);
-    };
+    const [showAlertNoMoney, setShowAlertNoMoney] = useState(false);
+    const [showAlertNoPrice, setShowAlertNoPrice] = useState(false);
+
+    const handleStateItems = (newValue: boolean) => setItems(newValue);
+
+    const handleStateAlertNoMoney = (newValue: boolean) => setShowAlertNoMoney(newValue);
+    const handleStatePassAlertNoPrice = (newValue: boolean) => setShowAlertNoPrice(newValue);
 
     return (
         <View>
@@ -106,6 +109,7 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                                 <TouchableOpacity
                                     onPress={!yellowDuckOpacity ? async () => {
                                         const coinsMinus2000 = await wasteCoinsAndStoreDuck(coinsInModal, 2000, { duck: ['yellowDuck'] })
+                                        if (!coinsMinus2000) setShowAlertNoMoney(true);
                                         if (coinsMinus2000) updateCoinsCallback(coinsMinus2000);
                                     } : () => console.warn('YA SE HA COMPRADO')}
                                     style={{ zIndex: 1000, width: 75, height: 75, borderColor: yellowDuckOpacity ? '#e5e5ff' : 'blue', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
@@ -120,6 +124,7 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                                     onPress={!pinkDuckOpacity ? async () => {
                                         const coinsMinus6000 = await wasteCoinsAndStoreDuck(coinsInModal, 6000, { duck: ['pinkDuck'] })
                                         if (coinsMinus6000) updateCoinsCallback(coinsMinus6000);
+                                        if (!coinsMinus6000) setShowAlertNoMoney(true);
                                     } : () => console.warn('YA SE HA COMPRADO')}
                                     style={{ zIndex: 1000, width: 75, height: 75, borderColor: pinkDuckOpacity ? '#e5e5ff' : 'blue', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
                                     <Image
@@ -132,6 +137,7 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                                 <TouchableOpacity
                                     onPress={!greenDuckOpacity ? async () => {
                                         const coinsMinus10000 = await wasteCoinsAndStoreDuck(coinsInModal, 10000, { duck: ['greenDuck'] })
+                                        if (!coinsMinus10000) setShowAlertNoMoney(true);
                                         if (coinsMinus10000) updateCoinsCallback(coinsMinus10000);
                                     } : () => console.warn('YA SE HA COMPRADO')}
                                     style={{ zIndex: 1000, width: 75, height: 75, borderColor: greenDuckOpacity ? '#e5e5ff' : 'blue', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
@@ -146,7 +152,9 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                             <View style={{ alignItems: 'center', flex: 0.5 }}>
                                 <TouchableOpacity
                                     onPress={!goldenDiplomaOpacity ? async () => {
-                                        goldenPrice('goldenDiploma')
+                                        const isPrice = await goldenPrice('goldenDiploma');
+                                        if (!isPrice) setShowAlertNoPrice(true);
+
                                     } : () => console.warn('YA SE HA ganado')}
                                     style={{ zIndex: 1000, width: 75, height: 75, borderColor: goldenDiplomaOpacity ? '#e5e5ff' : 'blue', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
                                     <Image
@@ -158,7 +166,9 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                             <View style={{ alignItems: 'center', flex: 0.5 }}>
                                 <TouchableOpacity
                                     onPress={!goldenMedalOpacity ? async () => {
-                                        goldenPrice('goldenMedal')
+                                        const isPrice = await goldenPrice('goldenMedal')
+                                        if (!isPrice) setShowAlertNoPrice(true);
+
                                     } : () => console.warn('YA SE HA ganado')}
                                     style={{ zIndex: 1000, width: 75, height: 75, borderColor: goldenMedalOpacity ? '#e5e5ff' : 'blue', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
                                     <Image
@@ -169,8 +179,10 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                             </View>
                             <View style={{ alignItems: 'center', flex: 0.5 }}>
                                 <TouchableOpacity
-                                    onPress={!goldenTrophyOpacity ? () => {
-                                        goldenPrice('goldenTrophy')
+                                    onPress={!goldenTrophyOpacity ? async () => {
+                                        const isPrice = await goldenPrice('goldenTrophy')
+                                        if (!isPrice) setShowAlertNoPrice(true);
+
                                     } : () => console.warn('YA SE HA ganado')}
                                     style={{ zIndex: 1000, width: 75, height: 75, borderColor: goldenTrophyOpacity ? '#e5e5ff' : 'blue', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
                                     <Image
@@ -199,6 +211,7 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                                 <TouchableOpacity
                                     onPress={!blackGirlOpacity ? async () => {
                                         const moneySpentCharacter = await spendCoinsForCharacter(coinsInModal, 3000, 'blackGirl')
+                                        if (!moneySpentCharacter) setShowAlertNoMoney(true);
                                         if (moneySpentCharacter) updateCoinsCallback(moneySpentCharacter);
                                     } : () => console.warn('YA SE HA COMPRADO')}
                                     style={{ zIndex: 1000, width: 100, height: 100, borderRadius: 10, borderColor: blackGirlOpacity ? '#ffcccc' : 'red', borderWidth: 3, alignItems: 'center', justifyContent: 'center' }}>
@@ -212,7 +225,9 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                                 <TouchableOpacity
                                     onPress={!lipsGirlOpacity ? async () => {
                                         const moneySpentCharacter = await spendCoinsForCharacter(coinsInModal, 8000, 'lipsGirl')
+                                        if (!moneySpentCharacter) setShowAlertNoMoney(true);
                                         if (moneySpentCharacter) updateCoinsCallback(moneySpentCharacter);
+
                                     } : () => console.warn('YA SE HA COMPRADO')}
                                     style={{ zIndex: 1000, width: 100, height: 100, borderColor: lipsGirlOpacity ? '#ffcccc' : 'red', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
                                     <Image
@@ -225,6 +240,7 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                                 <TouchableOpacity
                                     onPress={!cakeGirlOpacity ? async () => {
                                         const moneySpentCharacter = await spendCoinsForCharacter(coinsInModal, 12000, 'cakeGirl')
+                                        if (!moneySpentCharacter) setShowAlertNoMoney(true);
                                         if (moneySpentCharacter) updateCoinsCallback(moneySpentCharacter);
                                     } : () => console.warn('YA SE HA COMPRADO')}
                                     style={{ zIndex: 1000, width: 100, height: 100, borderColor: cakeGirlOpacity ? '#ffcccc' : 'red', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
@@ -238,6 +254,7 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                                 <TouchableOpacity
                                     onPress={!blueGirlOpacity ? async () => {
                                         const moneySpentCharacter = await spendCoinsForCharacter(coinsInModal, 15000, 'blueGirl')
+                                        if (!moneySpentCharacter) setShowAlertNoMoney(true);
                                         if (moneySpentCharacter) updateCoinsCallback(moneySpentCharacter);
                                     } : () => console.warn('YA SE HA COMPRADO')}
                                     style={{ zIndex: 1000, width: 100, height: 100, borderColor: blueGirlOpacity ? '#ffcccc' : 'red', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
@@ -255,6 +272,28 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                         </View>
                         <Cancel onPressCancel={onPressCancel} />
                     </View>
+                }
+
+                {showAlertNoMoney ?
+                    <CustomAlert
+                        showAlert={showAlertNoMoney}
+                        onShow={handleStateAlertNoMoney}
+                        titleText="Sorry"
+                        messageText="         not    enough    coins!          "
+                        icon={fatImages.noMoney}
+                    />
+                    : null
+                }
+
+                {showAlertNoPrice ?
+                    <CustomAlert
+                        showAlert={showAlertNoPrice}
+                        onShow={handleStatePassAlertNoPrice}
+                        titleText="Sorry"
+                        messageText="not enough   games   or   ducks   or   characters!"
+                        icon={fatImages.noItems}
+                    />
+                    : null
                 }
             </Modal>
         </View >

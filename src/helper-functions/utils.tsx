@@ -59,28 +59,29 @@ export const goldenPrice = async (goldenPrice: string) => {
     switch (goldenPrice) {
         case 'goldenDiploma':
             if (gamesStorage > 20) {
-                console.warn('deberia de entrar por aqui');
-
                 storeGoldenPrice('goldenDiploma')
+                return true
             } else {
-                Alert.alert('NOT ENOUGH GAMES')
+                //Alert.alert('NOT ENOUGH GAMES')
+                return false
             }
-            break;
-
         case 'goldenMedal':
             if (gamesStorage >= 30 && duckStorage?.duck?.length === 3) {
                 storeGoldenPrice('goldenMedal')
+                return true
             } else {
-                Alert.alert('NOT ENOUGH GAMES OR DUCKS')
+                //Alert.alert('NOT ENOUGH GAMES OR DUCKS')
+                return false
             }
-            break;
         case 'goldenTrophy':
             if (gamesStorage >= 50 && characterListStorage?.character?.length === 5 && duckStorage?.duck?.length === 3) {
                 storeGoldenPrice('goldenTrophy')
+                return true
+
             } else {
-                Alert.alert('NOT ENOUGH GAMES,  DUCKS OR CHARACTERS')
+                //Alert.alert('NOT ENOUGH GAMES,  DUCKS OR CHARACTERS')
+                return false
             }
-            break;
     }
 }
 
@@ -97,7 +98,7 @@ const storeGoldenPrice = async (goldenPriceString: string) => {
 
 export const wasteCoinsAndStoreDuck = async (coinsInModal: number, coinsCostDuck: number, duck: any) => {
     if (coinsInModal < coinsCostDuck) {
-        Alert.alert('NOT ENOUGH COINS')
+        //Alert.alert('NOT ENOUGH COINS')
         return false
     } else {
         const coinsMinus = coinsInModal - coinsCostDuck;
@@ -119,8 +120,9 @@ export const wasteCoinsAndStoreDuck = async (coinsInModal: number, coinsCostDuck
 }
 
 export const spendCoinsForCharacter = async (coinsInModal: number, coinsCostCharacter: number, character: string) => {
+
     if (coinsInModal < coinsCostCharacter) {
-        Alert.alert('NOT ENOUGH COINS')
+        //Alert.alert('NOT ENOUGH COINS')
         return false
     } else {
         const coinsMinus = coinsInModal - coinsCostCharacter;

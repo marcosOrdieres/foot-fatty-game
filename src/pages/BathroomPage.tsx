@@ -3,18 +3,17 @@ import { Text, View, TouchableOpacity, Dimensions, Image, ImageBackground, Alert
 import { characterForHeadOrFeet, multipleFive } from '../helper-functions/utils'
 import { getAsyncStorage, setAsyncStorage } from '../services/storage-service';
 import * as fatImages from '../assets'
-import { AnimatedPowerBar, ButtonRounded, RightFoot, LeftFoot, Head, Ducks, ModalShop, Sponges, Countdown, ButtonIcon, Coins, TextHelper } from '../components';
+import { AnimatedPowerBar, ButtonRounded, RightFoot, LeftFoot, Head, Ducks, ModalShop, Sponges, Countdown, ButtonIcon, Coins, TextHelper, CustomAlert } from '../components';
 //import { ChangeHeadArray } from '../helper-functions/changeHead'
 const { width, height } = Dimensions.get('window');
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 //asyncStorage keys: character, coins, duck, games, goldenPrices
 
 const BathroomPage = () => {
     const insets = useSafeAreaInsets();
-
-    const navigation = useNavigation();
     const [totalCoins, setTotalCoins] = useState(0);
     const [games, setGames] = useState(0);
 
@@ -23,8 +22,10 @@ const BathroomPage = () => {
     const [moveRightToLeft, setMoveRightToLeft] = useState(false);
     const [moveRightToRight, setMoveRightToRight] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
-    //const [characterFinal, setCharacterFinal] = useState({ character: ['fatBoy'] });
     const [characterFinal, setCharacterFinal] = useState('fatBoy');
+    const [showAlertMissGame, setShowAlertMissGame] = useState(false);
+    const [showAlertPassGame, setShowAlertPassGame] = useState(false);
+    const [showAlertPassAndWinCoinsGame, setShowAlertPassAndWinCoinsGame] = useState(false);
 
     const [progress, setProgress] = useState(0);
     const [doubleScore, setDoubleScore] = useState(false);
@@ -96,7 +97,6 @@ const BathroomPage = () => {
     async function changeCharacter() {
         setEveryFeetFalse();
         const characterListStorage = await getAsyncStorage('character');
-        console.log('characters', characterListStorage)
         const characterListStorageNumber = characterListStorage.character.length;
         const numberIWant = Math.floor(Math.random() * characterListStorageNumber) + 0;
         const finalChar = characterListStorage.character[numberIWant];
@@ -152,10 +152,13 @@ const BathroomPage = () => {
             setProgress(progress + 0.02)
         } else {
             await setAsyncStorage('coins', coins + 1);
-            setProgress(progress + 0.01)
+            setProgress(progress + 0.1)
         }
         const coinsAfterSwipe = await getAsyncStorage('coins');
         setTotalCoins(coinsAfterSwipe)
+        if (progress >= 1) {
+            finishGame()
+        }
     }
 
     const setEveryFeetFalse = () => {
@@ -228,7 +231,7 @@ const BathroomPage = () => {
             const multiplesFive = multipleFive(currentGamesWonWithThisOne)
             setGames(gamesStorage + 1)
             if (multiplosCincoMasUno) {
-                Alert.alert('CONGRATULATIONS, you passed and Earned +200 coins 😀 😀 😀 😀')
+                setShowAlertPassAndWinCoinsGame(true)
                 const coins = await getAsyncStorage('coins');
                 const coinsPlus = coins + 200;
                 await setAsyncStorage('coins', coinsPlus);
@@ -240,23 +243,27 @@ const BathroomPage = () => {
                 return true
             }
             if (multiplesFive) {
-                Alert.alert('CONGRATULATIONS, you passed the level 😀 😀')
+                setShowAlertPassGame(true)
                 setMultiplosCincoMasUno(true)
                 setStartGame(false)
                 setOnFire(true)
                 setProgress(0)
                 return true
             };
-            Alert.alert('CONGRATULATIONS, you passed the level 😀 😀')
+            setShowAlertPassGame(true)
             setStartGame(false)
             setProgress(0)
 
         } else {
-            Alert.alert('Sorry, You missed the Level 😅 😅')
+            setShowAlertMissGame(true)
             setStartGame(false)
             setProgress(0)
         }
     }
+
+    const handleStateAlert = (newValue: boolean) => setShowAlertMissGame(newValue);
+    const handleStatePassAlert = (newValue: boolean) => setShowAlertPassGame(newValue);
+    const handleStatePassAndWinCoinsAlert = (newValue: boolean) => setShowAlertPassAndWinCoinsGame(newValue);
 
     return (
         <ImageBackground
@@ -391,14 +398,44 @@ const BathroomPage = () => {
                         blueRightFoot={fatImages.blueRightFoot}
                         moveRightToRight={moveRightToRight}
                         moveRightToLeft={moveRightToLeft} />
+
+                    {showAlertMissGame ?
+                        <CustomAlert
+                            showAlert={showAlertMissGame}
+                            onShow={handleStateAlert}
+                            titleText="Sorry"
+                            messageText="You   missed   the   Level!"
+                            icon={fatImages.failure}
+                        />
+                        : null
+                    }
+
+                    {showAlertPassGame ?
+                        <CustomAlert
+                            showAlert={showAlertPassGame}
+                            onShow={handleStatePassAlert}
+                            titleText="Congratulations"
+                            messageText="+  1   game!"
+                            icon={fatImages.success}
+                        />
+                        : null
+                    }
+
+                    {showAlertPassAndWinCoinsGame ?
+                        <CustomAlert
+                            showAlert={showAlertPassAndWinCoinsGame}
+                            onShow={handleStatePassAndWinCoinsAlert}
+                            titleText="Congratulations"
+                            messageText="+  1  game    +   200  coins!"
+                            icon={fatImages.coinImage}
+                        />
+                        : null
+                    }
+
                 </View>
             </View>
         </ImageBackground>
     )
 }
-
-// BathroomPage.defaultProps = {
-//     name: 'Marcos First Screen'
-// }
 
 export default BathroomPage
