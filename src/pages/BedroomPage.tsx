@@ -117,10 +117,8 @@ const BedroomPage = () => {
             const { decisionSide, sideChosen } = await decisionOnlineChosen(progressLeft, progressRight);
             if (decisionSide) {
                 setShowAlertPassAndWinCoinsGame(true)
-                Alert.alert(`+1 GAME +50 COINS  😀 your Side Decision:${sideChosen} was the Online Chosen`)
             } else {
                 setShowAlertPassGame(true)
-                Alert.alert(`+1 GAME 😀 your Side Decision:${sideChosen} was not the Online Chosen`)
             }
             setOnlineRightGame(false);
             setOnlineLeftGame(false);
@@ -132,7 +130,6 @@ const BedroomPage = () => {
 
         } else {
             setShowAlertMissGame(true)
-            //Alert.alert('Sorry, You missed the Level 😅 😅')
             setOnlineRightGame(false);
             setOnlineLeftGame(false);
             setStartGame(false)
