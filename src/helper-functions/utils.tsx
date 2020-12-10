@@ -52,6 +52,49 @@ export const multipleFive = (currentGamesWonWithThisOne: number): boolean => {
     }
 }
 
+export const goldenPrice = async (goldenPrice: string) => {
+    const characterListStorage = await getAsyncStorage('character');
+    const duckStorage = await getAsyncStorage('duck');
+    const gamesStorage = await getAsyncStorage('games');
+    switch (goldenPrice) {
+        case 'goldenDiploma':
+            if (gamesStorage > 20) {
+                console.warn('deberia de entrar por aqui');
+
+                storeGoldenPrice('goldenDiploma')
+            } else {
+                Alert.alert('NOT ENOUGH GAMES')
+            }
+            break;
+
+        case 'goldenMedal':
+            if (gamesStorage >= 30 && duckStorage?.duck?.length === 3) {
+                storeGoldenPrice('goldenMedal')
+            } else {
+                Alert.alert('NOT ENOUGH GAMES OR DUCKS')
+            }
+            break;
+        case 'goldenTrophy':
+            if (gamesStorage >= 50 && characterListStorage?.character?.length === 5 && duckStorage?.duck?.length === 3) {
+                storeGoldenPrice('goldenTrophy')
+            } else {
+                Alert.alert('NOT ENOUGH GAMES,  DUCKS OR CHARACTERS')
+            }
+            break;
+    }
+}
+
+const storeGoldenPrice = async (goldenPriceString: string) => {
+    const goldenPriceToStorage = { goldenPrice: [goldenPriceString] };
+    const goldenPriceStorage = await getAsyncStorage('goldenPrice');
+    if (!goldenPriceStorage) {
+        await setAsyncStorage('goldenPrice', goldenPriceToStorage);
+    } else {
+        goldenPriceStorage.goldenPrice.push(goldenPriceString)
+        await setAsyncStorage('goldenPrice', goldenPriceStorage);
+    }
+}
+
 export const wasteCoinsAndStoreDuck = async (coinsInModal: number, coinsCostDuck: number, duck: any) => {
     if (coinsInModal < coinsCostDuck) {
         Alert.alert('NOT ENOUGH COINS')
@@ -61,7 +104,9 @@ export const wasteCoinsAndStoreDuck = async (coinsInModal: number, coinsCostDuck
         const duckString = duck.duck;
         await setAsyncStorage('coins', coinsMinus);
         const duckToStorage = { duck: [...duckString] };
+
         const duckStorage = await getAsyncStorage('duck');
+        console.warn('duck storage: ', duckStorage)
         if (!duckStorage) {
             await setAsyncStorage('duck', duckToStorage);
         } else {

@@ -3,13 +3,15 @@ import { Text, View, TouchableOpacity, Dimensions, Image, ImageBackground, Alert
 import { characterForHeadOrFeet, multipleFive } from '../helper-functions/utils'
 import { getAsyncStorage, setAsyncStorage } from '../services/storage-service';
 import * as fatImages from '../assets'
-import { AnimatedPowerBar, ButtonRounded, RightFoot, LeftFoot, Head, Ducks, ModalShop, Sponges, Countdown } from '../components';
+import { AnimatedPowerBar, ButtonRounded, RightFoot, LeftFoot, Head, Ducks, ModalShop, Sponges, Countdown, ButtonIcon, Coins, TextHelper } from '../components';
 //import { ChangeHeadArray } from '../helper-functions/changeHead'
 const { width, height } = Dimensions.get('window');
+import { useNavigation } from '@react-navigation/native';
 
-//asyncStorage keys: character, coins, duck, games, duster
+//asyncStorage keys: character, coins, duck, games, goldenPrices
 
-const MainPage = () => {
+const BathroomPage = () => {
+    const navigation = useNavigation();
     const [totalCoins, setTotalCoins] = useState(0);
     const [games, setGames] = useState(0);
 
@@ -262,61 +264,9 @@ const MainPage = () => {
             <View
                 style={{ height: layout.layout.height, width: layout.layout.width, margin: 5, marginLeft: '3.5%' }}>
                 <View style={{ width: layout.layout.width, flex: 0.2, flexDirection: 'row' }}>
-                    <View style={{ flex: 0.2, flexDirection: 'row' }}>
-                        <View style={{ flex: 0.4, alignItems: 'center', justifyContent: 'center' }}>
-                            <Image
-                                style={{ height: 50, width: 50, resizeMode: 'stretch', position: 'absolute' }}
-                                source={fatImages.coinImage} />
-                            <View style={{ top: 80, left: 40 }}>
-                                {startGame ?
-                                    <Countdown
-                                        finishedGameBar={finishedGameBar}
-                                        onFire={onFire}
-                                        onFinish={() => finishGame()}
-                                        secondsGame={50}
-                                        secondsGameOnFire={40}
-                                    />
-                                    :
-                                    <View style={{ marginRight: 135 }}>
-                                        <ButtonRounded
-                                            onPress={() => {
-                                                correlacionDeTres()
-                                                setFinishedGameBar(false);
-                                                setStartGame(true)
-                                            }}
-                                            top={-30}
-                                            right={80}
-                                            start
-                                            textColor={'white'}
-                                            text={'Start Game'} />
-                                    </View>
-                                }
-                            </View>
-
-                            <ButtonRounded
-                                onPress={() => {
-                                    setEveryFeetFalse();
-                                    doubleScoreFunction();
-                                }}
-                                top={170}
-                                watchVideo
-                                text={'X2 - Watch Video'} />
-
-                            <ButtonRounded
-                                onPress={() => changeCharacter()}
-                                moreThanOneCharacted={oneCharacter ? false : true}
-                                top={250}
-                                textColor={oneCharacter ? 'black' : '#b3b3b3'}
-                                text={'Change Character'} />
-                        </View>
-                        <View style={{ flex: 0.6, alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ fontSize: totalCoins >= 1000 ? 30 : 45, fontFamily: 'Arcade-Classic' }}>{totalCoins}</Text>
-                        </View>
-                    </View>
+                    <Coins totalCoins={totalCoins} />
                     <View style={{ flex: 0.6, alignItems: 'center', justifyContent: 'center' }}>
-                        <AnimatedPowerBar
-                            progress={progress}
-                        />
+                        <AnimatedPowerBar progress={progress} />
                     </View>
                     <TouchableOpacity
                         onPress={() => { setEveryFeetFalse(); setModalVisible(true) }}
@@ -324,10 +274,8 @@ const MainPage = () => {
                         <Image
                             style={{ height: 80, width: 80, resizeMode: 'stretch', justifyContent: 'center', alignItems: 'center', marginLeft: 30 }}
                             source={fatImages.shopIcon} />
-
-
-                        <View style={{ top: 5, left: 5, alignItems: 'center', justifyContent: 'space-around' }}>
-                            <Text style={{ fontSize: 25, fontFamily: 'Arcade-Classic' }}>GAMES: {games}</Text>
+                        <View style={{ alignItems: 'center', justifyContent: 'space-around' }}>
+                            <Text adjustsFontSizeToFit style={{ fontSize: 25, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>GAMES: {games}</Text>
                         </View>
 
                         <Ducks ducks={theDucks} />
@@ -343,13 +291,53 @@ const MainPage = () => {
                             visible={modalVisible} />
                     </TouchableOpacity>
                 </View>
-
-
                 <View style={{ width: 300, height: 20, alignSelf: 'center' }}>
-                    <Text style={{ fontSize: 25, fontFamily: 'Arcade-Classic', textAlign: 'center' }}>BATHROOM   TICKLES</Text>
+                    <Text style={{ fontSize: 20, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null, textAlign: 'center' }}>BATHROOM   TICKLES</Text>
                 </View>
-
                 <View style={{ width: layout.layout.width, flex: 0.8, flexDirection: 'row' }}>
+                    <View style={{ width: '25%', height: '100%' }}>
+                        <View>
+                            {startGame ?
+                                <View style={{ marginRight: '30%' }}>
+                                    <Countdown
+                                        finishedGameBar={finishedGameBar}
+                                        onFire={onFire}
+                                        onFinish={() => finishGame()}
+                                        secondsGame={50}
+                                        secondsGameOnFire={40}
+                                    />
+                                </View >
+                                :
+                                <View>
+                                    <ButtonRounded
+                                        onPress={() => {
+                                            correlacionDeTres()
+                                            setFinishedGameBar(false);
+                                            setStartGame(true)
+                                        }}
+                                        start
+                                        textColor={'white'}
+                                        text={'Start Game'} />
+                                </View>
+                            }
+                        </View>
+
+                        <ButtonRounded
+                            onPress={() => {
+                                setEveryFeetFalse();
+                                doubleScoreFunction();
+                            }}
+                            marginTop={'15%'}
+                            watchVideo
+                            text={'X2 - Watch Video'} />
+                        <ButtonRounded
+                            onPress={() => changeCharacter()}
+                            moreThanOneCharacted={oneCharacter ? false : true}
+                            marginTop={'15%'}
+                            textColor={oneCharacter ? 'black' : '#b3b3b3'}
+                            text={'Change Character'} />
+                        <ButtonIcon action={'Bedroom'} icon={fatImages.bedroom} place={'Bathroom'} />
+                    </View >
                     <LeftFoot
                         onSwipeLeft={() => (startGame && !correlacionTresForGame) ? onSwipeLeftFootToLeft() : startGame && correlacionTresForGame && leftGame ? onSwipeLeftFootToLeft() : null}
                         onSwipeRight={() => (startGame && !correlacionTresForGame) ? onSwipeLeftFootToRight() : startGame && correlacionTresForGame && leftGame ? onSwipeLeftFootToRight() : null}
@@ -362,14 +350,15 @@ const MainPage = () => {
                         blueLeftFoot={fatImages.blueLeftFoot}
                         moveLeftToRight={moveLeftToRight}
                         moveLeftToLeft={moveLeftToLeft} />
-                    <View style={{ position: 'absolute', left: '28%', top: '10%' }}><Text style={{ color: 'red', fontSize: 30, fontWeight: 'bold' }}>{startGame && leftGame ? 'Left' : ''}</Text></View>
-                    <View style={{ position: 'absolute', left: '65%', top: '10%' }}><Text style={{ color: 'red', fontSize: 30, fontWeight: 'bold' }}>{startGame && rightGame ? 'Right' : ''}</Text></View>
 
-                    <Sponges
+                    <TextHelper startGame={startGame} left={'30%'} onlineGame={leftGame} text={'Left'} />
+                    <TextHelper startGame={startGame} left={'60%'} onlineGame={rightGame} text={'Right'} />
+
+                    {/* <Sponges
                         sponges={sponges}
                         games={games}
                         width={width}
-                        height={height} />
+                        height={height} /> */}
 
                     <Head
                         layout={layout}
@@ -404,8 +393,8 @@ const MainPage = () => {
     )
 }
 
-// MainPage.defaultProps = {
+// BathroomPage.defaultProps = {
 //     name: 'Marcos First Screen'
 // }
 
-export default MainPage
+export default BathroomPage

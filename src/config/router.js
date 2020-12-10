@@ -6,7 +6,8 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { Platform, SafeAreaView } from 'react-native'
 import COLORS from '../common/Colors'
 
-import MainPage from '../pages/MainPage'
+import BathroomPage from '../pages/BathroomPage'
+import BedroomPage from '../pages/BedroomPage'
 
 const safeViewIos = (
   <>
@@ -22,7 +23,8 @@ const safeViewAndroid = (
 );
 
 export const DrawerNavigation = createDrawerNavigator({
-  "MainPage": MainPage
+  "BathroomPage": BathroomPage,
+  "BedroomPage": BedroomPage
 }
 );
 

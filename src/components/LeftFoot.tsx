@@ -72,7 +72,7 @@ const LeftFoot: React.FunctionComponent<LeftFootProps> = ({ onSwipeLeft, onSwipe
     }
 
     return (
-        <View style={{ width: layout.layout.width, flex: 0.45, alignItems: 'flex-end', justifyContent: 'center', marginTop: 60 }}>
+        <View style={{ width: layout.layout.width, flex: 0.27, alignItems: 'flex-end', justifyContent: 'center', marginTop: 60 }}>
             <PanGestureHandler
                 onGestureEvent={onGestureEventFunc}>
                 <Animated.View style={{

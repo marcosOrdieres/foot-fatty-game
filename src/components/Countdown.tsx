@@ -1,5 +1,6 @@
 import React from 'react'
 import CountDown from 'react-native-countdown-component';
+import { Platform } from 'react-native';
 
 interface CountdownProps {
     finishedGameBar: boolean,
@@ -15,12 +16,12 @@ const Countdown: React.FunctionComponent<CountdownProps> = ({ finishedGameBar, o
         <CountDown
             until={finishedGameBar ? 1 : onFire ? secondsGameOnFire : secondsGame}
             onFinish={onFinish}
-            size={20}
+            size={18}
             timeToShow={['M', 'S']}
             timeLabels={{ m: 'Minutes', s: 'Seconds' }}
-            timeLabelStyle={{ fontFamily: 'Arcade-Classic', color: 'black' }}
-            digitStyle={{ fontFamily: 'Arcade-Classic', backgroundColor: onFire ? '#9C2A00' : '#FFF' }}
-            digitTxtStyle={{ fontFamily: 'Arcade-Classic', color: onFire ? '#FFF' : '#1CC625' }}
+            timeLabelStyle={{ fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null, color: 'black' }}
+            digitStyle={{ fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null, backgroundColor: onFire ? '#9C2A00' : '#FFF' }}
+            digitTxtStyle={{ fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null, color: onFire ? '#FFF' : '#1CC625' }}
         />
     )
 }

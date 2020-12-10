@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dimensions, Text, Image, View } from 'react-native';
+import { Dimensions, Text, Image, View, Platform } from 'react-native';
 import { watchVideoIcon } from '../assets';
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 const { width, height } = Dimensions.get('window');
@@ -7,7 +7,7 @@ const { width, height } = Dimensions.get('window');
 interface ButtonRoundedProps {
     onPress: any,
     text: string,
-    top?: number,
+    marginTop?: string,
     textColor?: string,
     start?: boolean,
     watchVideo: boolean,
@@ -15,14 +15,12 @@ interface ButtonRoundedProps {
 }
 
 
-const ButtonRounded: React.FunctionComponent<ButtonRoundedProps> = ({ onPress, text, top, textColor, start, watchVideo, moreThanOneCharacted }) => {
+const ButtonRounded: React.FunctionComponent<ButtonRoundedProps> = ({ onPress, text, marginTop, textColor, start, watchVideo, moreThanOneCharacted }) => {
     return (
         <View
             style={{
-                position: 'absolute',
-                top: top,
-                left: 10,
-                alignItems: 'center',
+                marginTop,
+                alignItems: 'flex-start',
                 justifyContent: 'center',
             }}>
             <AwesomeButtonRick
@@ -30,14 +28,9 @@ const ButtonRounded: React.FunctionComponent<ButtonRoundedProps> = ({ onPress, t
                 backgroundActive="#C0C0C0"
                 borderRadius={10}
                 onPress={onPress}
-                width={start ? width / 4 : width / 5.5}
+                width={start ? width / 4 : width / 6}
                 height={height / 8.5}>
-                {watchVideo ?
-                    <Image
-                        style={{ height: 15, width: 15, resizeMode: 'stretch' }}
-                        source={watchVideoIcon} />
-                    : null}
-                <Text style={{ textAlign: 'center', fontSize: 20, color: textColor || 'black', fontFamily: 'Arcade-Classic' }}>{text.toUpperCase()}</Text>
+                <Text adjustsFontSizeToFit style={{ textAlign: 'center', fontSize: Platform.OS === 'ios' ? 14 : 20, color: textColor || 'black', fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>{text.toUpperCase()}</Text>
             </AwesomeButtonRick>
         </View>
 

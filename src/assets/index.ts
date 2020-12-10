@@ -30,6 +30,15 @@ import spongeOrange from './spongeOrange.png';
 import blueGirl from './blueGirl.png';
 import blueGirlSecond from './blueGirlSecond.png';
 import blueGirlThird from './blueGirlThird.png';
+import imageBedroom from './imageBedroom.png';
+import imageBedroomBig from './imageBedroomBig.png';
+import bedroom from './bedroom.png';
+import bathroom from './bathroom.png';
+import explosion from './explosion.png';
+
+import goldenDiploma from './goldenDiploma.png';
+import goldenMedal from './goldenMedal.png';
+import goldenTrophy from './goldenTrophy.png';
 
 export {
   shopIcon,
@@ -63,4 +72,12 @@ export {
   blueGirlThird,
   blueLeftFoot,
   blueRightFoot,
+  imageBedroom,
+  imageBedroomBig,
+  bedroom,
+  bathroom,
+  explosion,
+  goldenDiploma,
+  goldenMedal,
+  goldenTrophy,
 };

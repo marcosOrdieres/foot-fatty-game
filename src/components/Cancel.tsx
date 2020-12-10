@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, TouchableOpacity, Text, Dimensions } from 'react-native';
+import { View, TouchableOpacity, Text, Dimensions, Platform } from 'react-native';
 const { width, height } = Dimensions.get('window');
 
 interface CancelProps {
@@ -11,8 +11,8 @@ const Cancel: React.FunctionComponent<CancelProps> = ({ onPressCancel }) => {
         <View style={{ flex: 0.2, alignItems: 'center', justifyContent: 'center' }}>
             <TouchableOpacity
                 onPress={onPressCancel}
-                style={{ width: width / 3, height: height / 9, backgroundColor: 'black', borderRadius: 10, justifyContent: 'center' }}>
-                <Text style={{ textAlign: 'center', fontSize: 20, fontStyle: 'normal', fontFamily: 'Arcade-Classic', color: 'white' }}>CANCEL</Text>
+                style={{ width: Platform.OS === 'android' ? width / 3 : width / 4, height: Platform.OS === 'android' ? height / 9 : height / 12, backgroundColor: 'black', borderRadius: 10, justifyContent: 'center' }}>
+                <Text style={{ textAlign: 'center', fontSize: 20, fontStyle: 'normal', fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null, color: 'white' }}>CANCEL</Text>
             </TouchableOpacity>
         </View >
     )

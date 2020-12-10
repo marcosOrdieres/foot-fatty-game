@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Linking } from 'react-native';
+import { View, Text, Linking, Platform } from 'react-native';
 
 interface PrivacyPolicyProps {
     url?: string,
@@ -8,10 +8,10 @@ interface PrivacyPolicyProps {
 
 const PrivacyPolicy: React.FunctionComponent<PrivacyPolicyProps> = ({ url }) => {
     return (
-        <View style={{ position: 'absolute', alignItems: 'center' }}>
+        <View style={{ alignItems: 'center' }}>
             <Text
                 onPress={() => Linking.openURL(url)}
-                style={{ textDecorationLine: 'underline', color: '#80aaff', textAlign: 'center', marginLeft: 480, marginTop: 300, fontSize: 15, fontFamily: 'Arcade-Classic' }}>Privacy Policy</Text>
+                style={{ textDecorationLine: 'underline', color: '#80aaff', textAlign: 'center', fontSize: 15, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>Privacy Policy</Text>
         </View >
     )
 }

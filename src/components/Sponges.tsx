@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Image, Text } from 'react-native';
+import { View, Image, Text, Platform } from 'react-native';
 import { indexAndGames } from '../helper-functions/indexAndGames'
 
 interface SpongesProps {
@@ -24,7 +24,7 @@ const Sponges: React.FunctionComponent<SpongesProps> = ({ sponges, games, width,
                     ))}
                 </View>
                 <View style={{ flex: 0.5 }}>
-                    <Text style={{ fontSize: 18, fontFamily: 'Arcade-Classic' }}>HARD</Text>
+                    <Text style={{ fontSize: 18, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>HARD</Text>
                 </View>
 
             </View>
