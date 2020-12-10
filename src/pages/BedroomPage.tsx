@@ -112,8 +112,6 @@ const BedroomPage = () => {
             await setAsyncStorage('games', gamesStorage + 1);
             setGames(gamesStorage + 1)
             const { decisionSide, sideChosen } = await decisionOnlineChosen(progressLeft, progressRight);
-            console.warn('22222', decisionSide, sideChosen)
-
             if (decisionSide) {
                 Alert.alert(`+1 GAME +100 COINS  😀 your Side Decision:${sideChosen} was the Online Chosen`)
             } else {
@@ -145,22 +143,38 @@ const BedroomPage = () => {
             await setAsyncStorage('coins', coins + coinsWon * 2);
             if (left) {
                 setProgressLeft(progressLeft + progress * 2)
-                onScaleFoot(0.04, 0)
+                if (progressLeft > 0.5) {
+                    onScaleFoot(0.005, 0)
+                } else {
+                    onScaleFoot(0.04, 0)
+                }
             }
             if (right) {
                 setProgressRight(progressRight + progress * 2)
-                onScaleFoot(0, 0.04)
+                if (progressRight > 0.5) {
+                    onScaleFoot(0, 0.005)
+                } else {
+                    onScaleFoot(0, 0.04)
+                }
             }
         } else {
             await setAsyncStorage('coins', coins + coinsWon);
             if (left) {
                 setProgressLeft(progressLeft + progress)
                 changeHeadState()
-                onScaleFoot(0.02, 0)
+                if (progressLeft > 0.5) {
+                    onScaleFoot(0.005, 0)
+                } else {
+                    onScaleFoot(0.02, 0)
+                }
             }
             if (right) {
                 setProgressRight(progressRight + progress)
-                onScaleFoot(0, 0.02)
+                if (progressRight > 0.5) {
+                    onScaleFoot(0, 0.005)
+                } else {
+                    onScaleFoot(0, 0.02)
+                }
             }
         }
         if (progressLeft >= 1 || progressRight >= 1) {

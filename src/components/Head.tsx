@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import { View, Image } from 'react-native';
-
+import { View, Image, Dimensions, PixelRatio } from 'react-native';
+import { isTabletBasedOnRatio } from '../helper-functions/ratio';
 interface HeadProps {
     characterChosen: string,
     blackGirl: boolean,
@@ -16,7 +16,6 @@ interface HeadProps {
     lipsGirl: boolean,
     layout: any
 }
-
 const Head: React.FunctionComponent<HeadProps> = ({ fatboyGif, fatboySecond, fatboyThird, blackGirl, blackGirlSecond, blackGirlThird, cakeGirl, lipsGirl, characterChosen, layout, blueGirl, blueGirlSecond, blueGirlThird, }) => {
 
     const headCharacter = (characterChosen: string) => {
@@ -41,9 +40,45 @@ const Head: React.FunctionComponent<HeadProps> = ({ fatboyGif, fatboySecond, fat
                 return blueGirlSecond
             case 'blueGirlThird':
                 return blueGirlThird
-
             default:
                 return fatboyGif
+        }
+    }
+
+    const ratio = PixelRatio.get();
+    const isTablet = isTabletBasedOnRatio(ratio);
+    const heightCharacter = (characterChosen: string, isTablet: boolean) => {
+        switch (characterChosen) {
+            case 'cakeGirl':
+                if (isTablet) {
+                    return 170
+                } else {
+                    return 120
+                }
+            case 'blueGirl':
+                if (isTablet) {
+                    return 170
+                } else {
+                    return 120
+                }
+            case 'blueGirlSecond':
+                if (isTablet) {
+                    return 170
+                } else {
+                    return 120
+                }
+            case 'blueGirlThird':
+                if (isTablet) {
+                    return 170
+                } else {
+                    return 120
+                }
+            default:
+                if (isTablet) {
+                    return 150
+                } else {
+                    return 100
+                }
         }
     }
     return (
@@ -55,15 +90,13 @@ const Head: React.FunctionComponent<HeadProps> = ({ fatboyGif, fatboySecond, fat
         }}>
             <Image
                 style={{
-                    height: characterChosen === 'cakeGirl' || characterChosen === 'blueGirl' || characterChosen === 'blueGirlSecond' || characterChosen === 'blueGirlThird' ? 120 : 100,
-                    width: cakeGirl ? 200 : 30,
+                    height: heightCharacter(characterChosen, isTablet),
                     resizeMode: cakeGirl ? 'contain' : 'stretch'
                 }}
                 source={headCharacter(characterChosen)} />
         </View>
     )
 }
-
 Head.defaultProps = {
     characterChosen: 'true',
     layout: true,
@@ -76,5 +109,4 @@ Head.defaultProps = {
     blueGirlSecond: true,
     blueGirlThird: true,
 }
-
 export default Head

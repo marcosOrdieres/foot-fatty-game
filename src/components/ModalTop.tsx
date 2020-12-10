@@ -21,14 +21,14 @@ const ModalTop: React.FunctionComponent<ModalTopProps> = ({ items, itemsChange, 
                     <Text style={{ fontSize: 25, fontStyle: 'normal', fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>SHOP</Text>
                 </View>
                 <View style={{ flex: 0.5, width: width / 2, flexDirection: 'row' }}>
-                    <TouchableOpacity
+                    <TouchableHighlight
                         style={{ minHeight: height / 10, borderWidth: 1, borderRadius: 10, flex: 0.4, borderColor: 'grey', alignItems: 'center', justifyContent: 'center' }}
                         onPress={handleStateItems}>
                         <Text style={{ fontSize: 20, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null, padding: 5, color: 'grey' }}>Characters</Text>
-                    </TouchableOpacity>
-                    <View style={{ flex: 0.2 }} />
+                    </TouchableHighlight>
+                    <View style={{ flex: 0.1 }} />
                     <TouchableOpacity
-                        style={{ minHeight: height / 10, borderWidth: 3, borderRadius: 10, flex: 0.4, borderColor: 'black', marginLeft: 10, alignItems: 'center', justifyContent: 'center' }}>
+                        style={{ minHeight: height / 10, borderWidth: 5, borderRadius: 10, flex: 0.4, borderColor: 'black', marginLeft: 10, alignItems: 'center', justifyContent: 'center' }}>
                         <Text style={{ fontSize: 20, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null, padding: 5, color: 'black' }}>Items</Text>
                     </TouchableOpacity>
                 </View>
@@ -40,10 +40,10 @@ const ModalTop: React.FunctionComponent<ModalTopProps> = ({ items, itemsChange, 
                 </View>
                 <View style={{ flex: 0.5, width: width / 2, flexDirection: 'row' }}>
                     <TouchableOpacity
-                        style={{ borderWidth: 3, borderRadius: 10, flex: 0.4, borderColor: 'black', alignItems: 'center', justifyContent: 'center' }}>
+                        style={{ borderWidth: 5, borderRadius: 10, flex: 0.4, borderColor: 'black', alignItems: 'center', justifyContent: 'center' }}>
                         <Text style={{ fontSize: 20, fontStyle: 'normal', fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null, padding: 5, color: 'black' }}>Characters</Text>
                     </TouchableOpacity>
-                    <View style={{ flex: 0.2 }} />
+                    <View style={{ flex: 0.1 }} />
                     <TouchableHighlight
                         style={{ borderWidth: 1, borderRadius: 10, flex: 0.4, borderColor: 'grey', alignItems: 'center', justifyContent: 'center' }}
                         onPress={handleStateItems}>
