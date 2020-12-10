@@ -76,7 +76,7 @@ const BedroomPage = () => {
         if (progressLeft >= 1) {
             if (randomString === 'Left') {
                 const coins = await getAsyncStorage('coins');
-                await setAsyncStorage('coins', coins + 100);
+                await setAsyncStorage('coins', coins + 50);
                 const coinsAfterWinOnlineGame = await getAsyncStorage('coins');
                 setTotalCoins(coinsAfterWinOnlineGame)
                 return { decisionSide: true, sideChosen: 'Left' }
@@ -88,7 +88,7 @@ const BedroomPage = () => {
             if (randomString === 'Right') {
 
                 const coins = await getAsyncStorage('coins');
-                await setAsyncStorage('coins', coins + 100);
+                await setAsyncStorage('coins', coins + 50);
                 const coinsAfterWinOnlineGame = await getAsyncStorage('coins');
                 setTotalCoins(coinsAfterWinOnlineGame)
 
@@ -113,26 +113,28 @@ const BedroomPage = () => {
             setGames(gamesStorage + 1)
             const { decisionSide, sideChosen } = await decisionOnlineChosen(progressLeft, progressRight);
             if (decisionSide) {
-                Alert.alert(`+1 GAME +100 COINS  😀 your Side Decision:${sideChosen} was the Online Chosen`)
+                Alert.alert(`+1 GAME +50 COINS  😀 your Side Decision:${sideChosen} was the Online Chosen`)
             } else {
                 Alert.alert(`+1 GAME 😀 your Side Decision:${sideChosen} was not the Online Chosen`)
             }
+            setOnlineRightGame(false);
+            setOnlineLeftGame(false);
             setStartGame(false)
             setProgressRight(0)
             setProgressLeft(0)
             setScaleFootLeft(2)
             setScaleFootRight(2)
-            setOnlineRightGame(false);
-            setOnlineLeftGame(false);
+
         } else {
             Alert.alert('Sorry, You missed the Level 😅 😅')
+            setOnlineRightGame(false);
+            setOnlineLeftGame(false);
             setStartGame(false)
             setProgressRight(0)
             setProgressLeft(0)
             setScaleFootLeft(2)
             setScaleFootRight(2)
-            setOnlineRightGame(false);
-            setOnlineLeftGame(false);
+
         }
     }
 
@@ -331,7 +333,10 @@ const BedroomPage = () => {
                             marginTop={'15%'}
                             textColor={oneCharacter ? 'black' : '#b3b3b3'}
                             text={'Change Character'} />
-                        <ButtonIcon action={'Bathroom'} icon={fatImages.bathroom} place={'Bedroom'} />
+                        {!startGame ?
+                            <ButtonIcon action={'Bathroom'} icon={fatImages.bathroom} place={'Bedroom'} />
+                            : null
+                        }
                     </View >
                     <LeftFootPunch
                         layout={layout}

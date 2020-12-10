@@ -151,7 +151,7 @@ const BathroomPage = () => {
             await setAsyncStorage('coins', coins + 2);
             setProgress(progress + 0.02)
         } else {
-            await setAsyncStorage('coins', coins + 1000);
+            await setAsyncStorage('coins', coins + 1);
             setProgress(progress + 0.01)
         }
         const coinsAfterSwipe = await getAsyncStorage('coins');
@@ -228,12 +228,11 @@ const BathroomPage = () => {
             const multiplesFive = multipleFive(currentGamesWonWithThisOne)
             setGames(gamesStorage + 1)
             if (multiplosCincoMasUno) {
-                Alert.alert('CONGRATULATIONS, you passed and Earned +300 coins 😀 😀 😀 😀')
+                Alert.alert('CONGRATULATIONS, you passed and Earned +200 coins 😀 😀 😀 😀')
                 const coins = await getAsyncStorage('coins');
-                const coinsPlus = coins + 300;
+                const coinsPlus = coins + 200;
                 await setAsyncStorage('coins', coinsPlus);
                 setTotalCoins(coinsPlus)
-                console.warn('WIN COINS: +300')
                 setStartGame(false)
                 setOnFire(false)
                 setProgress(0)
@@ -276,8 +275,8 @@ const BathroomPage = () => {
                         <Image
                             style={{ height: 80, width: 80, resizeMode: 'stretch', justifyContent: 'center', alignItems: 'center', marginLeft: 30 }}
                             source={fatImages.shopIcon} />
-                        <View style={{ alignItems: 'center', justifyContent: 'space-around' }}>
-                            <Text adjustsFontSizeToFit style={{ fontSize: 25, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>GAMES: {games}</Text>
+                        <View style={{ left: 5, alignItems: 'center', justifyContent: 'space-around' }}>
+                            <Text style={{ fontSize: 20, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>GAMES: {games}</Text>
                         </View>
 
                         <Ducks ducks={theDucks} />
@@ -338,7 +337,10 @@ const BathroomPage = () => {
                             marginTop={'15%'}
                             textColor={oneCharacter ? 'black' : '#b3b3b3'}
                             text={'Change Character'} />
-                        <ButtonIcon action={'Bedroom'} icon={fatImages.bedroom} place={'Bathroom'} />
+                        {!startGame ?
+                            <ButtonIcon action={'Bedroom'} icon={fatImages.bedroom} place={'Bathroom'} />
+                            : null
+                        }
                     </View >
                     <LeftFoot
                         onSwipeLeft={() => (startGame && !correlacionTresForGame) ? onSwipeLeftFootToLeft() : startGame && correlacionTresForGame && leftGame ? onSwipeLeftFootToLeft() : null}
