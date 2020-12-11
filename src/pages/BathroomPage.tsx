@@ -334,16 +334,18 @@ const BathroomPage = () => {
                                 </View>
                             }
                         </View>
-
-                        <ButtonRounded
-                            onPress={async () => {
-                                await chargeAdInterstitial()
-                                setEveryFeetFalse();
-                                doubleScoreFunction();
-                            }}
-                            marginTop={'15%'}
-                            watchVideo
-                            text={'X2 - Watch Video'} />
+                        {Platform.OS === 'android' ?
+                            <ButtonRounded
+                                onPress={async () => {
+                                    Platform.OS === 'android' ? await chargeAdInterstitial() : null;
+                                    setEveryFeetFalse();
+                                    doubleScoreFunction();
+                                }}
+                                marginTop={'15%'}
+                                watchVideo
+                                text={'X2 - Watch Video'} />
+                            : null
+                        }
                         <ButtonRounded
                             onPress={() => changeCharacter()}
                             moreThanOneCharacted={oneCharacter ? false : true}
@@ -351,7 +353,7 @@ const BathroomPage = () => {
                             textColor={oneCharacter ? 'black' : '#b3b3b3'}
                             text={'Change Character'} />
                         {!startGame ?
-                            <ButtonIcon action={'Bedroom'} icon={fatImages.bedroom} place={'Bathroom'} />
+                            <ButtonIcon action={'Bedroom'} icon={fatImages.bedroom} place={'Bedroom'} />
                             : null
                         }
                     </View >

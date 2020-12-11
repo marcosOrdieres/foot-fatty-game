@@ -337,16 +337,17 @@ const BedroomPage = () => {
                                 </View>
                             }
                         </View>
-
-                        <ButtonRounded
-                            onPress={async () => {
-                                await chargeAdInterstitial()
-
-                                doubleScoreFunction()
-                            }}
-                            marginTop={'15%'}
-                            watchVideo
-                            text={'X2 - Watch Video'} />
+                        {Platform.OS === 'android' ?
+                            <ButtonRounded
+                                onPress={async () => {
+                                    Platform.OS === 'android' ? await chargeAdInterstitial() : null;
+                                    doubleScoreFunction()
+                                }}
+                                marginTop={'15%'}
+                                watchVideo
+                                text={'X2 - Watch Video'} />
+                            : null
+                        }
                         <ButtonRounded
                             onPress={() => changeCharacter()}
                             moreThanOneCharacted={oneCharacter ? false : true}
@@ -354,7 +355,7 @@ const BedroomPage = () => {
                             textColor={oneCharacter ? 'black' : '#b3b3b3'}
                             text={'Change Character'} />
                         {!startGame ?
-                            <ButtonIcon action={'Bathroom'} icon={fatImages.bathroom} place={'Bedroom'} />
+                            <ButtonIcon action={'Bathroom'} icon={fatImages.bathroom} place={'Bathroom'} />
                             : null
                         }
                     </View >
@@ -435,13 +436,16 @@ const BedroomPage = () => {
                         : null
                     }
                 </View>
-                <View style={{ position: 'absolute', top: '85%', left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center' }}>
-                    <AdMobBanner
-                        adSize="fullBanner"
-                        adUnitID="ca-app-pub-3940256099942544/6300978111"
-                        onAdFailedToLoad={error => console.error(error)}
-                    />
-                </View>
+                {Platform.OS === 'android' ?
+                    <View style={{ position: 'absolute', top: '85%', left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center' }}>
+                        <AdMobBanner
+                            adSize="fullBanner"
+                            adUnitID="ca-app-pub-3940256099942544/6300978111"
+                            onAdFailedToLoad={error => console.error(error)}
+                        />
+                    </View> : null
+                }
+
             </View>
         </ImageBackground>
     )
