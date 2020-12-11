@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Text, View, TouchableOpacity, Dimensions, Image, ImageBackground, Alert, Platform } from 'react-native';
+import { Text, View, TouchableOpacity, Dimensions, Image, ImageBackground, Platform } from 'react-native';
 import { characterForHeadOrFeet, multipleFive } from '../helper-functions/utils'
 import { getAsyncStorage, setAsyncStorage } from '../services/storage-service';
 import * as fatImages from '../assets'
 import { AnimatedPowerBar, ButtonRounded, RightFoot, LeftFoot, Head, Ducks, ModalShop, Sponges, Countdown, ButtonIcon, Coins, TextHelper, CustomAlert } from '../components';
-//import { ChangeHeadArray } from '../helper-functions/changeHead'
-const { width, height } = Dimensions.get('window');
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import AwesomeAlert from 'react-native-awesome-alerts';
+import { AdMobInterstitial } from 'react-native-admob';
+const { width, height } = Dimensions.get('window');
 
 //asyncStorage keys: character, coins, duck, games, goldenPrices
 
@@ -207,6 +206,12 @@ const BathroomPage = () => {
         }
     }
 
+    const chargeAdInterstitial = async () => {
+        AdMobInterstitial.setAdUnitID('ca-app-pub-3940256099942544/1033173712');
+        await AdMobInterstitial.requestAd();
+        AdMobInterstitial.showAd()
+    }
+
     useEffect(() => {
         checkCoins()
         checkGames()
@@ -216,7 +221,7 @@ const BathroomPage = () => {
     }, [])
 
     const doubleScoreFunction = () => setTimeout(() => { setDoubleScore(true); setScoreCallback() }, 1000);
-    const setScoreCallback = () => setTimeout(() => setDoubleScore(false), 25000);
+    const setScoreCallback = () => setTimeout(() => setDoubleScore(false), 50000);
 
     const updateCoinsCallback = async (coins: number) => {
         await setAsyncStorage('coins', coins);
@@ -331,7 +336,8 @@ const BathroomPage = () => {
                         </View>
 
                         <ButtonRounded
-                            onPress={() => {
+                            onPress={async () => {
+                                await chargeAdInterstitial()
                                 setEveryFeetFalse();
                                 doubleScoreFunction();
                             }}
@@ -432,8 +438,10 @@ const BathroomPage = () => {
                         : null
                     }
 
+
                 </View>
             </View>
+
         </ImageBackground>
     )
 }
