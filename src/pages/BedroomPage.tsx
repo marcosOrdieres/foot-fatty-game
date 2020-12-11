@@ -4,7 +4,7 @@ import { characterForHeadOrFeet } from '../helper-functions/utils'
 import { getAsyncStorage, setAsyncStorage } from '../services/storage-service';
 import * as fatImages from '../assets'
 import { ButtonRounded, CustomAlert, Head, ModalShop, Sponges, Countdown, ButtonIcon, LeftFootPunch, RightFootPunch, DoubleProgressBar, Coins, TextHelper, GoldenPrices } from '../components';
-//import { ChangeHeadArray } from '../helper-functions/changeHead'
+import { AdMobInterstitial, AdMobBanner } from 'react-native-admob';
 const { width, height } = Dimensions.get('window');
 
 //asyncStorage keys: character, coins, duck, games, duster
@@ -219,6 +219,15 @@ const BedroomPage = () => {
         }
     }
 
+    const chargeAdInterstitial = async () => {
+        AdMobInterstitial.setAdUnitID('ca-app-pub-3940256099942544/1033173712');
+        await AdMobInterstitial.requestAd();
+        AdMobInterstitial.showAd()
+    }
+
+    const doubleScoreFunction = () => setTimeout(() => { setDoubleScore(true); setScoreCallback() }, 1000);
+    const setScoreCallback = () => setTimeout(() => setDoubleScore(false), 50000);
+
     const changeHeadState = () => {
         switch (characterFinal) {
             case 'fatBoy':
@@ -328,12 +337,17 @@ const BedroomPage = () => {
                                 </View>
                             }
                         </View>
-
-                        <ButtonRounded
-                            //onPress={() => {doubleScoreFunction()}}
-                            marginTop={'15%'}
-                            watchVideo
-                            text={'X2 - Watch Video'} />
+                        {Platform.OS === 'android' ?
+                            <ButtonRounded
+                                onPress={async () => {
+                                    Platform.OS === 'android' ? await chargeAdInterstitial() : null;
+                                    doubleScoreFunction()
+                                }}
+                                marginTop={'15%'}
+                                watchVideo
+                                text={'X2 - Watch Video'} />
+                            : null
+                        }
                         <ButtonRounded
                             onPress={() => changeCharacter()}
                             moreThanOneCharacted={oneCharacter ? false : true}
@@ -341,7 +355,7 @@ const BedroomPage = () => {
                             textColor={oneCharacter ? 'black' : '#b3b3b3'}
                             text={'Change Character'} />
                         {!startGame ?
-                            <ButtonIcon action={'Bathroom'} icon={fatImages.bathroom} place={'Bedroom'} />
+                            <ButtonIcon action={'Bathroom'} icon={fatImages.bathroom} place={'Bathroom'} />
                             : null
                         }
                     </View >
@@ -422,6 +436,16 @@ const BedroomPage = () => {
                         : null
                     }
                 </View>
+                {Platform.OS === 'android' ?
+                    <View style={{ position: 'absolute', top: '85%', left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center' }}>
+                        <AdMobBanner
+                            adSize="fullBanner"
+                            adUnitID="ca-app-pub-3940256099942544/6300978111"
+                            onAdFailedToLoad={error => console.error(error)}
+                        />
+                    </View> : null
+                }
+
             </View>
         </ImageBackground>
     )
