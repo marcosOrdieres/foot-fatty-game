@@ -22,6 +22,7 @@ const ButtonRounded: React.FunctionComponent<ButtonRoundedProps> = ({ onPress, t
                 marginTop,
                 alignItems: 'flex-start',
                 justifyContent: 'center',
+                zIndex: Platform.OS === 'ios' ? 1000 : null
             }}>
             <AwesomeButtonRick
                 type={start ? "anchor" : moreThanOneCharacted ? "disabled" : "primary"}
