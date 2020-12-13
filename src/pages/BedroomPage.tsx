@@ -203,6 +203,7 @@ const BedroomPage = () => {
     }
 
     async function changeCharacter() {
+        console.warn('holaaa')
         const characterListStorage = await getAsyncStorage('character');
         const characterListStorageNumber = characterListStorage.character.length;
         const numberIWant = Math.floor(Math.random() * characterListStorageNumber) + 0;
@@ -456,3 +457,4 @@ const BedroomPage = () => {
 // }
 
 export default BedroomPage
+

@@ -6,8 +6,7 @@ import * as fatImages from '../assets'
 import { Cancel, ModalTop, ButtonItemAndChar, CustomAlert } from '../components';
 import { goldenPrice, spendCoinsForCharacter, wasteCoinsAndStoreDuck } from '../helper-functions/utils';
 import { BigButton, PrivacyPolicy } from '../components';
-
-//import * as InAppPurchases from 'expo-in-app-purchases';
+import * as InAppPurchases from 'expo-in-app-purchases';
 
 interface ModalProps {
     props?: any,
@@ -265,7 +264,13 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                                 <ButtonItemAndChar opacity={blueGirlOpacity} marginLeft={'50%'} coins={15000} />
                             </View>
                             <View style={{ alignItems: 'center' }}>
-                                <BigButton image={fatImages.coinImage} text={'+ 3000'} />
+                                <BigButton
+                                    onPress={async () => {
+                                        console.warn('holsasaa', itemsForPurchase)
+                                        //await InAppPurchases.purchaseItemAsync(itemsForPurchase[0].productId);
+                                    }}
+                                    image={fatImages.coinImage}
+                                    text={'+ 3000'} />
                                 <PrivacyPolicy url={'https://mamarene.blogspot.com/2019/09/privacy-policy-fat-foot.html'} />
                             </View>
 

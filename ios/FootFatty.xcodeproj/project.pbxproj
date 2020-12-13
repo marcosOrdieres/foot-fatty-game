@@ -14,6 +14,7 @@
 		0A59535A2576C24200C8B701 /* libRNReanimated.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A5953592576C24200C8B701 /* libRNReanimated.a */; };
 		0A59535C2576C24200C8B701 /* libRNScreens.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A59535B2576C24200C8B701 /* libRNScreens.a */; };
 		0AB6BA692582774E002D4FC4 /* Arcade-Classic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6BA682582774E002D4FC4 /* Arcade-Classic.ttf */; };
+		0AEBE0F42584FEC800057BF8 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AEBE0F32584FEC700057BF8 /* GoogleMobileAds.framework */; };
 		0BE14BF039F2480FB3522904 /* Teko-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD40EBD003E049328B2FC16D /* Teko-Regular.ttf */; };
 		0D5F923B05E54B72A4611739 /* Teko-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 623DCDF3A1B84B60BE88E24F /* Teko-Light.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
@@ -42,6 +43,7 @@
 		0A59535B2576C24200C8B701 /* libRNScreens.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNScreens.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AB6BA682582774E002D4FC4 /* Arcade-Classic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Arcade-Classic.ttf"; path = "../../../src/assets/fonts/Arcade-Classic.ttf"; sourceTree = "<group>"; };
 		0AE30C29257A4C2B006CD2AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = "Base.lproj/Arcade-Classic.ttf"; sourceTree = "<group>"; };
+		0AEBE0F32584FEC700057BF8 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "GoogleMobileAds.xcframework/ios-arm64_armv7/GoogleMobileAds.framework"; sourceTree = "<group>"; };
 		12AA0463E709194CFF3DBA16 /* Pods-FootFatty.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FootFatty.debug.xcconfig"; path = "Target Support Files/Pods-FootFatty/Pods-FootFatty.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* FootFatty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FootFatty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = FootFatty/AppDelegate.h; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			files = (
 				0A5953542576C24200C8B701 /* libRNCAsyncStorage.a in Frameworks */,
 				0A5953562576C24200C8B701 /* libRNCMaskedView.a in Frameworks */,
+				0AEBE0F42584FEC800057BF8 /* GoogleMobileAds.framework in Frameworks */,
 				0A5953582576C24200C8B701 /* libRNGestureHandler.a in Frameworks */,
 				0A59535A2576C24200C8B701 /* libRNReanimated.a in Frameworks */,
 				0A59535C2576C24200C8B701 /* libRNScreens.a in Frameworks */,
@@ -141,6 +144,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0AEBE0F32584FEC700057BF8 /* GoogleMobileAds.framework */,
 				0A5953532576C24200C8B701 /* libRNCAsyncStorage.a */,
 				0A5953552576C24200C8B701 /* libRNCMaskedView.a */,
 				0A5953572576C24200C8B701 /* libRNGestureHandler.a */,
@@ -232,7 +236,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				BA0583E415D58D7A386B4F54 /* [CP] Copy Pods Resources */,
+				BDD567D31AB7AC97C63C8214 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -252,6 +256,7 @@
 				LastUpgradeCheck = 1130;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = CK459A46UR;
 						LastSwiftMigration = 1120;
 					};
 				};
@@ -310,7 +315,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		BA0583E415D58D7A386B4F54 /* [CP] Copy Pods Resources */ = {
+		BDD567D31AB7AC97C63C8214 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -402,7 +407,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CK459A46UR;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoogleMobileAds.xcframework/ios-arm64_armv7",
+					"$(PROJECT_DIR)/GoogleMobileAds.xcframework/ios-arm64_i386_x86_64-simulator",
+				);
 				INFOPLIST_FILE = FootFatty/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -414,6 +425,7 @@
 				PRODUCT_NAME = FootFatty;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -425,6 +437,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CK459A46UR;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoogleMobileAds.xcframework/ios-arm64_armv7",
+					"$(PROJECT_DIR)/GoogleMobileAds.xcframework/ios-arm64_i386_x86_64-simulator",
+				);
 				INFOPLIST_FILE = FootFatty/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -435,6 +453,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = FootFatty;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

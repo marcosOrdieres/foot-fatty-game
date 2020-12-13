@@ -7,6 +7,7 @@ import { AnimatedPowerBar, ButtonRounded, RightFoot, LeftFoot, Head, Ducks, Moda
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AdMobInterstitial } from 'react-native-admob';
+import * as InAppPurchases from 'expo-in-app-purchases';
 const { width, height } = Dimensions.get('window');
 
 //asyncStorage keys: character, coins, duck, games, goldenPrices
@@ -66,6 +67,63 @@ const BathroomPage = () => {
         setMoveLeftToRight(second)
         setMoveRightToLeft(third)
         setMoveRightToRight(fourth)
+    }
+
+    const footExtraCoins = Platform.select({
+        android: ['footcoins'],
+    });
+
+    const chargeInAppPurchases = async () => {
+        console.warn('66666:');
+        const history = await InAppPurchases.connectAsync();
+        console.warn('history:', history);
+
+        // Retrieve product details
+        const { responseCode, results } = await InAppPurchases.getProductsAsync(footExtraCoins);
+        if (responseCode === InAppPurchases.IAPResponseCode.OK) {
+            console.warn('results', results);
+
+        }
+
+        // Retrieve product details , This represents the user's previous purchase history and returns the same result as getPurchaseHistoryAsync().
+        // const history = await InAppPurchases.getPurchaseHistoryAsync();
+        // console.warn('history:', history);
+
+
+        // // Retrieves the product details (price, description, title, etc) 
+        // const { responseCode, results } = await InAppPurchases.getProductsAsync(footExtraCoins);
+        // console.warn('responseCode', responseCode)
+        // if (responseCode === InAppPurchases.IAPResponseCode.OK) {
+        //     console.warn('results getProductsAsync', results)
+        //     setItemsForPurchase(results);
+        // }
+        // // Set purchase listener
+        // setListenerForPurchaseFunction();
+    }
+
+
+    const setListenerForPurchaseFunction = async () => {
+        console.warn('entro en setListenerForPurchaseFunction, but only goes though if item purchased')
+        InAppPurchases.setPurchaseListener(async ({ responseCode, results, errorCode }) => {
+            // Purchase was successful
+            if (responseCode === InAppPurchases.IAPResponseCode.OK) {
+                results.forEach(purchase => {
+                    if (!purchase.acknowledged) {
+                        console.warn(`Successfully purchased ${purchase.productId}`);
+                        // Process transaction here and unlock content...
+                        // Then when you're done
+                        InAppPurchases.finishTransactionAsync(purchase, true);
+                        setSuccessAsync();
+                    }
+                });
+            } else if (responseCode === InAppPurchases.IAPResponseCode.USER_CANCELED) {
+                console.warn('User canceled the transaction');
+            } else if (responseCode === InAppPurchases.IAPResponseCode.DEFERRED) {
+                console.warn('User does not have permissions to buy but requested parental approval (iOS only)');
+            } else {
+                console.warn(`Something went wrong with the purchase. Received errorCode ${errorCode}`);
+            }
+        });
     }
 
     const setSuccessAsync = async () => {
@@ -217,6 +275,7 @@ const BathroomPage = () => {
         checkGames()
         getTheDucks()
         addBoyToStorage()
+        chargeInAppPurchases()
         correlacionDeTres()
     }, [])
 
