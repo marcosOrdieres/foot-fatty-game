@@ -21,6 +21,7 @@ const BedroomPage = () => {
     const [showAlertMissGame, setShowAlertMissGame] = useState(false);
     const [showAlertPassGame, setShowAlertPassGame] = useState(false);
     const [showAlertPassAndWinCoinsGame, setShowAlertPassAndWinCoinsGame] = useState(false);
+    const [showAlertInformation, setShowAlertInformation] = useState(false);
 
     const [progressLeft, setProgressLeft] = useState(0);
     const [progressRight, setProgressRight] = useState(0);
@@ -144,6 +145,7 @@ const BedroomPage = () => {
     const handleStateAlert = (newValue: boolean) => setShowAlertMissGame(newValue);
     const handleStatePassAlert = (newValue: boolean) => setShowAlertPassGame(newValue);
     const handleStatePassAndWinCoinsAlert = (newValue: boolean) => setShowAlertPassAndWinCoinsGame(newValue);
+    const handleStateInformation = (newValue: boolean) => setShowAlertInformation(newValue);
 
     const winCoinsWhenSwipe = async (left: boolean, right: boolean, progress: number, coinsWon: number) => {
         if (progressLeft >= 1 || progressRight >= 1) { setFinishedGameBar(true) }
@@ -293,13 +295,14 @@ const BedroomPage = () => {
                     <DoubleProgressBar progressLeft={progressLeft} leftChosen={startGame ? onlineLeftGame : null} rightChosen={startGame ? onlineRightGame : null} progressRight={progressRight} />
                     <TouchableOpacity
                         onPress={() => { setModalVisible(true) }}
-                        style={{ flex: 0.15 }}>
+                        style={{ flex: 0.15, marginRight: Platform.OS === 'android' ? null : '2%' }}>
                         <Image
                             style={{ height: 80, width: 80, resizeMode: 'stretch', justifyContent: 'center', alignItems: 'center', marginLeft: 30 }}
                             source={fatImages.shopIcon} />
                         <View style={{ left: 5, alignItems: 'center', justifyContent: 'space-around' }}>
-                            <Text style={{ fontSize: 20, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>GAMES: {games}</Text>
+                            <Text style={{ fontSize: 20, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : 'Teko-Semibold' }}>GAMES: {games}</Text>
                         </View>
+
 
                         <ModalShop
                             //updateCoinsCallback={updateCoinsCallback}
@@ -313,7 +316,7 @@ const BedroomPage = () => {
                     </TouchableOpacity>
                 </View>
                 <View style={{ width: 300, height: 30, alignSelf: 'center' }}>
-                    <Text style={{ fontSize: 20, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null, textAlign: 'center' }}>BEDROOM   ONLINE   PUNCHES</Text>
+                    <Text style={{ fontSize: 20, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : 'Teko-Semibold', textAlign: 'center' }}>BEDROOM   ONLINE   PUNCHES</Text>
                 </View>
                 <View style={{ width: layout.layout.width, flex: 0.8, flexDirection: 'row' }}>
                     <View style={{ width: '25%', height: '100%' }}>
@@ -338,17 +341,15 @@ const BedroomPage = () => {
                                 </View>
                             }
                         </View>
-                        {Platform.OS === 'android' ?
-                            <ButtonRounded
-                                onPress={async () => {
-                                    Platform.OS === 'android' ? await chargeAdInterstitial() : null;
-                                    doubleScoreFunction()
-                                }}
-                                marginTop={'15%'}
-                                watchVideo
-                                text={'X2 - Watch Video'} />
-                            : null
-                        }
+                        <ButtonRounded
+                            onPress={async () => {
+                                await chargeAdInterstitial();
+                                doubleScoreFunction()
+                            }}
+                            marginTop={'15%'}
+                            watchVideo
+                            text={'X2 - Watch Video'} />
+
                         <ButtonRounded
                             onPress={() => changeCharacter()}
                             moreThanOneCharacted={oneCharacter ? false : true}
@@ -375,6 +376,14 @@ const BedroomPage = () => {
                     <TextHelper startGame={startGame} left={'30%'} onlineGame={onlineLeftGame} text={'Left'} />
                     <TextHelper startGame={startGame} left={'60%'} onlineGame={onlineRightGame} text={'Right'} />
                     <GoldenPrices prices={prices} />
+
+                    <TouchableOpacity
+                        onPress={() => { setShowAlertInformation(true) }}
+                        style={{ zIndex: 1000, position: 'absolute', top: '10%', left: '85%' }}>
+                        <Image
+                            style={{ height: 30, width: 30 }}
+                            source={fatImages.questionMark} />
+                    </TouchableOpacity>
 
                     <Head
                         layout={layout}
@@ -420,7 +429,7 @@ const BedroomPage = () => {
                             showAlert={showAlertPassGame}
                             onShow={handleStatePassAlert}
                             titleText="Congratulations"
-                            messageText="+  1  game!"
+                            messageText="+  1  game,      not     online    decision,   Sorry!"
                             icon={fatImages.success}
                         />
                         : null
@@ -431,22 +440,32 @@ const BedroomPage = () => {
                             showAlert={showAlertPassAndWinCoinsGame}
                             onShow={handleStatePassAndWinCoinsAlert}
                             titleText="Congratulations"
-                            messageText="+  1  game    +   50  coins ( side online decision )!"
+                            messageText="+  1  game    +   50  coins (  online  side  decision  )!"
                             icon={fatImages.coinImage}
                         />
                         : null
                     }
                 </View>
-                {Platform.OS === 'android' ?
-                    <View style={{ position: 'absolute', top: '85%', left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center' }}>
-                        <AdMobBanner
-                            adSize="fullBanner"
-                            adUnitID="ca-app-pub-3940256099942544/6300978111"
-                            onAdFailedToLoad={error => console.error(error)}
-                        />
-                    </View> : null
-                }
+                <View style={{ position: 'absolute', top: '85%', left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center' }}>
+                    <AdMobBanner
+                        adSize="fullBanner"
+                        adUnitID="ca-app-pub-3940256099942544/6300978111"
+                        onAdFailedToLoad={error => console.error(error)}
+                    />
+                </View>
 
+                {showAlertInformation ?
+                    <CustomAlert
+                        showAlert={showAlertInformation}
+                        onShow={handleStateInformation}
+                        titleText="Bedroom     Punch     Game"
+                        messageText="START GAME   and   TAP   only   ONE   FOOT"
+                        heightImage={100}
+                        widthImage={100}
+                        icon={fatImages.tapFoot}
+                    />
+                    : null
+                }
             </View>
         </ImageBackground>
     )

@@ -26,6 +26,7 @@ const BathroomPage = () => {
     const [showAlertMissGame, setShowAlertMissGame] = useState(false);
     const [showAlertPassGame, setShowAlertPassGame] = useState(false);
     const [showAlertPassAndWinCoinsGame, setShowAlertPassAndWinCoinsGame] = useState(false);
+    const [showAlertInformation, setShowAlertInformation] = useState(false);
 
     const [progress, setProgress] = useState(0);
     const [doubleScore, setDoubleScore] = useState(false);
@@ -70,35 +71,34 @@ const BathroomPage = () => {
     }
 
     const footExtraCoins = Platform.select({
+        ios: ['1'],
         android: ['footcoins'],
     });
 
     const chargeInAppPurchases = async () => {
         console.warn('66666:');
-        const history = await InAppPurchases.connectAsync();
-        console.warn('history:', history);
+        const historyConnect = await InAppPurchases.connectAsync();
+        console.warn('historyConnect:', historyConnect);
 
-        // Retrieve product details
-        const { responseCode, results } = await InAppPurchases.getProductsAsync(footExtraCoins);
-        if (responseCode === InAppPurchases.IAPResponseCode.OK) {
-            console.warn('results', results);
+        // try {
+        //     const history = Platform.OS === 'android' ? await InAppPurchases.getPurchaseHistoryAsync() : await InAppPurchases.getPurchaseHistoryAsync(true)
+        //     console.warn('history:', history);
 
-        }
+        // } catch (error) {
+        //     console.warn('EL PUTO ERROR', error)
+        // }
 
         // Retrieve product details , This represents the user's previous purchase history and returns the same result as getPurchaseHistoryAsync().
-        // const history = await InAppPurchases.getPurchaseHistoryAsync();
-        // console.warn('history:', history);
 
-
-        // // Retrieves the product details (price, description, title, etc) 
-        // const { responseCode, results } = await InAppPurchases.getProductsAsync(footExtraCoins);
-        // console.warn('responseCode', responseCode)
-        // if (responseCode === InAppPurchases.IAPResponseCode.OK) {
-        //     console.warn('results getProductsAsync', results)
-        //     setItemsForPurchase(results);
-        // }
-        // // Set purchase listener
-        // setListenerForPurchaseFunction();
+        // Retrieves the product details (price, description, title, etc) 
+        const { responseCode, results } = await InAppPurchases.getProductsAsync(footExtraCoins);
+        console.warn('responseCode', responseCode)
+        if (responseCode === InAppPurchases.IAPResponseCode.OK) {
+            console.warn('results getProductsAsync', results)
+            setItemsForPurchase(results);
+        }
+        // Set purchase listener
+        setListenerForPurchaseFunction();
     }
 
 
@@ -128,11 +128,11 @@ const BathroomPage = () => {
 
     const setSuccessAsync = async () => {
         const coins = await getAsyncStorage('coins')
-        const coinsPlus = coins + 5000
+        const coinsPlus = coins + 3000
         await setAsyncStorage('coins', coinsPlus);
         const coinsUpdated = await getAsyncStorage('coins')
         setTotalCoins(coinsUpdated);
-        console.warn('GANA COINS: +5000')
+        console.warn('GANA COINS: +3000')
     }
 
     async function getTheDucks() {
@@ -209,7 +209,7 @@ const BathroomPage = () => {
             setProgress(progress + 0.02)
         } else {
             await setAsyncStorage('coins', coins + 1);
-            setProgress(progress + 0.1)
+            setProgress(progress + 0.01)
         }
         const coinsAfterSwipe = await getAsyncStorage('coins');
         setTotalCoins(coinsAfterSwipe)
@@ -328,6 +328,7 @@ const BathroomPage = () => {
     const handleStateAlert = (newValue: boolean) => setShowAlertMissGame(newValue);
     const handleStatePassAlert = (newValue: boolean) => setShowAlertPassGame(newValue);
     const handleStatePassAndWinCoinsAlert = (newValue: boolean) => setShowAlertPassAndWinCoinsGame(newValue);
+    const handleStateInformation = (newValue: boolean) => setShowAlertInformation(newValue);
 
     return (
         <ImageBackground
@@ -342,13 +343,14 @@ const BathroomPage = () => {
                     </View>
                     <TouchableOpacity
                         onPress={() => { setEveryFeetFalse(); setModalVisible(true) }}
-                        style={{ flex: 0.15 }}>
+                        style={{ flex: 0.15, marginRight: Platform.OS === 'android' ? null : '2%' }}>
                         <Image
                             style={{ height: 80, width: 80, resizeMode: 'stretch', justifyContent: 'center', alignItems: 'center', marginLeft: 30 }}
                             source={fatImages.shopIcon} />
                         <View style={{ left: 5, alignItems: 'center', justifyContent: 'space-around' }}>
-                            <Text style={{ fontSize: 20, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>GAMES: {games}</Text>
+                            <Text style={{ fontSize: 20, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : 'Teko-Semibold' }}>GAMES: {games}</Text>
                         </View>
+
 
                         <Ducks ducks={theDucks} />
 
@@ -362,9 +364,11 @@ const BathroomPage = () => {
                             itemsForPurchase={itemsForPurchase}
                             visible={modalVisible} />
                     </TouchableOpacity>
+
                 </View>
+
                 <View style={{ width: 300, height: 20, alignSelf: 'center' }}>
-                    <Text style={{ fontSize: 20, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null, textAlign: 'center' }}>BATHROOM   TICKLES</Text>
+                    <Text style={{ fontSize: 20, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : 'Teko-Semibold', textAlign: 'center' }}>BATHROOM   TICKLES</Text>
                 </View>
                 <View style={{ width: layout.layout.width, flex: 0.8, flexDirection: 'row' }}>
                     <View style={{ width: '25%', height: '100%' }}>
@@ -393,18 +397,16 @@ const BathroomPage = () => {
                                 </View>
                             }
                         </View>
-                        {Platform.OS === 'android' ?
-                            <ButtonRounded
-                                onPress={async () => {
-                                    Platform.OS === 'android' ? await chargeAdInterstitial() : null;
-                                    setEveryFeetFalse();
-                                    doubleScoreFunction();
-                                }}
-                                marginTop={'15%'}
-                                watchVideo
-                                text={'X2 - Watch Video'} />
-                            : null
-                        }
+                        <ButtonRounded
+                            onPress={async () => {
+                                await chargeAdInterstitial();
+                                setEveryFeetFalse();
+                                doubleScoreFunction();
+                            }}
+                            marginTop={'15%'}
+                            watchVideo
+                            text={'X2 - Watch Video'} />
+
                         <ButtonRounded
                             onPress={() => changeCharacter()}
                             moreThanOneCharacted={oneCharacter ? false : true}
@@ -431,6 +433,16 @@ const BathroomPage = () => {
 
                     <TextHelper startGame={startGame} left={'30%'} onlineGame={leftGame} text={'Left'} />
                     <TextHelper startGame={startGame} left={'60%'} onlineGame={rightGame} text={'Right'} />
+
+
+                    <TouchableOpacity
+                        onPress={() => { setShowAlertInformation(true) }}
+                        style={{ zIndex: 1000, position: 'absolute', top: '10%', left: '85%' }}>
+                        <Image
+                            style={{ height: 30, width: 30 }}
+                            source={fatImages.questionMark} />
+                    </TouchableOpacity>
+
 
                     {/* <Sponges
                         sponges={sponges}
@@ -499,11 +511,22 @@ const BathroomPage = () => {
                         : null
                     }
 
-
+                    {showAlertInformation ?
+                        <CustomAlert
+                            showAlert={showAlertInformation}
+                            onShow={handleStateInformation}
+                            titleText="Bathroom     Tickle     Game"
+                            messageText="START GAME   and   SWIPE   Left   and   Right   a   FOOT"
+                            heightImage={100}
+                            widthImage={100}
+                            icon={fatImages.swipeGif}
+                        />
+                        : null
+                    }
                 </View>
             </View>
 
-        </ImageBackground>
+        </ImageBackground >
     )
 }
 

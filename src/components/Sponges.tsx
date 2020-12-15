@@ -24,7 +24,7 @@ const Sponges: React.FunctionComponent<SpongesProps> = ({ sponges, games, width,
                     ))}
                 </View>
                 <View style={{ flex: 0.5 }}>
-                    <Text style={{ fontSize: 18, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>HARD</Text>
+                    <Text style={{ fontSize: 18, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : 'Teko-Semibold' }}>HARD</Text>
                 </View>
 
             </View>

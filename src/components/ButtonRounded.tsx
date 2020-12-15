@@ -31,7 +31,7 @@ const ButtonRounded: React.FunctionComponent<ButtonRoundedProps> = ({ onPress, t
                 onPress={onPress}
                 width={start ? width / 4 : width / 6}
                 height={height / 8.5}>
-                <Text adjustsFontSizeToFit style={{ textAlign: 'center', fontSize: Platform.OS === 'ios' ? 14 : 20, color: textColor || 'black', fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>{text.toUpperCase()}</Text>
+                <Text adjustsFontSizeToFit style={{ textAlign: 'center', fontSize: Platform.OS === 'ios' ? 14 : 20, color: textColor || 'black', fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : 'Teko-Semibold' }}>{text.toUpperCase()}</Text>
             </AwesomeButtonRick>
         </View>
 

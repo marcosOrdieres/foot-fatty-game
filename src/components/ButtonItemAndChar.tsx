@@ -13,7 +13,7 @@ interface ButtonItemAndCharProps {
 const ButtonItemAndChar: React.FunctionComponent<ButtonItemAndCharProps> = ({ opacity, marginLeft, coins, bestPriceText, duck }) => {
     return (
         <View style={{ opacity: opacity ? 0.3 : null, }}>
-            <Text style={{ textAlign: 'center', fontSize: 15, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>{coins ? coins + ' coins' : bestPriceText}</Text>
+            <Text style={{ textAlign: 'center', fontSize: 15, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : 'Teko-Semibold' }}>{coins ? coins + ' coins' : bestPriceText}</Text>
         </View>
     )
 }

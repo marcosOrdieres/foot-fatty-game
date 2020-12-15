@@ -11,7 +11,7 @@ const PrivacyPolicy: React.FunctionComponent<PrivacyPolicyProps> = ({ url }) => 
         <View style={{ alignItems: 'center' }}>
             <Text
                 onPress={() => Linking.openURL(url)}
-                style={{ textDecorationLine: 'underline', color: '#80aaff', textAlign: 'center', fontSize: 15, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>Privacy Policy</Text>
+                style={{ textDecorationLine: 'underline', color: '#80aaff', textAlign: 'center', fontSize: 15, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : 'Teko-Semibold' }}>Privacy Policy</Text>
         </View >
     )
 }

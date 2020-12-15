@@ -18,7 +18,7 @@ const BigButton: React.FunctionComponent<BigButtonProps> = ({ image, text, onPre
             //     await InAppPurchases.purchaseItemAsync(itemsForPurchase[0].productId);
             // }}
             style={{ width: width / 5, height: height / 1.5, backgroundColor: 'green', borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ textAlign: 'center', fontSize: 30, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>{text}</Text>
+            <Text style={{ textAlign: 'center', fontSize: 30, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : 'Teko-Semibold' }}>{text}</Text>
             <Image
                 style={{ height: 50, width: 50, resizeMode: 'stretch' }}
                 source={image} />

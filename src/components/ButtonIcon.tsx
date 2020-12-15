@@ -18,7 +18,7 @@ const ButtonIcon: React.FunctionComponent<DrawerProps> = ({ action, icon, place 
             <Image
                 style={{ height: 60, width: 60 }}
                 source={icon} />
-            <Text style={{ fontSize: 14, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null, textAlign: 'left' }}>{place}</Text>
+            <Text style={{ marginLeft: Platform.OS === 'android' ? null : '5%', fontSize: 14, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : 'Teko-Semibold', textAlign: 'left' }}>{place}</Text>
 
         </TouchableOpacity>
     )

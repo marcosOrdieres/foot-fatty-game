@@ -12,7 +12,7 @@ const Cancel: React.FunctionComponent<CancelProps> = ({ onPressCancel }) => {
             <TouchableOpacity
                 onPress={onPressCancel}
                 style={{ width: Platform.OS === 'android' ? width / 3 : width / 4, height: Platform.OS === 'android' ? height / 9 : height / 12, backgroundColor: 'black', borderRadius: 10, justifyContent: 'center' }}>
-                <Text style={{ textAlign: 'center', fontSize: 20, fontStyle: 'normal', fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null, color: 'white' }}>CANCEL</Text>
+                <Text style={{ textAlign: 'center', fontSize: 20, fontStyle: 'normal', fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : 'Teko-Semibold', color: 'white' }}>CANCEL</Text>
             </TouchableOpacity>
         </View >
     )

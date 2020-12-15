@@ -28,7 +28,7 @@ const AnimatedPowerBar: React.FunctionComponent<AnimatedPowerBarProps> = ({ prog
                 </View>
             </AnimatedBar>
             :
-            <Text style={{ fontSize: 20, fontStyle: 'normal', fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>Game Finalised 😀</Text>
+            <Text style={{ fontSize: 20, fontStyle: 'normal', fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : 'Teko-Semibold' }}>Game Finalised 😀</Text>
     )
 }
 
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     barText: {
         backgroundColor: "transparent",
         color: "#FFF",
-        fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null
+        fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : 'Teko-Semibold'
     },
 });
 

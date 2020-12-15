@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Image, Text, Modal, TouchableOpacity, Dimensions } from 'react-native';
+import { View, StyleSheet, Image, Text, Modal, TouchableOpacity, Dimensions, Platform } from 'react-native';
 const { width, height } = Dimensions.get('window');
 import { getAsyncStorage, setAsyncStorage } from '../services/storage-service';
 import * as fatImages from '../assets'
@@ -213,10 +213,20 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                                         if (!moneySpentCharacter) setShowAlertNoMoney(true);
                                         if (moneySpentCharacter) updateCoinsCallback(moneySpentCharacter);
                                     } : () => console.warn('YA SE HA COMPRADO')}
-                                    style={{ zIndex: 1000, width: 100, height: 100, borderRadius: 10, borderColor: blackGirlOpacity ? '#ffcccc' : 'red', borderWidth: 3, alignItems: 'center', justifyContent: 'center' }}>
+                                    style={{ flexDirection: 'column', zIndex: 1000, width: Platform.OS === 'android' ? '90%' : '80%', height: '70%', borderRadius: 10, borderColor: blackGirlOpacity ? '#ffcccc' : 'red', borderWidth: 3, alignItems: 'center', justifyContent: 'center' }}>
+
+
                                     <Image
-                                        style={{ opacity: blackGirlOpacity ? 0.3 : null, height: 75, width: 75, resizeMode: 'stretch' }}
+                                        style={{ opacity: blackGirlOpacity ? 0.3 : null, height: '60%', width: '80%', resizeMode: 'stretch', marginBottom: 5 }}
                                         source={fatImages.blackGirl} />
+
+
+                                    <Image
+                                        style={{ opacity: blackGirlOpacity ? 0.3 : null, height: '30%', width: '30%', resizeMode: 'stretch' }}
+                                        source={fatImages.leftBlackFoot} />
+
+
+
                                 </TouchableOpacity>
                                 <ButtonItemAndChar opacity={cakeGirlOpacity} marginLeft={'1%'} coins={3000} />
                             </View>
@@ -228,10 +238,19 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                                         if (moneySpentCharacter) updateCoinsCallback(moneySpentCharacter);
 
                                     } : () => console.warn('YA SE HA COMPRADO')}
-                                    style={{ zIndex: 1000, width: 100, height: 100, borderColor: lipsGirlOpacity ? '#ffcccc' : 'red', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
+                                    style={{ zIndex: 1000, width: Platform.OS === 'android' ? '90%' : '80%', height: '70%', borderColor: lipsGirlOpacity ? '#ffcccc' : 'red', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
+
+
                                     <Image
-                                        style={{ opacity: lipsGirlOpacity ? 0.3 : null, height: 75, width: 75, resizeMode: 'stretch' }}
+                                        style={{ opacity: lipsGirlOpacity ? 0.3 : null, height: '60%', width: '70%', resizeMode: 'stretch', marginBottom: 5 }}
                                         source={fatImages.lipsGirl} />
+
+
+                                    <Image
+                                        style={{ opacity: lipsGirlOpacity ? 0.3 : null, height: '30%', width: '30%', resizeMode: 'stretch' }}
+                                        source={fatImages.lipLeftFoot} />
+
+
                                 </TouchableOpacity>
                                 <ButtonItemAndChar opacity={cakeGirlOpacity} marginLeft={'16%'} coins={8000} />
                             </View>
@@ -242,10 +261,19 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                                         if (!moneySpentCharacter) setShowAlertNoMoney(true);
                                         if (moneySpentCharacter) updateCoinsCallback(moneySpentCharacter);
                                     } : () => console.warn('YA SE HA COMPRADO')}
-                                    style={{ zIndex: 1000, width: 100, height: 100, borderColor: cakeGirlOpacity ? '#ffcccc' : 'red', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
+                                    style={{ flexDirection: 'column', zIndex: 1000, width: Platform.OS === 'android' ? '90%' : '80%', height: '70%', borderColor: cakeGirlOpacity ? '#ffcccc' : 'red', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
+
+
                                     <Image
-                                        style={{ opacity: cakeGirlOpacity ? 0.3 : null, height: 75, width: 100, resizeMode: 'stretch' }}
+                                        style={{ opacity: cakeGirlOpacity ? 0.3 : null, height: '60%', width: '100%', resizeMode: 'stretch', marginBottom: 5 }}
                                         source={fatImages.cakeGirl} />
+
+
+                                    <Image
+                                        style={{ opacity: cakeGirlOpacity ? 0.3 : null, height: '30%', width: '30%', resizeMode: 'stretch' }}
+                                        source={fatImages.cakeLeftFoot} />
+
+
                                 </TouchableOpacity>
                                 <ButtonItemAndChar opacity={cakeGirlOpacity} marginLeft={'31%'} coins={12000} />
                             </View>
@@ -256,18 +284,26 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                                         if (!moneySpentCharacter) setShowAlertNoMoney(true);
                                         if (moneySpentCharacter) updateCoinsCallback(moneySpentCharacter);
                                     } : () => console.warn('YA SE HA COMPRADO')}
-                                    style={{ zIndex: 1000, width: 100, height: 100, borderColor: blueGirlOpacity ? '#ffcccc' : 'red', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
+                                    style={{ flexDirection: 'column', zIndex: 1000, width: Platform.OS === 'android' ? '90%' : '80%', height: '70%', borderColor: blueGirlOpacity ? '#ffcccc' : 'red', borderWidth: 3, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
+
+
                                     <Image
-                                        style={{ opacity: blueGirlOpacity ? 0.3 : null, height: 75, width: 60, resizeMode: 'stretch' }}
+                                        style={{ opacity: blueGirlOpacity ? 0.3 : null, height: '60%', width: '60%', resizeMode: 'stretch', marginBottom: 5 }}
                                         source={fatImages.blueGirl} />
+
+
+                                    <Image
+                                        style={{ opacity: blueGirlOpacity ? 0.3 : null, height: '30%', width: '30%', resizeMode: 'stretch' }}
+                                        source={fatImages.blueLeftFoot} />
+
                                 </TouchableOpacity>
                                 <ButtonItemAndChar opacity={blueGirlOpacity} marginLeft={'50%'} coins={15000} />
                             </View>
                             <View style={{ alignItems: 'center' }}>
                                 <BigButton
                                     onPress={async () => {
-                                        console.warn('holsasaa', itemsForPurchase)
-                                        //await InAppPurchases.purchaseItemAsync(itemsForPurchase[0].productId);
+                                        console.warn('itemsForPurchase', itemsForPurchase)
+                                        await InAppPurchases.purchaseItemAsync(itemsForPurchase[0].productId);
                                     }}
                                     image={fatImages.coinImage}
                                     text={'+ 3000'} />

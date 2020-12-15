@@ -12,7 +12,7 @@ interface TextHelperProps {
 const TextHelper: React.FunctionComponent<TextHelperProps> = ({ startGame, onlineGame, text, left }) => {
     return (
         <View style={{ position: 'absolute', left, top: '10%' }}>
-            <Text style={{ color: '#006622', fontSize: 30, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : null }}>
+            <Text style={{ color: '#006622', fontSize: 30, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : 'Teko-Semibold' }}>
                 {startGame && onlineGame ? text : ''}
             </Text>
         </View>

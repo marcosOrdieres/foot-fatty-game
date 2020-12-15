@@ -13,8 +13,8 @@
 		0A5953582576C24200C8B701 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A5953572576C24200C8B701 /* libRNGestureHandler.a */; };
 		0A59535A2576C24200C8B701 /* libRNReanimated.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A5953592576C24200C8B701 /* libRNReanimated.a */; };
 		0A59535C2576C24200C8B701 /* libRNScreens.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A59535B2576C24200C8B701 /* libRNScreens.a */; };
-		0AB6BA692582774E002D4FC4 /* Arcade-Classic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6BA682582774E002D4FC4 /* Arcade-Classic.ttf */; };
 		0AEBE0F42584FEC800057BF8 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AEBE0F32584FEC700057BF8 /* GoogleMobileAds.framework */; };
+		0AEBE0F82586930200057BF8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AEBE0F72586930200057BF8 /* StoreKit.framework */; };
 		0BE14BF039F2480FB3522904 /* Teko-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD40EBD003E049328B2FC16D /* Teko-Regular.ttf */; };
 		0D5F923B05E54B72A4611739 /* Teko-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 623DCDF3A1B84B60BE88E24F /* Teko-Light.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
@@ -41,9 +41,9 @@
 		0A5953572576C24200C8B701 /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A5953592576C24200C8B701 /* libRNReanimated.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNReanimated.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A59535B2576C24200C8B701 /* libRNScreens.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNScreens.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		0AB6BA682582774E002D4FC4 /* Arcade-Classic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Arcade-Classic.ttf"; path = "../../../src/assets/fonts/Arcade-Classic.ttf"; sourceTree = "<group>"; };
 		0AE30C29257A4C2B006CD2AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = "Base.lproj/Arcade-Classic.ttf"; sourceTree = "<group>"; };
 		0AEBE0F32584FEC700057BF8 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "GoogleMobileAds.xcframework/ios-arm64_armv7/GoogleMobileAds.framework"; sourceTree = "<group>"; };
+		0AEBE0F72586930200057BF8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		12AA0463E709194CFF3DBA16 /* Pods-FootFatty.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FootFatty.debug.xcconfig"; path = "Target Support Files/Pods-FootFatty/Pods-FootFatty.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* FootFatty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FootFatty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = FootFatty/AppDelegate.h; sourceTree = "<group>"; };
@@ -79,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AEBE0F82586930200057BF8 /* StoreKit.framework in Frameworks */,
 				0A5953542576C24200C8B701 /* libRNCAsyncStorage.a in Frameworks */,
 				0A5953562576C24200C8B701 /* libRNCMaskedView.a in Frameworks */,
 				0AEBE0F42584FEC800057BF8 /* GoogleMobileAds.framework in Frameworks */,
@@ -121,7 +122,6 @@
 		0AE30C32257A650F006CD2AA /* fonts */ = {
 			isa = PBXGroup;
 			children = (
-				0AB6BA682582774E002D4FC4 /* Arcade-Classic.ttf */,
 				0AE30C2A257A4C2B006CD2AA /* Arcade-Classic.ttf */,
 			);
 			path = fonts;
@@ -144,6 +144,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0AEBE0F72586930200057BF8 /* StoreKit.framework */,
 				0AEBE0F32584FEC700057BF8 /* GoogleMobileAds.framework */,
 				0A5953532576C24200C8B701 /* libRNCAsyncStorage.a */,
 				0A5953552576C24200C8B701 /* libRNCMaskedView.a */,
@@ -294,7 +295,6 @@
 				65D6672A5EB54F028D02D6BF /* Teko-Medium.ttf in Resources */,
 				0BE14BF039F2480FB3522904 /* Teko-Regular.ttf in Resources */,
 				1478ABA7D42E456682C77B16 /* Teko-SemiBold.ttf in Resources */,
-				0AB6BA692582774E002D4FC4 /* Arcade-Classic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,7 +421,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.marcosordieres.footfatty;
 				PRODUCT_NAME = FootFatty;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -450,7 +450,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.marcosordieres.footfatty;
 				PRODUCT_NAME = FootFatty;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
