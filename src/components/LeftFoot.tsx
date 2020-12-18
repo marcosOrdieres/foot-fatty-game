@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { View, Image, Animated, Easing, Dimensions } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
+import React, { useState } from 'react'
+import { View, Image, Animated, Easing, Dimensions, Platform } from 'react-native';
 
 interface LeftFootProps {
     props?: any,
@@ -72,7 +72,7 @@ const LeftFoot: React.FunctionComponent<LeftFootProps> = ({ onSwipeLeft, onSwipe
     }
 
     return (
-        <View style={{ width: layout.layout.width, flex: 0.27, alignItems: 'flex-end', justifyContent: 'center', marginTop: 60 }}>
+        <View style={{ zIndex: Platform.OS === 'ios' ? 1000 : null, width: layout.layout.width, flex: 0.27, alignItems: 'flex-end', justifyContent: 'center', marginTop: 60 }}>
             <PanGestureHandler
                 onGestureEvent={onGestureEventFunc}>
                 <Animated.View style={{

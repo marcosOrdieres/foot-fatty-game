@@ -1,0 +1,86 @@
+{
+    "IAPErrorCode":{
+       "0":"UNKNOWN",
+       "1":"PAYMENT_INVALID",
+       "10":"CLOUD_SERVICE",
+       "11":"PRIVACY_UNACKNOWLEDGED",
+       "12":"UNAUTHORIZED_REQUEST",
+       "13":"INVALID_IDENTIFIER",
+       "14":"MISSING_PARAMS",
+       "2":"SERVICE_DISCONNECTED",
+       "3":"SERVICE_UNAVAILABLE",
+       "4":"SERVICE_TIMEOUT",
+       "5":"BILLING_UNAVAILABLE",
+       "6":"ITEM_UNAVAILABLE",
+       "7":"DEVELOPER_ERROR",
+       "8":"ITEM_ALREADY_OWNED",
+       "9":"ITEM_NOT_OWNED",
+       "BILLING_UNAVAILABLE":5,
+       "CLOUD_SERVICE":10,
+       "DEVELOPER_ERROR":7,
+       "INVALID_IDENTIFIER":13,
+       "ITEM_ALREADY_OWNED":8,
+       "ITEM_NOT_OWNED":9,
+       "ITEM_UNAVAILABLE":6,
+       "MISSING_PARAMS":14,
+       "PAYMENT_INVALID":1,
+       "PRIVACY_UNACKNOWLEDGED":11,
+       "SERVICE_DISCONNECTED":2,
+       "SERVICE_TIMEOUT":4,
+       "SERVICE_UNAVAILABLE":3,
+       "UNAUTHORIZED_REQUEST":12,
+       "UNKNOWN":0
+    },
+    "IAPItemType":{
+       "0":"PURCHASE",
+       "1":"SUBSCRIPTION",
+       "PURCHASE":0,
+       "SUBSCRIPTION":1
+    },
+    "IAPResponseCode":{
+       "0":"OK",
+       "1":"USER_CANCELED",
+       "2":"ERROR",
+       "3":"DEFERRED",
+       "DEFERRED":3,
+       "ERROR":2,
+       "OK":0,
+       "USER_CANCELED":1
+    },
+    "InAppPurchaseState":{
+       "0":"PURCHASING",
+       "1":"PURCHASED",
+       "2":"FAILED",
+       "3":"RESTORED",
+       "4":"DEFERRED",
+       "DEFERRED":4,
+       "FAILED":2,
+       "PURCHASED":1,
+       "PURCHASING":0,
+       "RESTORED":3
+    },
+    "connectAsync":[
+       "Function connectAsync"
+    ],
+    "disconnectAsync":[
+       "Function disconnectAsync"
+    ],
+    "finishTransactionAsync":[
+       "Function finishTransactionAsync"
+    ],
+    "getBillingResponseCodeAsync":[
+       "Function getBillingResponseCodeAsync"
+    ],
+    "getProductsAsync":[
+       "Function getProductsAsync"
+    ],
+    "getPurchaseHistoryAsync":[
+       "Function getPurchaseHistoryAsync"
+    ],
+    "purchaseItemAsync":[
+       "Function purchaseItemAsync"
+    ],
+    "setPurchaseListener":[
+       "Function setPurchaseListener"
+    ]
+ }

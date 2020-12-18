@@ -44,7 +44,7 @@ import success from './success.png';
 import failure from './failure.png';
 import noItems from './noItems.png';
 import noMoney from './noMoney.png';
-import questionMark from './questionMark.png';
+import consoleQuestion from './consoleQuestion.png';
 import swipeGif from './swipeGif.gif';
 import tapFoot from './tapFoot.png';
 
@@ -92,7 +92,7 @@ export {
   success,
   noItems,
   noMoney,
-  questionMark,
+  consoleQuestion,
   swipeGif,
   tapFoot,
 };

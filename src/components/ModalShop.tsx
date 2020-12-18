@@ -299,17 +299,26 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                                 </TouchableOpacity>
                                 <ButtonItemAndChar opacity={blueGirlOpacity} marginLeft={'50%'} coins={15000} />
                             </View>
-                            <View style={{ alignItems: 'center' }}>
-                                <BigButton
-                                    onPress={async () => {
-                                        console.warn('itemsForPurchase', itemsForPurchase)
-                                        await InAppPurchases.purchaseItemAsync(itemsForPurchase[0].productId);
-                                    }}
-                                    image={fatImages.coinImage}
-                                    text={'+ 3000'} />
-                                <PrivacyPolicy url={'https://mamarene.blogspot.com/2019/09/privacy-policy-fat-foot.html'} />
-                            </View>
 
+                            {Platform.OS === 'android' ?
+                                <View style={{ alignItems: 'center' }}>
+                                    <BigButton
+                                        onPress={async () => {
+                                            try {
+                                                console.warn('itemsForPurchase', itemsForPurchase)
+                                                return await InAppPurchases.purchaseItemAsync(itemsForPurchase[0].productId);
+                                            }
+                                            catch (error) {
+                                                console.warn('Error in purchase item', error);
+                                            }
+                                        }}
+                                        image={fatImages.coinImage}
+                                        text={'+ 3000'} />
+                                    <PrivacyPolicy url={'https://backpackerneeds2.blogspot.com/2020/12/foot-fatty-privacy-policy.html'} />
+                                </View>
+                                :
+                                null
+                            }
                         </View>
                         <Cancel onPressCancel={onPressCancel} />
                     </View>

@@ -5,6 +5,7 @@ import { getAsyncStorage, setAsyncStorage } from '../services/storage-service';
 import * as fatImages from '../assets'
 import { ButtonRounded, CustomAlert, Head, ModalShop, Sponges, Countdown, ButtonIcon, LeftFootPunch, RightFootPunch, DoubleProgressBar, Coins, TextHelper, GoldenPrices } from '../components';
 import { AdMobInterstitial, AdMobBanner } from 'react-native-admob';
+import * as InAppPurchases from 'expo-in-app-purchases';
 const { width, height } = Dimensions.get('window');
 
 //asyncStorage keys: character, coins, duck, games, duster
@@ -41,6 +42,67 @@ const BedroomPage = () => {
         const coins = await getAsyncStorage('coins');
         setTotalCoins(coins)
         return coins
+    }
+
+
+    const footExtraCoins = Platform.select({
+        ios: ['1'],
+        android: ['footcoins'],
+    });
+
+    const chargeInAppPurchases = async () => {
+        console.warn('66666:');
+        try {
+            const history = Platform.OS === 'android' ? await InAppPurchases.getPurchaseHistoryAsync() : await InAppPurchases.getPurchaseHistoryAsync(true)
+            console.warn('history:', history);
+
+        } catch (error) {
+            console.warn('EL PUTO ERROR', error)
+        }
+
+        const { responseCode, results } = await InAppPurchases.getProductsAsync(footExtraCoins);
+        console.warn('responseCode', responseCode)
+        if (responseCode === InAppPurchases.IAPResponseCode.OK) {
+            console.warn('results getProductsAsync', results)
+            setItemsForPurchase(results);
+        }
+        // Set purchase listener
+        setListenerForPurchaseFunction();
+    }
+
+
+    const setListenerForPurchaseFunction = async () => {
+        console.warn('entro en setListenerForPurchaseFunction, but only goes though if item purchased')
+        await InAppPurchases.setPurchaseListener(async ({ responseCode, results, errorCode }) => {
+
+            // Purchase was successful
+            if (responseCode === InAppPurchases.IAPResponseCode.OK) {
+                results.forEach(purchase => {
+                    if (!purchase.acknowledged) {
+                        console.warn(`Successfully purchased ${purchase.productId}`);
+                        // Process transaction here and unlock content...
+                        // Then when you're done
+                        InAppPurchases.finishTransactionAsync(purchase, true);
+                        setSuccessAsync();
+                    }
+                });
+            } else if (responseCode === InAppPurchases.IAPResponseCode.USER_CANCELED) {
+                console.warn('User canceled the transaction');
+            } else if (responseCode === InAppPurchases.IAPResponseCode.DEFERRED) {
+                console.warn('User does not have permissions to buy but requested parental approval (iOS only)');
+            } else {
+                console.warn(`Something went wrong with the purchase. Received errorCode ${errorCode}`);
+            }
+        });
+    }
+
+    const setSuccessAsync = async () => {
+        const coins = await getAsyncStorage('coins')
+        const coinsPlus = coins + 3000
+        await setAsyncStorage('coins', coinsPlus);
+        const coinsUpdated = await getAsyncStorage('coins')
+        setTotalCoins(coinsUpdated);
+        console.warn('GANA COINS: +3000')
     }
 
     const onPunchFoot = (left: boolean, right: boolean, correctPunch: boolean) => {
@@ -106,6 +168,7 @@ const BedroomPage = () => {
     useEffect(() => {
         checkCoins();
         //onlineFakeGame(); why?
+        Platform.OS === 'android' ? chargeInAppPurchases() : null
         getTheGoldenPrices()
         checkGames();
     }, [])
@@ -223,7 +286,7 @@ const BedroomPage = () => {
     }
 
     const chargeAdInterstitial = async () => {
-        AdMobInterstitial.setAdUnitID('ca-app-pub-3940256099942544/1033173712');
+        AdMobInterstitial.setAdUnitID('ca-app-pub-9901220615892956/5784632384');
         await AdMobInterstitial.requestAd();
         AdMobInterstitial.showAd()
     }
@@ -379,10 +442,10 @@ const BedroomPage = () => {
 
                     <TouchableOpacity
                         onPress={() => { setShowAlertInformation(true) }}
-                        style={{ zIndex: 1000, position: 'absolute', top: '10%', left: '85%' }}>
+                        style={{ zIndex: 1000, position: 'absolute', top: '8%', left: '86%' }}>
                         <Image
-                            style={{ height: 30, width: 30 }}
-                            source={fatImages.questionMark} />
+                            style={{ height: 40, width: 40 }}
+                            source={fatImages.consoleQuestion} />
                     </TouchableOpacity>
 
                     <Head
@@ -446,13 +509,17 @@ const BedroomPage = () => {
                         : null
                     }
                 </View>
-                <View style={{ position: 'absolute', top: '85%', left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center' }}>
-                    <AdMobBanner
-                        adSize="fullBanner"
-                        adUnitID="ca-app-pub-3940256099942544/6300978111"
-                        onAdFailedToLoad={error => console.error(error)}
-                    />
-                </View>
+
+                {Platform.OS === 'android' ?
+                    <View style={{ position: 'absolute', top: '85%', left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center' }}>
+                        <AdMobBanner
+                            adSize="fullBanner"
+                            adUnitID="ca-app-pub-9901220615892956/4437065157"
+                            onAdFailedToLoad={error => console.error(error)}
+                        />
+                    </View>
+                    : null
+                }
 
                 {showAlertInformation ?
                     <CustomAlert

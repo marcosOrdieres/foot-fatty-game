@@ -77,8 +77,7 @@ const BathroomPage = () => {
 
     const chargeInAppPurchases = async () => {
         console.warn('66666:');
-        const historyConnect = await InAppPurchases.connectAsync();
-        console.warn('historyConnect:', historyConnect);
+        await InAppPurchases.connectAsync();
 
         // try {
         //     const history = Platform.OS === 'android' ? await InAppPurchases.getPurchaseHistoryAsync() : await InAppPurchases.getPurchaseHistoryAsync(true)
@@ -87,8 +86,6 @@ const BathroomPage = () => {
         // } catch (error) {
         //     console.warn('EL PUTO ERROR', error)
         // }
-
-        // Retrieve product details , This represents the user's previous purchase history and returns the same result as getPurchaseHistoryAsync().
 
         // Retrieves the product details (price, description, title, etc) 
         const { responseCode, results } = await InAppPurchases.getProductsAsync(footExtraCoins);
@@ -104,7 +101,8 @@ const BathroomPage = () => {
 
     const setListenerForPurchaseFunction = async () => {
         console.warn('entro en setListenerForPurchaseFunction, but only goes though if item purchased')
-        InAppPurchases.setPurchaseListener(async ({ responseCode, results, errorCode }) => {
+        await InAppPurchases.setPurchaseListener(async ({ responseCode, results, errorCode }) => {
+
             // Purchase was successful
             if (responseCode === InAppPurchases.IAPResponseCode.OK) {
                 results.forEach(purchase => {
@@ -265,7 +263,7 @@ const BathroomPage = () => {
     }
 
     const chargeAdInterstitial = async () => {
-        AdMobInterstitial.setAdUnitID('ca-app-pub-3940256099942544/1033173712');
+        AdMobInterstitial.setAdUnitID('ca-app-pub-9901220615892956/5784632384');
         await AdMobInterstitial.requestAd();
         AdMobInterstitial.showAd()
     }
@@ -276,6 +274,7 @@ const BathroomPage = () => {
         getTheDucks()
         addBoyToStorage()
         chargeInAppPurchases()
+        //Platform.OS === 'android' ? chargeInAppPurchases() : null
         correlacionDeTres()
     }, [])
 
@@ -437,10 +436,10 @@ const BathroomPage = () => {
 
                     <TouchableOpacity
                         onPress={() => { setShowAlertInformation(true) }}
-                        style={{ zIndex: 1000, position: 'absolute', top: '10%', left: '85%' }}>
+                        style={{ zIndex: 1000, position: 'absolute', top: '8%', left: '86%' }}>
                         <Image
-                            style={{ height: 30, width: 30 }}
-                            source={fatImages.questionMark} />
+                            style={{ height: 40, width: 40 }}
+                            source={fatImages.consoleQuestion} />
                     </TouchableOpacity>
 
 

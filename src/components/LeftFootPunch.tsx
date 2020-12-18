@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
-import { View, Image, Animated, Easing, Dimensions, TouchableOpacity } from 'react-native';
-import { PanGestureHandler } from 'react-native-gesture-handler';
+import React from 'react'
+import { View, Image, Dimensions, TouchableOpacity } from 'react-native';
 
 interface LeftFootPunchProps {
     props?: any,
@@ -34,7 +33,7 @@ const LeftFootPunch: React.FunctionComponent<LeftFootPunchProps> = ({ onPunch, p
     }
 
     return (
-        <View style={{ width: layout.layout.width, flex: 0.27, alignItems: 'flex-end', justifyContent: 'center', marginTop: 60 }}>
+        <View style={{ zIndex: 1000, width: layout.layout.width, flex: 0.27, alignItems: 'flex-end', justifyContent: 'center', marginTop: 60 }}>
             <TouchableOpacity onPress={onPunch}>
                 <Image
                     style={{ marginBottom: '30%', marginRight: '50%', width: (width / 12) / scale, height: (height / 4) / scale, resizeMode: 'stretch' }}

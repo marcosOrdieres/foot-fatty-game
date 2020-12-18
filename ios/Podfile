@@ -9,8 +9,9 @@ target 'FootFatty' do
   
   use_react_native!(:path => config["reactNativePath"])
 
-  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
   pod 'Google-Mobile-Ads-SDK' 
 
   use_native_modules!
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
 end

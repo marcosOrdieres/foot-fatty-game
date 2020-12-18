@@ -10,16 +10,19 @@ const Ducks: React.FunctionComponent<DuckProps> = ({ ducks }) => {
 
     return (
         <View style={{ marginTop: '160%', flex: 1, flexDirection: 'row' }}>
-            {ducks?.map(value => value === 'yellowDuck' ?
+            {ducks?.map((value, index) => value === 'yellowDuck' ?
                 <Image
+                    key={index}
                     style={{ height: 50, width: 50, resizeMode: 'stretch', justifyContent: 'center', alignItems: 'center', right: 90 }}
                     source={fatImages.yellowDuck} /> : null)}
-            {ducks?.map(value => value === 'pinkDuck' ?
+            {ducks?.map((value, index) => value === 'pinkDuck' ?
                 <Image
+                    key={index}
                     style={{ height: 50, width: 50, resizeMode: 'stretch', justifyContent: 'center', alignItems: 'center', right: 70 }}
                     source={fatImages.pinkDuck} /> : null)}
-            {ducks?.map(value => value === 'greenDuck' ?
+            {ducks?.map((value, index) => value === 'greenDuck' ?
                 <Image
+                    key={index}
                     style={{ height: 50, width: 50, resizeMode: 'stretch', justifyContent: 'center', alignItems: 'center', right: 50 }}
                     source={fatImages.greenDuck} /> : null)}
         </View>
