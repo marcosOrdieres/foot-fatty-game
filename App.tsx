@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Bathroom from './src/pages/BathroomPage'
 import Bedroom from './src/pages/BedroomPage'
+import Livingroom from './src/pages/LivingroomPage'
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,7 @@ const App = () => {
         <Stack.Navigator>
           <Stack.Screen options={{ headerShown: false }} name="Bathroom" component={Bathroom} />
           <Stack.Screen options={{ headerShown: false }} name="Bedroom" component={Bedroom} />
+          <Stack.Screen options={{ headerShown: false }} name="Livingroom" component={Livingroom} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

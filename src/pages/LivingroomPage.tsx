@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, Dimensions, Image, ImageBackground, Platf
 import { characterForHeadOrFeet, multipleFive } from '../helper-functions/utils'
 import { getAsyncStorage, setAsyncStorage } from '../services/storage-service';
 import * as fatImages from '../assets'
-import { AnimatedPowerBar, ButtonRounded, RightFoot, LeftFoot, Head, Ducks, ModalShop, Sponges, Countdown, ButtonIcon, Coins, TextHelper, CustomAlert } from '../components';
+import { LeftFootVertical, RightFootVertical, AnimatedPowerBar, ButtonRounded, RightFoot, LeftFoot, Head, Ducks, ModalShop, Sponges, Countdown, ButtonIcon, Coins, TextHelper, CustomAlert } from '../components';
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AdMobInterstitial } from 'react-native-admob';
@@ -12,7 +12,7 @@ const { width, height } = Dimensions.get('window');
 
 //asyncStorage keys: character, coins, duck, games, goldenPrices
 
-const BathroomPage = () => {
+const LivingroomPage = () => {
     const insets = useSafeAreaInsets();
     const [totalCoins, setTotalCoins] = useState(0);
     const [games, setGames] = useState(0);
@@ -27,9 +27,7 @@ const BathroomPage = () => {
     const [showAlertPassGame, setShowAlertPassGame] = useState(false);
     const [showAlertPassAndWinCoinsGame, setShowAlertPassAndWinCoinsGame] = useState(false);
     const [showAlertInformation, setShowAlertInformation] = useState(false);
-    const [showAlertLivingroom, setShowAlertLivingroom] = useState(false);
 
-    const [livingroom, setLivingroom] = useState(false);
     const [progress, setProgress] = useState(0);
     const [doubleScore, setDoubleScore] = useState(false);
     const [startGame, setStartGame] = useState(false);
@@ -73,17 +71,12 @@ const BathroomPage = () => {
     }
 
     const footExtraCoins = Platform.select({
-        ios: ['footcoins182'],
+        ios: ['1'],
         android: ['footcoins'],
     });
 
     const chargeInAppPurchases = async () => {
-        console.warn('66666:');
         await InAppPurchases.connectAsync();
-        const history = Platform.OS === 'android' ? await InAppPurchases.getPurchaseHistoryAsync() : await InAppPurchases.getPurchaseHistoryAsync(true)
-        console.warn('history:', history);
-
-        // Retrieves the product details (price, description, title, etc) 
         const { responseCode, results } = await InAppPurchases.getProductsAsync(footExtraCoins);
         console.warn('responseCode', responseCode)
         if (responseCode === InAppPurchases.IAPResponseCode.OK) {
@@ -98,7 +91,6 @@ const BathroomPage = () => {
     const setListenerForPurchaseFunction = async () => {
         console.warn('entro en setListenerForPurchaseFunction, but only goes though if item purchased')
         await InAppPurchases.setPurchaseListener(async ({ responseCode, results, errorCode }) => {
-
 
             // Purchase was successful
             if (responseCode === InAppPurchases.IAPResponseCode.OK) {
@@ -117,7 +109,6 @@ const BathroomPage = () => {
                 console.warn('User does not have permissions to buy but requested parental approval (iOS only)');
             } else {
                 console.warn(`Something went wrong with the purchase. Received errorCode ${errorCode}`);
-
             }
         });
     }
@@ -129,13 +120,6 @@ const BathroomPage = () => {
         const coinsUpdated = await getAsyncStorage('coins')
         setTotalCoins(coinsUpdated);
         console.warn('GANA COINS: +3000')
-    }
-
-    async function getTheDucks() {
-        const duckStorage = await getAsyncStorage('duck');
-        if (duckStorage) {
-            setTheDucks(duckStorage.duck)
-        }
     }
 
     async function addBoyToStorage() {
@@ -234,31 +218,6 @@ const BathroomPage = () => {
             return setGames(0)
         }
         setGames(gamesStorage)
-        return gamesStorage;
-    }
-
-    const correlacionDeTres = async () => {
-        const currentGamesWonWithThisOne = await getAsyncStorage('games');
-        if ((currentGamesWonWithThisOne + 1) % 5 === 0) { // for the correlation of 4, so 5n - 1
-            setCorrelacionTresForGame(true)
-
-            await new Promise((resolve) => setTimeout(() => {
-                setRightGame(false);
-                setLeftGame(true);
-                resolve();
-            }, Math.floor(Math.random() * 7000) + 100));
-
-            await new Promise((resolve) => setTimeout(() => {
-                setLeftGame(false);
-                setRightGame(true);
-                resolve();
-            }, Math.floor(Math.random() * 7000) + 100));
-            correlacionDeTres()
-        } else {
-            setLeftGame(false);
-            setRightGame(false);
-            setCorrelacionTresForGame(false)
-        }
     }
 
     const chargeAdInterstitial = async () => {
@@ -267,24 +226,12 @@ const BathroomPage = () => {
         AdMobInterstitial.showAd()
     }
 
-    const gamesAndCoinsForLivingRoom = async () => {
-        const coins = await checkCoins();
-        const games = await checkGames();
-
-        if (games >= 10 && coins >= 5000) {
-            setLivingroom(true)
-        }
-    }
-
     useEffect(() => {
         checkCoins()
         checkGames()
-        gamesAndCoinsForLivingRoom()
-        getTheDucks()
         addBoyToStorage()
         chargeInAppPurchases()
         //Platform.OS === 'android' ? chargeInAppPurchases() : null
-        correlacionDeTres()
     }, [])
 
     const doubleScoreFunction = () => setTimeout(() => { setDoubleScore(true); setScoreCallback() }, 1000);
@@ -337,11 +284,10 @@ const BathroomPage = () => {
     const handleStatePassAlert = (newValue: boolean) => setShowAlertPassGame(newValue);
     const handleStatePassAndWinCoinsAlert = (newValue: boolean) => setShowAlertPassAndWinCoinsGame(newValue);
     const handleStateInformation = (newValue: boolean) => setShowAlertInformation(newValue);
-    const handleStateLivingroom = (newValue: boolean) => setShowAlertLivingroom(newValue);
 
     return (
         <ImageBackground
-            source={onFire ? fatImages.imageBathroomFire : fatImages.imageBathroom}
+            source={onFire ? fatImages.livingroom : fatImages.livingroom}
             style={{ flex: 1 }}>
             <View
                 style={{ height: layout.layout.height, width: layout.layout.width, margin: 5, marginLeft: '3.5%' }}>
@@ -359,15 +305,10 @@ const BathroomPage = () => {
                         <View style={{ left: 5, alignItems: 'center', justifyContent: 'space-around' }}>
                             <Text style={{ fontSize: 20, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : 'Teko-Semibold' }}>GAMES: {games}</Text>
                         </View>
-
-
-                        <Ducks ducks={theDucks} />
-
                         <ModalShop
                             updateCoinsCallback={updateCoinsCallback}
                             onPressCancel={() => {
                                 setModalVisible(!modalVisible);
-                                getTheDucks()
                                 moreThanOneCharacter()
                             }}
                             itemsForPurchase={itemsForPurchase}
@@ -377,7 +318,7 @@ const BathroomPage = () => {
                 </View>
 
                 <View style={{ width: 300, height: 20, alignSelf: 'center' }}>
-                    <Text style={{ fontSize: 20, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : 'Teko-Semibold', textAlign: 'center' }}>BATHROOM   TICKLES</Text>
+                    <Text style={{ fontSize: 20, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : 'Teko-Semibold', textAlign: 'center' }}>LIVINGROOM   UP   AND   DOWN   TICKLES</Text>
                 </View>
                 <View style={{ width: layout.layout.width, flex: 0.8, flexDirection: 'row' }}>
                     <View style={{ width: '25%', height: '100%' }}>
@@ -396,7 +337,6 @@ const BathroomPage = () => {
                                 <View>
                                     <ButtonRounded
                                         onPress={() => {
-                                            correlacionDeTres()
                                             setFinishedGameBar(false);
                                             setStartGame(true)
                                         }}
@@ -423,21 +363,11 @@ const BathroomPage = () => {
                             textColor={oneCharacter ? 'black' : '#b3b3b3'}
                             text={'Change Character'} />
                         {!startGame ?
-                            <View style={{ flexDirection: 'row' }}>
-                                <ButtonIcon action={'Bedroom'} icon={fatImages.bedroom} place={'Bedroom'} />
-                                {livingroom ?
-                                    <ButtonIcon action={'Livingroom'} icon={fatImages.sofa} place={'Livingroom'} />
-                                    :
-                                    <>
-                                        <ButtonIcon onPressAlert={() => setShowAlertLivingroom(true)} opacity={0.2} icon={fatImages.sofa} place={'Livingroom'} />
-                                    </>
-                                }
-                            </View>
-
+                            <ButtonIcon action={'Bathroom'} icon={fatImages.bathroom} place={'Bathroom'} />
                             : null
                         }
                     </View >
-                    <LeftFoot
+                    <LeftFootVertical
                         onSwipeLeft={() => (startGame && !correlacionTresForGame) ? onSwipeLeftFootToLeft() : startGame && correlacionTresForGame && leftGame ? onSwipeLeftFootToLeft() : null}
                         onSwipeRight={() => (startGame && !correlacionTresForGame) ? onSwipeLeftFootToRight() : startGame && correlacionTresForGame && leftGame ? onSwipeLeftFootToRight() : null}
                         layout={layout}
@@ -462,13 +392,6 @@ const BathroomPage = () => {
                             source={fatImages.consoleQuestion} />
                     </TouchableOpacity>
 
-
-                    {/* <Sponges
-                        sponges={sponges}
-                        games={games}
-                        width={width}
-                        height={height} /> */}
-
                     <Head
                         layout={layout}
                         characterChosen={characterForHeadOrFeet(characterFinal)}
@@ -484,7 +407,7 @@ const BathroomPage = () => {
                         blueGirlThird={fatImages.blueGirlThird}
                         blueGirl={fatImages.blueGirl} />
 
-                    <RightFoot
+                    <RightFootVertical
                         onSwipeLeft={() => (startGame && !correlacionTresForGame) ? onSwipeRightFootToLeft() : startGame && correlacionTresForGame && rightGame ? onSwipeRightFootToLeft() : null}
                         onSwipeRight={() => (startGame && !correlacionTresForGame) ? onSwipeRightFootToRight() : startGame && correlacionTresForGame && rightGame ? onSwipeRightFootToLeft() : null}
                         layout={layout}
@@ -534,24 +457,11 @@ const BathroomPage = () => {
                         <CustomAlert
                             showAlert={showAlertInformation}
                             onShow={handleStateInformation}
-                            titleText="Bathroom     Tickle     Game"
-                            messageText="START GAME   and   SWIPE   Left   and   Right   a   FOOT"
+                            titleText="Livingroom     Tickle    Up   and    Down   Game"
+                            messageText="START GAME   and   SWIPE   Up   and   Down   a   FOOT"
                             heightImage={100}
                             widthImage={100}
-                            icon={fatImages.swipeGif}
-                        />
-                        : null
-                    }
-
-                    {showAlertLivingroom ?
-                        <CustomAlert
-                            showAlert={showAlertLivingroom}
-                            onShow={handleStateLivingroom}
-                            titleText="Livingroom     Tickle    UP    and   Down   Game"
-                            messageText="YOU NEED 10 GAMES AND 5OO0 COINS TO UNLOCK THIS LEVEL"
-                            heightImage={100}
-                            widthImage={100}
-                            icon={fatImages.sofa}
+                            icon={fatImages.scrollUpDown}
                         />
                         : null
                     }
@@ -562,4 +472,4 @@ const BathroomPage = () => {
     )
 }
 
-export default BathroomPage
+export default LivingroomPage

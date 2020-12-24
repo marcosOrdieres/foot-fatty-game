@@ -5,16 +5,18 @@ import { useNavigation } from '@react-navigation/native';
 interface DrawerProps {
     action?: string,
     icon?: string,
-    place?: string
+    place?: string,
+    opacity?: number,
+    onPressAlert: any
 }
 
 
-const ButtonIcon: React.FunctionComponent<DrawerProps> = ({ action, icon, place }) => {
+const ButtonIcon: React.FunctionComponent<DrawerProps> = ({ action, icon, place, opacity, onPressAlert }) => {
     const navigation = useNavigation();
     return (
         <TouchableOpacity
-            onPress={() => { navigation.navigate(action) }}
-            style={{ marginTop: '5%', width: '75%' }}>
+            onPress={onPressAlert ? onPressAlert : () => { navigation.navigate(action) }}
+            style={{ marginTop: '5%', width: '30%', opacity: opacity ?? null }}>
             <Image
                 style={{ height: 60, width: 60 }}
                 source={icon} />

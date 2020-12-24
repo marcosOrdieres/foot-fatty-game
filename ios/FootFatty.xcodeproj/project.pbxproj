@@ -13,8 +13,8 @@
 		0A5953582576C24200C8B701 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A5953572576C24200C8B701 /* libRNGestureHandler.a */; };
 		0A59535A2576C24200C8B701 /* libRNReanimated.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A5953592576C24200C8B701 /* libRNReanimated.a */; };
 		0A59535C2576C24200C8B701 /* libRNScreens.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A59535B2576C24200C8B701 /* libRNScreens.a */; };
+		0A76E400258FA7930068D390 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A76E3FF258FA7930068D390 /* StoreKit.framework */; };
 		0AEBE0F42584FEC800057BF8 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AEBE0F32584FEC700057BF8 /* GoogleMobileAds.framework */; };
-		0AEBE0F82586930200057BF8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AEBE0F72586930200057BF8 /* StoreKit.framework */; };
 		0BE14BF039F2480FB3522904 /* Teko-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD40EBD003E049328B2FC16D /* Teko-Regular.ttf */; };
 		0D5F923B05E54B72A4611739 /* Teko-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 623DCDF3A1B84B60BE88E24F /* Teko-Light.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
@@ -37,9 +37,10 @@
 		0A5953572576C24200C8B701 /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A5953592576C24200C8B701 /* libRNReanimated.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNReanimated.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A59535B2576C24200C8B701 /* libRNScreens.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNScreens.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A76E3FF258FA7930068D390 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		0A76E401258FC3CA0068D390 /* FootFatty.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = FootFatty.entitlements; path = FootFatty/FootFatty.entitlements; sourceTree = "<group>"; };
 		0AE30C29257A4C2B006CD2AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = "Base.lproj/Arcade-Classic.ttf"; sourceTree = "<group>"; };
 		0AEBE0F32584FEC700057BF8 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "GoogleMobileAds.xcframework/ios-arm64_armv7/GoogleMobileAds.framework"; sourceTree = "<group>"; };
-		0AEBE0F72586930200057BF8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		12AA0463E709194CFF3DBA16 /* Pods-FootFatty.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FootFatty.debug.xcconfig"; path = "Target Support Files/Pods-FootFatty/Pods-FootFatty.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* FootFatty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FootFatty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = FootFatty/AppDelegate.h; sourceTree = "<group>"; };
@@ -73,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AEBE0F82586930200057BF8 /* StoreKit.framework in Frameworks */,
+				0A76E400258FA7930068D390 /* StoreKit.framework in Frameworks */,
 				0A5953542576C24200C8B701 /* libRNCAsyncStorage.a in Frameworks */,
 				0A5953562576C24200C8B701 /* libRNCMaskedView.a in Frameworks */,
 				0AEBE0F42584FEC800057BF8 /* GoogleMobileAds.framework in Frameworks */,
@@ -124,6 +125,7 @@
 		13B07FAE1A68108700A75B9A /* FootFatty */ = {
 			isa = PBXGroup;
 			children = (
+				0A76E401258FC3CA0068D390 /* FootFatty.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -138,7 +140,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0AEBE0F72586930200057BF8 /* StoreKit.framework */,
+				0A76E3FF258FA7930068D390 /* StoreKit.framework */,
 				0AEBE0F32584FEC700057BF8 /* GoogleMobileAds.framework */,
 				0A5953532576C24200C8B701 /* libRNCAsyncStorage.a */,
 				0A5953552576C24200C8B701 /* libRNCMaskedView.a */,
@@ -394,7 +396,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 4;
+				CODE_SIGN_ENTITLEMENTS = FootFatty/FootFatty.entitlements;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = CK459A46UR;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -404,7 +407,7 @@
 				);
 				INFOPLIST_FILE = FootFatty/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.6;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -425,7 +428,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 4;
+				CODE_SIGN_ENTITLEMENTS = FootFatty/FootFatty.entitlements;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = CK459A46UR;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -435,7 +439,7 @@
 				);
 				INFOPLIST_FILE = FootFatty/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.6;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

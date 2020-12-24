@@ -300,25 +300,23 @@ const ModalShop: React.FunctionComponent<ModalProps> = ({ visible, onPressCancel
                                 <ButtonItemAndChar opacity={blueGirlOpacity} marginLeft={'50%'} coins={15000} />
                             </View>
 
-                            {Platform.OS === 'android' ?
-                                <View style={{ alignItems: 'center' }}>
-                                    <BigButton
-                                        onPress={async () => {
-                                            try {
-                                                console.warn('itemsForPurchase', itemsForPurchase)
-                                                return await InAppPurchases.purchaseItemAsync(itemsForPurchase[0].productId);
-                                            }
-                                            catch (error) {
-                                                console.warn('Error in purchase item', error);
-                                            }
-                                        }}
-                                        image={fatImages.coinImage}
-                                        text={'+ 3000'} />
-                                    <PrivacyPolicy url={'https://backpackerneeds2.blogspot.com/2020/12/foot-fatty-privacy-policy.html'} />
-                                </View>
-                                :
-                                null
-                            }
+                            <View style={{ alignItems: 'center' }}>
+                                <BigButton
+                                    onPress={async () => {
+                                        try {
+                                            console.warn('333', itemsForPurchase)
+
+                                            return await InAppPurchases.purchaseItemAsync(itemsForPurchase[0].productId);
+                                        }
+                                        catch (error) {
+                                            console.warn('Error in purchase item', error);
+                                        }
+                                    }}
+                                    image={fatImages.coinImage}
+                                    text={'+ 3000'} />
+                                <PrivacyPolicy url={'https://backpackerneeds2.blogspot.com/2020/12/foot-fatty-privacy-policy.html'} />
+                            </View>
+
                         </View>
                         <Cancel onPressCancel={onPressCancel} />
                     </View>

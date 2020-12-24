@@ -12,7 +12,8 @@
     "ios": "ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.13.2",
@@ -21,6 +22,7 @@
     "@react-navigation/stack": "^5.12.8",
     "cocoapods": "0.0.0",
     "expo-in-app-purchases": "^9.1.0",
+    "patch-package": "^6.2.2",
     "react": "16.13.1",
     "react-native": "0.63.4",
     "react-native-admob": "^2.0.0-beta.6",

@@ -47,6 +47,9 @@ import noMoney from './noMoney.png';
 import consoleQuestion from './consoleQuestion.png';
 import swipeGif from './swipeGif.gif';
 import tapFoot from './tapFoot.png';
+import livingroom from './livingroom.png';
+import sofa from './sofa.png';
+import scrollUpDown from './scrollUpDown.png';
 
 export {
   shopIcon,
@@ -95,4 +98,7 @@ export {
   consoleQuestion,
   swipeGif,
   tapFoot,
+  livingroom,
+  sofa,
+  scrollUpDown,
 };

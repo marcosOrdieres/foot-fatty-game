@@ -21,6 +21,8 @@ import Coins from './Coins';
 import TextHelper from './TextHelper';
 import GoldenPrices from './GoldenPrices';
 import CustomAlert from './CustomAlert';
+import RightFootVertical from './RightFootVertical';
+import LeftFootVertical from './LeftFootVertical';
 
 export {
   LeftFoot,
@@ -46,4 +48,6 @@ export {
   TextHelper,
   GoldenPrices,
   CustomAlert,
+  RightFootVertical,
+  LeftFootVertical,
 };
