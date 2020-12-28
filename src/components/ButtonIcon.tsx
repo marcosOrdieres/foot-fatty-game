@@ -16,11 +16,11 @@ const ButtonIcon: React.FunctionComponent<DrawerProps> = ({ action, icon, place,
     return (
         <TouchableOpacity
             onPress={onPressAlert ? onPressAlert : () => { navigation.navigate(action) }}
-            style={{ marginTop: '5%', width: '30%', opacity: opacity ?? null }}>
+            style={{ marginTop: '5%', width: '40%', opacity: opacity ?? null }}>
             <Image
                 style={{ height: 60, width: 60 }}
                 source={icon} />
-            <Text style={{ marginLeft: Platform.OS === 'android' ? null : '5%', fontSize: 14, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : 'Teko-Semibold', textAlign: 'left' }}>{place}</Text>
+            <Text style={{ marginLeft: Platform.OS === 'android' ? null : '5%', fontSize: 12, fontFamily: Platform.OS === 'android' ? 'Arcade-Classic' : 'Teko-Semibold', textAlign: 'left' }}>{place}</Text>
 
         </TouchableOpacity>
     )

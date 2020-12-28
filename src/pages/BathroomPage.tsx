@@ -48,6 +48,10 @@ const BathroomPage = () => {
 
     const onSwipeLeftFootToLeft = () => {
         setTheProferFootMove(true, false, false, false)
+        console.warn('IZDAAA');
+
+        // if progress is multiple of 10, laugh depending of the character, if boy boy laughs, if woman woman laughs
+
         winCoinsWhenSwipe()
     }
     const onSwipeLeftFootToRight = () => {
@@ -297,6 +301,7 @@ const BathroomPage = () => {
 
     const finishGame = async () => {
         const gamesStorage = await getAsyncStorage('games');
+        gamesAndCoinsForLivingRoom()
         if (progress >= 1) {
             await setAsyncStorage('games', gamesStorage + 1);
             const currentGamesWonWithThisOne = await getAsyncStorage('games');
