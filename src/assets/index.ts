@@ -28,8 +28,6 @@ import spongeNormal from './spongeNormal.png';
 import spongeFire from './spongeFire.png';
 import spongeOrange from './spongeOrange.png';
 import blueGirl from './blueGirl.png';
-import blueGirlSecond from './blueGirlSecond.png';
-import blueGirlThird from './blueGirlThird.png';
 import imageBedroom from './imageBedroom.png';
 import imageBedroomBig from './imageBedroomBig.png';
 import bedroom from './bedroom.png';
@@ -73,8 +71,6 @@ export {
   spongeOrange,
   imageBathroomFire,
   blueGirl,
-  blueGirlSecond,
-  blueGirlThird,
   blueLeftFoot,
   blueRightFoot,
   imageBedroom,
